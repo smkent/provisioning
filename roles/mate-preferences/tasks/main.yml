@@ -1,3 +1,7 @@
+- name: Install dconf-cli
+  apt: name=dconf-cli state=present
+  become: yes
+
 - name: Set MATE preferences
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
