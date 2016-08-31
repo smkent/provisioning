@@ -1,0 +1,27 @@
+- name: Set MATE preferences
+  dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
+  with_items:
+      - { key: /com/linuxmint/mintmenu/applet-text,
+            val: '{{ ansible_hostname }}', type: string }
+      - { key: /com/linuxmint/mintmenu/hot-key,
+            val: '<Primary>Super_L', type: string }
+      - { key: /org/mate/desktop/peripherals/keyboard/kbd/options,
+            val: "'caps\\tcaps:swapescape'", type: array_present }
+      - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-delay,
+            val: 60, type: 'int' }
+      - { key: /org/mate/caja/desktop/home-icon-visible,
+            val: False, type: bool }
+      - { key: /org/mate/caja/desktop/computer-icon-visible,
+            val: False, type: bool }
+      - { key: /org/mate/caja/preferences/use-iec-units,
+            val: True, type: bool }
+      - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-enable,
+            val: True, type: bool }
+      - { key: /org/mate/panel/objects/clock/prefs/show-date,
+            val: False, type: bool }
+      - { key: /org/mate/panel/objects/clock/prefs/show-temperature,
+            val: False, type: bool }
+      - { key: /org/mate/panel/objects/clock/prefs/show-weather,
+            val: False, type: bool }
+      - { key: /org/mate/panel/objects/clock/prefs/format,
+            val: 24-hour, type: string }

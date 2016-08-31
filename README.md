@@ -2,6 +2,24 @@
 
 Ansible provisioning scripts for my machines
 
+## Usage
+
+Simply clone the repository and run the convenience script to configure a
+desktop system:
+
+```shell
+./desktop.sh
+```
+
+If not already installed, the convenience script installs Ansible using `apt`
+before runing the playbook. The script passes any arguments to
+`ansible-playbook`.
+
+## Features
+
+Currently, the included playbook sets [MATE desktop
+environment](http://mate-desktop.com/) preferences.
+
 ## License
 
 This program is free software: you can redistribute it and/or modify

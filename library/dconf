@@ -1,0 +1,157 @@
+#!/usr/bin/python
+
+from ansible.constants import mk_boolean
+from ansible.module_utils.basic import *  # NOQA
+
+DOCUMENTATION = '''
+---
+module: dconf
+author: Stephen Kent
+short_description: Set dconf values
+description: Set dconf values (desktop environment settings)
+options:
+  key:
+    description:
+    - dconf setting key
+    type: string
+    required: true
+  value:
+    description:
+    - dconf setting value
+    type: string
+    required: false
+  type:
+    description: >
+      dconf setting value type. C(array_present) indicates that the key
+      value is an array and the specified value should be
+      contained within that array.
+    type: string
+    required: true
+    choices: [ "bool", "int", "float", "string", "array_present" ]
+  set:
+    description: >
+      Set the value of the specified key. If false, the existing value is
+      retrieved and returned but the new value is ignored.
+'''
+
+EXAMPLES = '''
+# Set a boolean value
+- dc: key=/org/mate/caja/preferences/use-iec-units value=False type=bool
+
+# Set an integer value
+- dc: key=/org/mate/caja/desktop/thumbnail-size value=64 type=int
+
+# Ensure an array contains a value
+- dc:
+    key: /org/mate/desktop/peripherals/keyboard/kbd/options
+    value: "'caps\\tcaps:swapescape'"
+    type: array_present
+'''
+
+RETURN = '''
+key:
+    description: dconf setting key
+    returned: success
+    type: string
+    sample: "/org/mate/caja/preferences/use-iec-units"
+old:
+    description: Previous dconf setting value
+    returned: success
+    type: string
+    sample: "false"
+new:
+    description: New dconf setting value
+    returned: success
+    type: string
+    sample: "true"
+'''
+
+
+def escape_quotes(value):
+    return str(value).replace('\\', '\\\\').replace('"', '\\"')
+
+
+def dconf_write(module, key, value):
+    return module.run_command('dconf write {} "{}"'
+                              .format(key, escape_quotes(value)))
+
+
+def dconf_read(module, key):
+    return module.run_command('dconf read {}'.format(key))[1].strip()
+
+
+def main():
+    module = AnsibleModule(
+        argument_spec={
+            'set': {type: 'bool', 'default': True},
+            'key': {'required': True, type: 'str'},
+            'value': {'required': False, type: 'str'},
+            'type': {'required': True,
+                     'choices': ['bool', 'int', 'float', 'string',
+                                 'array_present']},
+        },
+        supports_check_mode=True,
+    )
+
+    key_option = module.params['key']
+    value_option = module.params['value']
+    type_option = module.params['type']
+    set_option = mk_boolean(module.params['set'])
+
+    if set_option and not module.params['value']:
+        module.fail_json(msg='a value must be specified if set is enabled')
+
+    read_value = dconf_read(module, key_option)
+
+    # Perform type-specific actions:
+    # - Validate the input value is the correct type
+    # - Properly format the value to be set for use with a shell command
+    # - Optionally override the value to be used for equivalence checking
+    check_value = None
+    if type_option == 'string':
+        command_value = '"{}"'.format(escape_quotes(value_option))
+        read_value = read_value[1:-1]
+    elif type_option == 'int':
+        command_value = str(int(value_option))
+    elif type_option == 'float':
+        command_value = str(float(value_option))
+    elif type_option == 'bool':
+        command_value = ('true' if mk_boolean(value_option) else 'false')
+        check_value = command_value
+    elif type_option == 'array_present':
+        if read_value.startswith('@as '):
+            read_value = read_value[4:]
+        if not read_value.startswith('[') or not read_value.endswith(']'):
+            module.fail_json(msg=('Existing value for {} is not an '
+                                  'array'.format(key_option)))
+        # Strip off the surrounding brackets and split the string into a list
+        existing_array = filter(bool, read_value[1:-1].split(', '))
+        if value_option in existing_array:
+            # Value exists in the array, set check value to the input value
+            value_option = command_value = read_value
+        else:
+            command_value = \
+                '[{}]'.format(', '.join(existing_array + [value_option]))
+            value_option = command_value
+            command_value = '@as {}'.format(command_value)
+    else:
+        command_value = value_option
+
+    if not check_value:
+        check_value = value_option
+    changed = (set_option and read_value != check_value)
+
+    if changed and not module.check_mode:
+        dconf_write(module, key_option, command_value)
+
+    module.exit_json(
+        changed=changed,
+        c=check_value,
+        key=key_option,
+        old=read_value,
+        new=value_option,
+    )
+
+
+if __name__ == '__main__':
+    main()

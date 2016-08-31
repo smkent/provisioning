@@ -1,0 +1,4 @@
+- name: Local desktop machine configuration
+  hosts: localhost
+  roles:
+    - mate-preferences
