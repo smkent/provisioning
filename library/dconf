@@ -121,7 +121,8 @@ def main():
     elif type_option == 'array_present':
         if read_value.startswith('@as '):
             read_value = read_value[4:]
-        if not read_value.startswith('[') or not read_value.endswith(']'):
+        if read_value and (not read_value.startswith('[') or
+                           not read_value.endswith(']')):
             module.fail_json(msg=('Existing value for {} is not an '
                                   'array'.format(key_option)))
         # Strip off the surrounding brackets and split the string into a list
