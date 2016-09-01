@@ -17,8 +17,8 @@ before runing the playbook. The script passes any arguments to
 
 ## Features
 
-Currently, the included playbook sets [MATE desktop
-environment](http://mate-desktop.com/) preferences.
+Currently, the included playbook installs packages using `apt` and sets [MATE
+desktop environment](http://mate-desktop.com/) preferences.
 
 ## License
 

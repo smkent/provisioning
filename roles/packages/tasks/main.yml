@@ -1,0 +1,33 @@
+- name: Install apt packages
+  apt:
+    pkg: '{{ item }}'
+    state: present
+  become: yes
+  register: packages_apt_results
+  with_items:
+  - build-essential
+  - compizconfig-settings-manager
+  - curl
+  - dconf-cli
+  - dconf-editor
+  - dconf-tools
+  - gimp
+  - gnucash
+  - gparted
+  - iftop
+  - imagemagick
+  - nmap
+  - pdftk
+  - pv
+  - screen
+  - ssh
+  - tofrodos
+  - tmux
+  - traceroute
+  - vim
+  - whois
+  - zsnes
+
+- name: apt package installation output
+  debug: var=packages_apt_results.results.0.stdout_lines
+  when: packages_apt_results|changed
