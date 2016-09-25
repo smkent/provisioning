@@ -1,3 +1,10 @@
+- name: Check if MATE is installed
+  command: dpkg-query -l mate-desktop
+  register: mate_installed
+  failed_when: mate_installed.rc > 1
+  always_run: True
+  changed_when: False
+
 - name: Set MATE preferences
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
@@ -27,3 +34,4 @@
             val: False, type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/format,
             val: 24-hour, type: string }
+  when: mate_installed.rc == 0
