@@ -16,7 +16,9 @@
       - { key: /org/mate/caja/preferences/use-iec-units,
             val: True, type: bool }
       - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-enable,
-            val: True, type: bool }
+            val: "{{ ansible_form_factor not in
+                     ['Portable', 'Laptop', 'Notebook'] }}",
+            type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/show-date,
             val: False, type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/show-temperature,
