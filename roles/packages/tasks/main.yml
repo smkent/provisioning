@@ -5,6 +5,7 @@
   become: yes
   register: packages_apt_results
   with_items:
+  - audacity
   - build-essential
   - compizconfig-settings-manager
   - curl
