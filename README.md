@@ -2,17 +2,20 @@
 
 Ansible provisioning scripts for my machines
 
+These scripts are meant for desktop/laptop systems running Ubuntu Linux or
+Linux Mint.
+
 ## Usage
 
 Simply clone the repository and run the convenience script to configure a
-desktop system:
+system:
 
 ```shell
-./desktop.sh
+./provision
 ```
 
 If not already installed, the convenience script installs Ansible using `apt`
-before runing the playbook. The script passes any arguments to
+before runing the playbook. `provision` passes any arguments to
 `ansible-playbook`.
 
 ## Features
