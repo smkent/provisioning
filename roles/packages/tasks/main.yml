@@ -2,7 +2,7 @@
   apt:
     pkg: '{{ item }}'
     state: present
-  become: yes
+  become: True
   register: packages_apt_results
   with_items:
   - audacity
