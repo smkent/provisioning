@@ -20,8 +20,11 @@ before runing the playbook. `provision` passes any arguments to
 
 ## Features
 
-Currently, the included playbook installs packages using `apt` and sets [MATE
-desktop environment](http://mate-desktop.com/) preferences.
+The included playbook performs the following actions:
+
+* Install packages using `apt`
+* Install [smkent/dotfiles](https://github.com/smkent/dotfiles) in `$HOME`
+* Set [MATE desktop environment](http://mate-desktop.com/) preferences
 
 ## License
 
