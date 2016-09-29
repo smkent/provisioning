@@ -8,7 +8,7 @@ fi
 if ! which ansible >/dev/null 2>&1; then
     sudo apt-add-repository -y ppa:ansible/ansible
     sudo apt-get update
-    sudo apt install -y ansible
+    sudo apt install -y ansible python-apt
 fi
 
 ANSIBLE_NOCOWS=1 ansible-playbook -Ki hosts.localhost local.yml "${@}"
