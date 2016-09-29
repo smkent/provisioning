@@ -1,5 +1,6 @@
 - name: Local desktop machine configuration
   hosts: localhost
   roles:
+    - dotfiles
     - mate-preferences
     - packages
