@@ -36,13 +36,13 @@ options:
 
 EXAMPLES = '''
 # Set a boolean value
-- dc: key=/org/mate/caja/preferences/use-iec-units value=False type=bool
+- dconf: key=/org/mate/caja/preferences/use-iec-units value=False type=bool
 
 # Set an integer value
-- dc: key=/org/mate/caja/desktop/thumbnail-size value=64 type=int
+- dconf: key=/org/mate/caja/desktop/thumbnail-size value=64 type=int
 
 # Ensure an array contains a value
-- dc:
+- dconf:
     key: /org/mate/desktop/peripherals/keyboard/kbd/options
     value: "'caps\\tcaps:swapescape'"
     type: array_present
