@@ -1,0 +1,24 @@
+- name: Install Google Chrome apt repository
+  apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    filename: google-chrome
+    state: present
+  register: google_chrome_apt_repo
+  become: True
+
+- name: Add Google Chrome apt repository key
+  apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+    id: EB4C1BFD4F042F6DDDCCEC917721F63BD38B4796
+    state: present
+  become: True
+
+# In check mode, the repository is not installed and
+# google-chrome-stable may not be in the packages list
+- name: Install Google Chrome
+  apt:
+    pkg: google-chrome-stable
+    update_cache: '{{ google_chrome_apt_repo|changed }}'
+    state: present
+  become: True
+  when: not ansible_check_mode
