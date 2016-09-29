@@ -18,7 +18,7 @@
   when: not dotfiles_exists.before
 
 - name: Move repository metadata directory into place
-  command: mv dotfiles/.git .
+  command: mv dotfiles_temp/.git .
   args:
     chdir: '{{ ansible_user_dir }}'
     removes: '{{ ansible_user_dir }}/dotfiles_temp/.git'
