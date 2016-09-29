@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ "$(id -u)" -eq 0 ]; then
     echo "Error: Run this as a normal user" >&2
     exit 1
