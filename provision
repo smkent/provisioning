@@ -13,4 +13,5 @@ if ! which ansible >/dev/null 2>&1; then
     sudo apt install -y ansible python-apt
 fi
 
+set -x
 ANSIBLE_NOCOWS=1 ansible-playbook -Ki hosts.localhost local.yml "${@}"
