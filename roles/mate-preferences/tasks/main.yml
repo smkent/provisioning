@@ -8,6 +8,8 @@
 - name: Set MATE preferences
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
+
+      # General preferences
       - { key: /com/linuxmint/mintmenu/applet-text,
             val: '{{ ansible_hostname }}', type: string }
       - { key: /com/linuxmint/mintmenu/hot-key,
@@ -32,4 +34,44 @@
             val: False, type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/format,
             val: 24-hour, type: string }
+
+      # MATE terminal
+      - { key: /org/mate/terminal/profiles/smkent/allow-bold,
+            val: True, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/alternate-screen-scroll,
+            val: True, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/background-color,
+            val: "#000000000000", type: string }
+      - { key: /org/mate/terminal/profiles/smkent/background-darkness,
+            val: 0.8, type: float }
+      - { key: /org/mate/terminal/profiles/smkent/background-type,
+            val: transparent, type: string }
+      - { key: /org/mate/terminal/profiles/smkent/bold-color,
+            val: "#000000000000", type: string }
+      - { key: /org/mate/terminal/profiles/smkent/bold-color-same-as-fg,
+            val: True, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/default-show-menubar,
+            val: False, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/foreground-color,
+            val: "#FFFFFFFFFFFF", type: string }
+      - { key: /org/mate/terminal/profiles/smkent/palette,
+            val: "#000000000000:#CCCC00000000:#4E4E9A9A0606:#C4C4A0A00000:\
+                  #34346565A4A4:#757550507B7B:#060698209A9A:#D3D3D7D7CFCF:\
+                  #555557575353:#EFEF29292929:#8A8AE2E23434:#FCFCE9E94F4F:\
+                  #72729F9FCFCF:#ADAD7F7FA8A8:#3434E2E2E2E2:#EEEEEEEEECEC",
+            type: string }
+      - { key: /org/mate/terminal/profiles/smkent/scrollback-lines,
+            val: 8192, type: int }
+      - { key: /org/mate/terminal/profiles/smkent/scrollbar-position,
+            val: right, type: string }
+      - { key: /org/mate/terminal/profiles/smkent/silent-bell,
+            val: False, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/use-theme-colors,
+            val: False, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/visible-name,
+            val: smkent, type: string }
+      - { key: /org/mate/terminal/global/profile-list,
+            val: "'smkent'", type: array_present }
+      - { key: /org/mate/terminal/global/default-profile,
+            val: smkent, type: string }
   when: mate_installed.rc == 0
