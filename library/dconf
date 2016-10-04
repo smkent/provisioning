@@ -114,7 +114,11 @@ def main():
     elif type_option == 'int':
         command_value = str(int(value_option))
     elif type_option == 'float':
-        command_value = str(float(value_option))
+        float_value = float(value_option)
+        command_value = str(float_value)
+        # Ignore tiny variances resulting from reading/comparing float values
+        if abs(float(read_value) - float_value) < 0.0000001:
+            read_value = command_value
     elif type_option == 'bool':
         command_value = ('true' if mk_boolean(value_option) else 'false')
         check_value = command_value
