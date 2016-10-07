@@ -12,6 +12,7 @@
   - dconf-cli
   - dconf-editor
   - dconf-tools
+  - exuberant-ctags
   - gimp
   - gnucash
   - gnupg-curl
@@ -20,6 +21,7 @@
   - imagemagick
   - nmap
   - pdftk
+  - python-flake8
   - pv
   - screen
   - ssh
@@ -28,6 +30,7 @@
   - traceroute
   - vim
   - whois
+  - xclip
   - zsnes
 
 - name: apt package installation output
