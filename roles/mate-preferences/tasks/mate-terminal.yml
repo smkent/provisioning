@@ -17,6 +17,8 @@
             val: True, type: bool }
       - { key: /org/mate/terminal/profiles/smkent/default-show-menubar,
             val: False, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/font,
+            val: DejaVu Sans Mono for Powerline 10, type: string }
       - { key: /org/mate/terminal/profiles/smkent/foreground-color,
             val: "#FFFFFFFFFFFF", type: string }
       - { key: /org/mate/terminal/profiles/smkent/palette,
@@ -32,6 +34,8 @@
       - { key: /org/mate/terminal/profiles/smkent/silent-bell,
             val: False, type: bool }
       - { key: /org/mate/terminal/profiles/smkent/use-theme-colors,
+            val: False, type: bool }
+      - { key: /org/mate/terminal/profiles/smkent/use-system-font,
             val: False, type: bool }
       - { key: /org/mate/terminal/profiles/smkent/visible-name,
             val: smkent, type: string }

@@ -1,0 +1,11 @@
+- name: Check if the Powerline fonts are installed
+  shell: fc-list | grep "for Powerline"
+  register: powerline_font_check
+  always_run: True
+  changed_when: False
+  failed_when: False
+
+- name: Install needed system fonts
+  command: '{{ ansible_user_dir }}/.dotfiles/bin/install-fonts'
+  become: True
+  when: powerline_font_check.rc > 0
