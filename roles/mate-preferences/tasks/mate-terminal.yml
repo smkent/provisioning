@@ -36,6 +36,8 @@
       - { key: /org/mate/terminal/profiles/smkent/visible-name,
             val: smkent, type: string }
       - { key: /org/mate/terminal/global/profile-list,
+            val: "'default'", type: array_present }
+      - { key: /org/mate/terminal/global/profile-list,
             val: "'smkent'", type: array_present }
       - { key: /org/mate/terminal/global/default-profile,
             val: smkent, type: string }
