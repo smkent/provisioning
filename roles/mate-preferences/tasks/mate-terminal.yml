@@ -28,7 +28,7 @@
       - { key: /org/mate/terminal/profiles/smkent/scrollback-lines,
             val: 8192, type: int }
       - { key: /org/mate/terminal/profiles/smkent/scrollbar-position,
-            val: right, type: string }
+            val: hidden, type: string }
       - { key: /org/mate/terminal/profiles/smkent/silent-bell,
             val: False, type: bool }
       - { key: /org/mate/terminal/profiles/smkent/use-theme-colors,
