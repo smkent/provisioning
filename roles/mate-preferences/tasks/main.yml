@@ -2,7 +2,7 @@
   command: dpkg-query -l mate-desktop
   register: mate_installed
   failed_when: mate_installed.rc > 1
-  always_run: True
+  check_mode: False
   changed_when: False
 
 - include: general.yml

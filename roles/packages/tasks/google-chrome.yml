@@ -2,7 +2,7 @@
   command: dpkg-query -l google-chrome-stable
   register: google_chrome_installed
   failed_when: google_chrome_installed.rc > 1
-  always_run: True
+  check_mode: False
   changed_when: False
 
 - name: Install Google Chrome
