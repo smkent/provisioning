@@ -2,15 +2,25 @@
 
 set -e
 
+# Don't check if ansible is installed if -h/--help is a command line argument
+check_ansible_installed=1
+for arg in "${@}"; do
+    if [ "${arg}" = "-h" ] || [ "${arg}" = "--help" ]; then
+        check_ansible_installed=0
+    fi
+done
+
 if [ "$(id -u)" -eq 0 ]; then
     echo "Error: Run this as a normal user" >&2
     exit 1
 fi
 
-if ! which ansible >/dev/null 2>&1; then
-    sudo apt-add-repository -y ppa:ansible/ansible
-    sudo apt-get update
-    sudo apt install -y ansible python-apt
+if [ ${check_ansible_installed} -eq 1 ]; then
+    if ! which ansible >/dev/null 2>&1; then
+        sudo apt-add-repository -y ppa:ansible/ansible
+        sudo apt-get update
+        sudo apt install -y ansible python-apt
+    fi
 fi
 
 set -x
