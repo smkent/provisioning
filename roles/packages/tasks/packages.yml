@@ -12,6 +12,7 @@
   - dconf-cli
   - dconf-editor
   - dconf-tools
+  - exiv2
   - exuberant-ctags
   - gimp
   - gnucash
