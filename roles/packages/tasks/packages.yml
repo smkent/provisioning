@@ -18,10 +18,12 @@
   - gnucash
   - gnupg-curl
   - gparted
+  - htop
   - iftop
   - imagemagick
   - nmap
   - pdftk
+  - proxytunnel
   - python-flake8
   - pv
   - screen
