@@ -13,3 +13,9 @@
             val: 80, type: int }
       - { key: /org/x/editor/color-scheme,
           val: oblivion, type: string}
+
+- name: Set Gnucash preferences
+  dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
+  with_items:
+      - { key: /org/gnucash/dialogs/tip-of-the-day/show-at-startup,
+            val: False, type: bool }

@@ -31,9 +31,3 @@
             val: False, type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/format,
             val: 24-hour, type: string }
-      - { key: /org/mate/power-manager/button-lid-ac,
-            val: nothing, type: string }
-      - { key: /org/mate/power-manager/button-lid-battery,
-            val: nothing, type: string }
-      - { key: /org/mate/power-manager/button-power,
-            val: suspend, type: string }

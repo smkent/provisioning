@@ -5,11 +5,12 @@
   check_mode: False
   changed_when: False
 
-- include_tasks: general.yml
-  when: mate_installed.rc == 0
-
-- include_tasks: mate-terminal.yml
-  when: mate_installed.rc == 0
-
-- include_tasks: text-editor.yml
+- include_tasks: '{{mate_preferences_item}}'
+  with_items:
+    - general.yml
+    - apps.yml
+    - mate-terminal.yml
+    - power-manager.yml
+  loop_control:
+    loop_var: mate_preferences_item
   when: mate_installed.rc == 0
