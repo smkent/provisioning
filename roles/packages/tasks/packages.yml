@@ -7,6 +7,7 @@
   with_items:
   - audacity
   - build-essential
+  - compiz-plugins-extra
   - compizconfig-settings-manager
   - curl
   - dconf-cli
