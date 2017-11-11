@@ -11,12 +11,16 @@
             val: False, type: bool }
       - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-delay,
             val: 60, type: 'int' }
+      - { key: /org/mate/caja/preferences/default-folder-viewer,
+            val: "list-view", type: string }
       - { key: /org/mate/caja/desktop/home-icon-visible,
             val: False, type: bool }
       - { key: /org/mate/caja/desktop/computer-icon-visible,
             val: False, type: bool }
       - { key: /org/mate/caja/preferences/use-iec-units,
             val: True, type: bool }
+      - { key: /org/mate/media-handling/automount-open,
+            val: False, type: bool }
       - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-enable,
             val: "{{ ansible_form_factor == 'Desktop' }}", type: bool }
       - { key: /org/mate/panel/objects/clock/prefs/show-date,
