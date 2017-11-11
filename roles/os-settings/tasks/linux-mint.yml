@@ -1,0 +1,7 @@
+- name: Set Linux Mint updated preferences
+  dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
+  with_items:
+      - { key: /com/linuxmint/updates/default-repo-is-ok,
+            val: True, type: bool }
+      - { key: /com/linuxmint/updates/autorefresh-hours,
+            val: 12, type: int }

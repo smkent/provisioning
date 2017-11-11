@@ -3,4 +3,5 @@
   roles:
     - dotfiles
     - mate-preferences
+    - os-settings
     - packages
