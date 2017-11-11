@@ -15,3 +15,18 @@
 - name: LibreOffice package upgrade output
   debug: var=libreoffice_upgrade_results.stdout_lines
   when: libreoffice_upgrade_results|changed
+
+- name: Install LibreOffice theme packages
+  apt:
+    pkg: '{{ item }}'
+    state: present
+  become: True
+  register: libreoffice_theme_packages_apt_results
+  with_items:
+  - libreoffice-style-breeze
+  - libreoffice-style-elementary
+  - libreoffice-style-galaxy
+
+- name: apt package installation output
+  debug: var=libreoffice_theme_packages_apt_results.results.0.stdout_lines
+  when: libreoffice_theme_packages_apt_results|changed
