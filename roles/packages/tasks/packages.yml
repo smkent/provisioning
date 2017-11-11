@@ -21,6 +21,8 @@
   - htop
   - iftop
   - imagemagick
+  - network-manager-openvpn
+  - network-manager-openvpn-gnome
   - nmap
   - pdftk
   - proxytunnel
