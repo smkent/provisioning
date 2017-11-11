@@ -7,6 +7,8 @@
             val: '<Primary>Super_L', type: string }
       - { key: /org/mate/desktop/peripherals/keyboard/kbd/options,
             val: "'caps\\tcaps:swapescape'", type: array_present }
+      - { key: /org/mate/desktop/peripherals/touchpad/natural-scroll,
+            val: False, type: bool }
       - { key: /org/mate/desktop/accessibility/keyboard/bouncekeys-delay,
             val: 60, type: 'int' }
       - { key: /org/mate/caja/desktop/home-icon-visible,
