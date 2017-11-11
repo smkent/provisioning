@@ -10,3 +10,6 @@
 
 - include_tasks: mate-terminal.yml
   when: mate_installed.rc == 0
+
+- include_tasks: text-editor.yml
+  when: mate_installed.rc == 0

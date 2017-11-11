@@ -1,0 +1,15 @@
+- name: Set MATE text editor preferences
+  dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
+  with_items:
+      - { key: /org/x/editor/bracket-matching,
+            val: True, type: bool }
+      - { key: /org/x/editor/display-line-numbers,
+            val: True, type: bool }
+      - { key: /org/x/editor/highlight-current-line,
+            val: True, type: bool }
+      - { key: /org/x/editor/display-right-margin,
+            val: True, type: bool }
+      - { key: /org/x/editor/right-margin-position,
+            val: 80, type: int }
+      - { key: /org/x/editor/color-scheme,
+          val: oblivion, type: string}
