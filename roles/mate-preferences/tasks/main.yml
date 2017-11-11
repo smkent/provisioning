@@ -5,8 +5,8 @@
   check_mode: False
   changed_when: False
 
-- include: general.yml
+- include_tasks: general.yml
   when: mate_installed.rc == 0
 
-- include: mate-terminal.yml
+- include_tasks: mate-terminal.yml
   when: mate_installed.rc == 0
