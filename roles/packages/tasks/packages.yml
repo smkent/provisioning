@@ -28,6 +28,7 @@
   - pdftk
   - proxytunnel
   - python-flake8
+  - python-pip
   - pv
   - screen
   - ssh
