@@ -22,7 +22,7 @@ before runing the playbook. `provision` passes any arguments to
 
 The included playbook performs the following actions:
 
-* Install packages using `apt`
+* Install packages using `apt`, `pip`, and `cabal`
 * Install [smkent/dotfiles](https://github.com/smkent/dotfiles) in `$HOME`
 * Configure Linux Mint preferences
 * Set [MATE desktop environment](http://mate-desktop.com/) preferences
