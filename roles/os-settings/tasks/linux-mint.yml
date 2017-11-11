@@ -1,4 +1,4 @@
-- name: Set Linux Mint updated preferences
+- name: Set Linux Mint updater preferences
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
       - { key: /com/linuxmint/updates/default-repo-is-ok,
