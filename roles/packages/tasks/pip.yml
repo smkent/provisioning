@@ -2,6 +2,7 @@
   pip:
     name: '{{ item }}'
     state: latest
+    extra_args: --user
   with_items:
   - flake8
   - mdv
