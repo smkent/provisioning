@@ -13,16 +13,17 @@
 
 - name: Update list of known cabal packages
   command: cabal update
-  check_mode: False
   changed_when: False
 
 - name: Install shellcheck
   command: cabal install shellcheck
   args:
     creates: ~/.cabal/bin/shellcheck
+  register: shellcheck_installed
 
 - name: Symlink shellcheck to ~/.local/bin
   file:
     src: ../../.cabal/bin/shellcheck
     dest: ~/.local/bin/shellcheck
     state: link
+  when: shellcheck_installed|changed
