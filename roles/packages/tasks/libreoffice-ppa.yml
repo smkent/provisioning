@@ -10,11 +10,11 @@
     upgrade: dist
   become: True
   register: libreoffice_upgrade_results
-  when: libreoffice_ppa|changed
+  when: libreoffice_ppa is changed
 
 - name: LibreOffice package upgrade output
   debug: var=libreoffice_upgrade_results.stdout_lines
-  when: libreoffice_upgrade_results|changed
+  when: libreoffice_upgrade_results is changed
 
 - name: Install LibreOffice theme packages
   apt:
@@ -29,4 +29,4 @@
 
 - name: apt package installation output
   debug: var=libreoffice_theme_packages_apt_results.results.0.stdout_lines
-  when: libreoffice_theme_packages_apt_results|changed
+  when: libreoffice_theme_packages_apt_results is changed

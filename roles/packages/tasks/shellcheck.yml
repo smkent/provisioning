@@ -9,7 +9,7 @@
 
 - name: cabal-install package installation output
   debug: var=cabal_install_apt_results.results.0.stdout_lines
-  when: cabal_install_apt_results|changed
+  when: cabal_install_apt_results is changed
 
 - name: Update list of known cabal packages
   command: cabal update
@@ -26,4 +26,4 @@
     src: ../../.cabal/bin/shellcheck
     dest: ~/.local/bin/shellcheck
     state: link
-  when: shellcheck_installed|changed
+  when: shellcheck_installed is changed

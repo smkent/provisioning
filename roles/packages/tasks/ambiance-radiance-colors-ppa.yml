@@ -8,7 +8,7 @@
   apt:
     update_cache: True
   become: True
-  when: ambiance_radiance_ppa|changed
+  when: ambiance_radiance_ppa is changed
 
 - name: Install Ambiance & Radiance Colors packages
   apt:
@@ -23,4 +23,4 @@
 
 - name: apt package installation output
   debug: var=ambiance_radiance_packages_apt_results.results.0.stdout_lines
-  when: ambiance_radiance_packages_apt_results|changed
+  when: ambiance_radiance_packages_apt_results is changed
