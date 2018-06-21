@@ -1,6 +1,10 @@
-- include_tasks: ambiance-radiance-colors-ppa.yml
 - include_tasks: google-chrome.yml
-- include_tasks: libreoffice-ppa.yml
 - include_tasks: packages.yml
 - include_tasks: pip.yml
 - include_tasks: shellcheck.yml
+
+- include_tasks: ambiance-radiance-colors-ppa.yml
+  when: ansible_distribution_release not in ppa_exclude_releases
+
+- include_tasks: libreoffice-ppa.yml
+  when: ansible_distribution_release not in ppa_exclude_releases
