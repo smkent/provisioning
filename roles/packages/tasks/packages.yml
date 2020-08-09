@@ -8,7 +8,6 @@
     - curl
     - dconf-cli
     - dconf-editor
-    - dconf-tools
     - exiv2
     - exuberant-ctags
     - flake8
