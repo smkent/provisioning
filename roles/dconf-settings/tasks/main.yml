@@ -1,5 +1,6 @@
 - include_tasks: '{{dconf_preferences_item}}'
   with_items:
     - gnucash.yml
+    - nemo.yml
   loop_control:
     loop_var: dconf_preferences_item
