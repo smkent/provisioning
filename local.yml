@@ -1,6 +1,7 @@
 - name: Local desktop machine configuration
   hosts: localhost
   roles:
+    - dconf-settings
     - dotfiles
     - mate-preferences
     - os-settings

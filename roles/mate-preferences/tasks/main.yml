@@ -7,10 +7,10 @@
 
 - include_tasks: '{{mate_preferences_item}}'
   with_items:
-    - general.yml
-    - apps.yml
+    - mate-general-preferences.yml
+    - mate-power-manager.yml
     - mate-terminal.yml
-    - power-manager.yml
+    - mate-text-editor.yml
   loop_control:
     loop_var: mate_preferences_item
   when: mate_installed.rc == 0
