@@ -6,6 +6,7 @@
     - curl
     - dconf-cli
     - dconf-editor
+    - easytag
     - exiv2
     - exuberant-ctags
     - flake8
@@ -18,6 +19,7 @@
     - network-manager-openvpn
     - network-manager-openvpn-gnome
     - nmap
+    - pdftk-java
     - proxytunnel
     - python3-pip
     - pv
@@ -27,6 +29,7 @@
     - tmux
     - traceroute
     - vim-gtk
+    - vlc
     - whois
     - xclip
     - zsnes
