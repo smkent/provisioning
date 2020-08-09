@@ -22,7 +22,7 @@
     - network-manager-openvpn-gnome
     - nmap
     - proxytunnel
-    - python-pip
+    - python3-pip
     - pv
     - screen
     - ssh
