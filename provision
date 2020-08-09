@@ -17,8 +17,6 @@ fi
 
 if [ ${check_ansible_installed} -eq 1 ]; then
     if ! which ansible >/dev/null 2>&1; then
-        sudo apt-add-repository -y ppa:ansible/ansible
-        sudo apt-get update
         sudo apt install -y ansible python-apt
     fi
 fi
