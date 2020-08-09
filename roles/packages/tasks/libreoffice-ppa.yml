@@ -18,14 +18,13 @@
 
 - name: Install LibreOffice theme packages
   apt:
-    pkg: '{{ item }}'
+    pkg:
+    - libreoffice-style-breeze
+    - libreoffice-style-elementary
+    - libreoffice-style-galaxy
     state: present
   become: True
   register: libreoffice_theme_packages_apt_results
-  with_items:
-  - libreoffice-style-breeze
-  - libreoffice-style-elementary
-  - libreoffice-style-galaxy
 
 - name: apt package installation output
   debug: var=libreoffice_theme_packages_apt_results.results.0.stdout_lines

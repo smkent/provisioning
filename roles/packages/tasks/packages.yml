@@ -1,42 +1,41 @@
 - name: Install apt packages
   apt:
-    pkg: '{{ item }}'
+    pkg:
+    - audacity
+    - build-essential
+    - compiz-plugins-extra
+    - compizconfig-settings-manager
+    - curl
+    - dconf-cli
+    - dconf-editor
+    - dconf-tools
+    - exiv2
+    - exuberant-ctags
+    - flake8
+    - gimp
+    - gnucash
+    - gparted
+    - htop
+    - iftop
+    - imagemagick
+    - network-manager-openvpn
+    - network-manager-openvpn-gnome
+    - nmap
+    - proxytunnel
+    - python-pip
+    - pv
+    - screen
+    - ssh
+    - tofrodos
+    - tmux
+    - traceroute
+    - vim-gtk
+    - whois
+    - xclip
+    - zsnes
     state: present
   become: True
   register: packages_apt_results
-  with_items:
-  - audacity
-  - build-essential
-  - compiz-plugins-extra
-  - compizconfig-settings-manager
-  - curl
-  - dconf-cli
-  - dconf-editor
-  - dconf-tools
-  - exiv2
-  - exuberant-ctags
-  - flake8
-  - gimp
-  - gnucash
-  - gparted
-  - htop
-  - iftop
-  - imagemagick
-  - network-manager-openvpn
-  - network-manager-openvpn-gnome
-  - nmap
-  - proxytunnel
-  - python-pip
-  - pv
-  - screen
-  - ssh
-  - tofrodos
-  - tmux
-  - traceroute
-  - vim-gtk
-  - whois
-  - xclip
-  - zsnes
 
 - name: apt package installation output
   debug: var=packages_apt_results.results.0.stdout_lines

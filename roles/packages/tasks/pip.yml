@@ -1,8 +1,7 @@
 - name: Install pip packages
   pip:
-    name: '{{ item }}'
+    name:
+    - flake8
+    - mdv
     state: latest
     extra_args: --user
-  with_items:
-  - flake8
-  - mdv
