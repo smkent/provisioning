@@ -35,8 +35,3 @@
     - zsnes
     state: present
   become: True
-  register: packages_apt_results
-
-- name: apt package installation output
-  debug: var=packages_apt_results.results.0.stdout_lines
-  when: packages_apt_results is changed

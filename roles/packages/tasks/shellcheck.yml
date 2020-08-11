@@ -3,11 +3,6 @@
     pkg: cabal-install
     state: present
   become: True
-  register: cabal_install_apt_results
-
-- name: cabal-install package installation output
-  debug: var=cabal_install_apt_results.results.0.stdout_lines
-  when: cabal_install_apt_results is changed
 
 - name: Check if shellcheck is installed
   stat:
