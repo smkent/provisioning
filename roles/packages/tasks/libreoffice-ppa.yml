@@ -1,20 +1,27 @@
+- name: check if the Libreoffice Fresh PPA is installed
+  command:
+    argv:
+      - grep
+      - -qrHnie
+      - libreoffice/ppa
+      - /etc/apt/sources.list.d/
+  register: libreoffice_ppa_grep
+  check_mode: False
+  changed_when: False
+  failed_when: False
+
 - name: Add the LibreOffice Fresh PPA
   add_ppa:
     name: ppa:libreoffice/ppa
-  register: libreoffice_ppa
   become: True
+  when: libreoffice_ppa_grep.rc != 0
 
 - name: Upgrade to install newer LibreOffice packages
   apt:
     update_cache: True
     upgrade: dist
   become: True
-  register: libreoffice_upgrade_results
-  when: libreoffice_ppa is changed
-
-- name: LibreOffice package upgrade output
-  debug: var=libreoffice_upgrade_results.stdout_lines
-  when: libreoffice_upgrade_results is changed
+  when: libreoffice_ppa_grep.rc != 0
 
 - name: Install LibreOffice theme packages
   apt:
@@ -24,8 +31,3 @@
     - libreoffice-style-galaxy
     state: present
   become: True
-  register: libreoffice_theme_packages_apt_results
-
-- name: apt package installation output
-  debug: var=libreoffice_theme_packages_apt_results.results.0.stdout_lines
-  when: libreoffice_theme_packages_apt_results is changed
