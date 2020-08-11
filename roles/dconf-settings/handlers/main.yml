@@ -1,0 +1,4 @@
+---
+- name: restart-budgie-panel
+  shell: "( DISPLAY=:0 nohup budgie-panel --replace </dev/null >/dev/null 2>&1 & )"
+

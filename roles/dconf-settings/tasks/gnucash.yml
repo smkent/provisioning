@@ -1,5 +1,0 @@
-- name: Set Gnucash preferences
-  dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
-  with_items:
-      - { key: /org/gnucash/dialogs/tip-of-the-day/show-at-startup,
-            val: 'false', type: bool }
