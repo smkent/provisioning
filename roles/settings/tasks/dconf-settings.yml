@@ -5,6 +5,9 @@
       - read
       - /com/solus-project/budgie-panel/panels
   register: budgie_panels_dconf_output
+  check_mode: False
+  changed_when: False
+  failed_when: False
 
 - name: Remove existing budgie-panel(s) configuration
   command:
