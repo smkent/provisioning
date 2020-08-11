@@ -1,0 +1,14 @@
+- name: Remove unwanted autostart applications
+  file:
+    path: "~/.config/autostart/{{ item }}"
+    state: absent
+  with_items:
+    - plank.desktop
+
+- name: Install autostart applications
+  copy:
+    src: "{{item}}"
+    dest: "~/.config/autostart/{{ item }}"
+    mode: 0664
+  with_items:
+    - setxkbmap.desktop

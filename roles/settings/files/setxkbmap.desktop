@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=setxkbmap
+Comment=Swap Caps Lock and Escape
+Description=Swap Caps Lock and Escape
+Exec=setxkbmap -option "caps:swapescape"
