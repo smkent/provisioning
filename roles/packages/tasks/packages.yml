@@ -16,6 +16,7 @@
     - htop
     - iftop
     - imagemagick
+    - mesa-utils
     - network-manager-openvpn
     - network-manager-openvpn-gnome
     - nmap
