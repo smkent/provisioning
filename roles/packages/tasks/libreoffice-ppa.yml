@@ -1,4 +1,4 @@
-- name: check if the Libreoffice Fresh PPA is installed
+- name: Check if the Libreoffice Fresh PPA is installed
   command:
     argv:
       - grep
