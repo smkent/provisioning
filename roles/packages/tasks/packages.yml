@@ -32,6 +32,8 @@
     - vim-gtk
     - vlc
     - whois
+    - yubikey-manager
+    - yubioath-desktop
     - xclip
     - zsnes
     state: present
