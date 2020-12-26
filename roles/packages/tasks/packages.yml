@@ -22,19 +22,19 @@
     - nmap
     - pdftk-java
     - proxytunnel
-    - python3-pip
     - pv
+    - python3-pip
     - screen
     - ssh
-    - tofrodos
     - tmux
+    - tofrodos
     - traceroute
     - vim-gtk
     - vlc
     - whois
+    - xclip
     - yubikey-manager
     - yubioath-desktop
-    - xclip
     - zsnes
     state: present
   become: True
