@@ -24,6 +24,7 @@
     - proxytunnel
     - pv
     - python3-pip
+    - scdaemon
     - screen
     - ssh
     - tmux
