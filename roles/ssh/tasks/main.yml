@@ -4,6 +4,4 @@
     state: present
     key: '{{ item }}'
   with_file:
-    - arboghast.pub
-    - optimus.pub
-    - tardis.pub
+    - yubikey.pub
