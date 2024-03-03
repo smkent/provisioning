@@ -32,6 +32,6 @@
 
 - name: Set budgie-panel menu label
   dconf:
-    key: '/org/solus-project/budgie-panel/instance/budgie-menu/{c01dale8-1977-1138-2187-deadbeefa001}/menu-label'
+    key: '/org/solus-project/budgie-panel/instance/budgie-menu/{c01dale8-1977-1138-2187-deadbeefa000}/menu-label'
     type: string
     value: '{{ ansible_hostname }}'

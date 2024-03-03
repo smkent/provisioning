@@ -2,6 +2,6 @@
   hosts: localhost
   roles:
   - dotfiles
-  - packages
-  - settings
   - ssh
+  - budgie
+  - packages

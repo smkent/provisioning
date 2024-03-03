@@ -1,0 +1,67 @@
+- name: Install Budgie desktop environment
+  apt:
+    pkg:
+    - ubuntu-budgie-desktop
+    state: present
+  become: true
+
+- name: Set lightdm as the default display manager
+  block:
+  - name: Configure default display manager executable
+    copy:
+      content: '/usr/sbin/lightdm'
+      dest: /etc/X11/default-display-manager
+    register: etc_default_dm
+    become: true
+
+  - name: Configure lightdm
+    when: etc_default_dm.changed
+    block:
+    - name: Configure lightdm as default in debconf
+      debconf:
+        name: lightdm
+        question: shared/default-x-display-manager
+        vtype: string
+        value: lightdm
+      register: reconfigure_lightdm
+      become: true
+
+    - name: Apply lightdm configuration using dpkg-reconfigure
+      command: dpkg-reconfigure lightdm
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+        DEBCONF_NONINTERACTIVE_SEEN: true
+      become: true
+      when: reconfigure_lightdm.changed
+
+- name: Check if the Ubuntu Budgie Backports PPA is installed
+  command:
+    argv:
+    - grep
+    - -qrHnie
+    - ubuntubudgie/backports
+    - /etc/apt/sources.list.d/
+  register: ubuntubudgie_backports_ppa_grep
+  check_mode: false
+  changed_when: false
+  failed_when: false
+
+- name: Install Ubuntu Budgie Backports PPA
+  when: ubuntubudgie_backports_ppa_grep.rc != 0
+  block:
+  - name: Add the Ubuntu Budgie Backports PPA
+    add_ppa:
+      name: ppa:ubuntubudgie/backports
+    become: true
+
+  - name: Update packages cache
+    apt:
+      update_cache: true
+    become: true
+
+- name: Install budgie apt packages
+  apt:
+    pkg:
+    - budgie-calendar-applet
+    state: present
+  become: true
