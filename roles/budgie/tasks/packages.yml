@@ -34,30 +34,10 @@
       become: true
       when: reconfigure_lightdm.changed
 
-- name: Check if the Ubuntu Budgie Backports PPA is installed
-  command:
-    argv:
-    - grep
-    - -qrHnie
-    - ubuntubudgie/backports
-    - /etc/apt/sources.list.d/
-  register: ubuntubudgie_backports_ppa_grep
-  check_mode: false
-  changed_when: false
-  failed_when: false
-
 - name: Install Ubuntu Budgie Backports PPA
-  when: ubuntubudgie_backports_ppa_grep.rc != 0
-  block:
-  - name: Add the Ubuntu Budgie Backports PPA
-    add_ppa:
-      name: ppa:ubuntubudgie/backports
-    become: true
-
-  - name: Update packages cache
-    apt:
-      update_cache: true
-    become: true
+  ansible.builtin.apt_repository:
+    repo: ppa:ubuntubudgie/backports
+  become: true
 
 - name: Install budgie apt packages
   apt:

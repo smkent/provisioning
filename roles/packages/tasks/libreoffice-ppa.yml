@@ -1,28 +1,15 @@
-- name: Check if the Libreoffice Fresh PPA is installed
-  command:
-    argv:
-    - grep
-    - -qrHnie
-    - libreoffice/ppa
-    - /etc/apt/sources.list.d/
-  register: libreoffice_ppa_grep
-  check_mode: false
-  changed_when: false
-  failed_when: false
+- name: Install Libreoffice Fresh PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:libreoffice/ppa
+  register: libreoffice_ppa
+  become: true
 
-- name: Install the LibreOffice Fresh PPA
-  when: libreoffice_ppa_grep.rc != 0
-  block:
-  - name: Add the LibreOffice Fresh PPA
-    add_ppa:
-      name: ppa:libreoffice/ppa
-    become: true
-
-  - name: Upgrade to install newer LibreOffice packages
-    apt:
-      update_cache: true
-      upgrade: dist
-    become: true
+- name: Upgrade to install newer LibreOffice packages
+  apt:
+    update_cache: true
+    upgrade: dist
+  become: true
+  when: libreoffice_ppa.changed
 
 - name: Install LibreOffice
   apt:
