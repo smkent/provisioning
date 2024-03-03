@@ -28,7 +28,6 @@
     - scdaemon
     - screen
     - shellcheck
-    - ssh
     - tmux
     - tofrodos
     - traceroute
