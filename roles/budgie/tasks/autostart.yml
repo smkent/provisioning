@@ -1,3 +1,8 @@
+- name: Ensure autostart directory exists
+  file:
+    path: "~/.config/autostart"
+    state: directory
+
 - name: Remove unwanted autostart applications
   file:
     path: "~/.config/autostart/{{ item }}"
