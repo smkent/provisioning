@@ -16,7 +16,7 @@
     - reset
     - -f
     - /com/solus-project/budgie-panel/
-  when: 'budgie_panels_dconf_output.stdout != "[''7e105842-d533-11ea-93fb-e3fe5ccb8507'']"'
+  when: 'budgie_panels_dconf_output.stdout != "[''c01dale8-1977-1138-2187-deadbeef0000'']"'
   notify:
   - restart-budgie-panel
 
@@ -32,6 +32,6 @@
 
 - name: Set budgie-panel menu label
   dconf:
-    key: '/org/solus-project/budgie-panel/instance/budgie-menu/{7e105843-d533-11ea-93fb-e3fe5ccb8507}/menu-label'
+    key: '/org/solus-project/budgie-panel/instance/budgie-menu/{c01dale8-1977-1138-2187-deadbeefa001}/menu-label'
     type: string
     value: '{{ ansible_hostname }}'
