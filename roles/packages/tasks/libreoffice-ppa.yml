@@ -10,18 +10,19 @@
   changed_when: false
   failed_when: false
 
-- name: Add the LibreOffice Fresh PPA
-  add_ppa:
-    name: ppa:libreoffice/ppa
-  become: true
+- name: Install the LibreOffice Fresh PPA
   when: libreoffice_ppa_grep.rc != 0
+  block:
+  - name: Add the LibreOffice Fresh PPA
+    add_ppa:
+      name: ppa:libreoffice/ppa
+    become: true
 
-- name: Upgrade to install newer LibreOffice packages
-  apt:
-    update_cache: true
-    upgrade: dist
-  become: true
-  when: libreoffice_ppa_grep.rc != 0
+  - name: Upgrade to install newer LibreOffice packages
+    apt:
+      update_cache: true
+      upgrade: dist
+    become: true
 
 - name: Install LibreOffice theme packages
   apt:
