@@ -1,5 +1,5 @@
 - name: Set up smkent's authorized_keys
-  authorized_key:
+  ansible.posix.authorized_key:
     user: smkent
     state: present
     key: '{{ item }}'
