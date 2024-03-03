@@ -27,6 +27,7 @@
     - python3-pip
     - scdaemon
     - screen
+    - shellcheck
     - ssh
     - tmux
     - tofrodos
