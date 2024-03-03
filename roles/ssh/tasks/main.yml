@@ -5,3 +5,10 @@
     key: '{{ item }}'
   with_file:
   - yubikey.pub
+
+- name: Install ssh packages
+  apt:
+    pkg:
+    - ssh
+    state: present
+  become: true
