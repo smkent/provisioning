@@ -1,0 +1,8 @@
+- name: Install pip packages via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - flake8
+  - mdv
+  - poetry

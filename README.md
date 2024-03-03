@@ -2,8 +2,7 @@
 
 Ansible provisioning scripts for my machines
 
-These scripts are meant for desktop/laptop systems running Ubuntu Linux or
-Linux Mint.
+These scripts are meant for desktop/laptop systems running Ubuntu Linux.
 
 ## Usage
 
@@ -14,18 +13,17 @@ system:
 ./provision
 ```
 
-If not already installed, the convenience script installs Ansible using `apt`
-before runing the playbook. `provision` passes any arguments to
+If not already installed, the convenience script installs Ansible and
+dependencies before running the playbook. `provision` passes any arguments to
 `ansible-playbook`.
 
 ## Features
 
 The included playbook performs the following actions:
 
-* Install packages using `apt`, `pip`, and `cabal`
+* Install packages using `apt` and `pipx`
 * Install [smkent/dotfiles](https://github.com/smkent/dotfiles) in `$HOME`
 * Set [Budgie desktop environment](https://ubuntubudgie.org/) preferences
-* Set [MATE desktop environment](http://mate-desktop.com/) preferences
 
 ## License
 

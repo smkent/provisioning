@@ -18,8 +18,6 @@
     - iftop
     - imagemagick
     - mesa-utils
-    - network-manager-openvpn
-    - network-manager-openvpn-gnome
     - nmap
     - pdftk-java
     - proxytunnel
@@ -27,6 +25,7 @@
     - python3-pip
     - scdaemon
     - screen
+    - shellcheck
     - ssh
     - tmux
     - tofrodos

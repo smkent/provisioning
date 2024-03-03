@@ -2,7 +2,6 @@
   hosts: localhost
   roles:
   - dotfiles
-  - mate-preferences
   - packages
   - settings
   - ssh
