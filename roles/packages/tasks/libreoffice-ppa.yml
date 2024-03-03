@@ -28,8 +28,5 @@
   apt:
     pkg:
     - libreoffice
-    - libreoffice-style-breeze
-    - libreoffice-style-elementary
-    - libreoffice-style-galaxy
     state: present
   become: true
