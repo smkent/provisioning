@@ -3,7 +3,7 @@
     path: "~/.config/autostart/{{ item }}"
     state: absent
   with_items:
-    - plank.desktop
+  - plank.desktop
 
 - name: Install autostart applications
   copy:
@@ -11,4 +11,4 @@
     dest: "~/.config/autostart/{{ item }}"
     mode: 0664
   with_items:
-    - setxkbmap.desktop
+  - setxkbmap.desktop
