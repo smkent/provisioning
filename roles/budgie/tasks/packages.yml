@@ -1,3 +1,10 @@
+- name: Install Budgie desktop environment
+  apt:
+    pkg:
+    - ubuntu-budgie-desktop
+    state: present
+  become: true
+
 - name: Check if the Ubuntu Budgie Backports PPA is installed
   command:
     argv:
