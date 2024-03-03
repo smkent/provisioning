@@ -24,7 +24,7 @@ if [ ${check_ansible_installed} -eq 1 ]; then
     if ! which ansible >/dev/null 2>&1; then
         sudo apt install -y python3-apt
         pipx install ansible-core
-        ansible-galaxy install -r requirements.yml --help
+        ansible-galaxy install -r requirements.yml
     fi
 fi
 
