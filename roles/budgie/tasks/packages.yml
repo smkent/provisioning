@@ -6,10 +6,33 @@
   become: true
 
 - name: Set lightdm as the default display manager
-  copy:
-    content: '/usr/sbin/lightdm'
-    dest: /etc/X11/default-display-manager
-  become: true
+  block:
+  - name: Configure default display manager executable
+    copy:
+      content: '/usr/sbin/lightdm'
+      dest: /etc/X11/default-display-manager
+    register: etc_default_dm
+    become: true
+
+  - name: Configure lightdm
+    when: etc_default_dm.changed
+    block:
+    - name: Configure lightdm as default in debconf
+      debconf:
+        name: lightdm
+        question: shared/default-x-display-manager
+        vtype: string
+        value: lightdm
+      register: reconfigure_lightdm
+      become: true
+
+    - name: Apply lightdm configuration using dpkg-reconfigure
+      command: dpkg-reconfigure lightdm
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+        DEBCONF_NONINTERACTIVE_SEEN: true
+      become: true
+      when: reconfigure_lightdm.changed
 
 - name: Check if the Ubuntu Budgie Backports PPA is installed
   command:
