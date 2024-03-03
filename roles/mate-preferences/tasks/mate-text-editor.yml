@@ -1,31 +1,19 @@
 - name: Set MATE text editor preferences (MATE 1.16.x)
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
-      - { key: /org/x/editor/bracket-matching,
-            val: True, type: bool }
-      - { key: /org/x/editor/display-line-numbers,
-            val: True, type: bool }
-      - { key: /org/x/editor/highlight-current-line,
-            val: True, type: bool }
-      - { key: /org/x/editor/display-right-margin,
-            val: True, type: bool }
-      - { key: /org/x/editor/right-margin-position,
-            val: 80, type: int }
-      - { key: /org/x/editor/color-scheme,
-          val: oblivion, type: string }
+  - {key: /org/x/editor/bracket-matching, val: true, type: bool}
+  - {key: /org/x/editor/display-line-numbers, val: true, type: bool}
+  - {key: /org/x/editor/highlight-current-line, val: true, type: bool}
+  - {key: /org/x/editor/display-right-margin, val: true, type: bool}
+  - {key: /org/x/editor/right-margin-position, val: 80, type: int}
+  - {key: /org/x/editor/color-scheme, val: oblivion, type: string}
 
 - name: Set MATE text editor preferences (MATE >=1.18.x)
   dconf: key={{item.key}} type={{item.type}} value="{{item.val}}"
   with_items:
-      - { key: /org/x/editor/preferences/editor/bracket-matching,
-            val: True, type: bool }
-      - { key: /org/x/editor/preferences/editor/display-line-numbers,
-            val: True, type: bool }
-      - { key: /org/x/editor/preferences/editor/highlight-current-line,
-            val: True, type: bool }
-      - { key: /org/x/editor/preferences/editor/display-right-margin,
-            val: True, type: bool }
-      - { key: /org/x/editor/preferences/editor/right-margin-position,
-            val: 80, type: int }
-      - { key: /org/x/editor/preferences/editor/scheme,
-          val: oblivion, type: string }
+  - {key: /org/x/editor/preferences/editor/bracket-matching, val: true, type: bool}
+  - {key: /org/x/editor/preferences/editor/display-line-numbers, val: true, type: bool}
+  - {key: /org/x/editor/preferences/editor/highlight-current-line, val: true, type: bool}
+  - {key: /org/x/editor/preferences/editor/display-right-margin, val: true, type: bool}
+  - {key: /org/x/editor/preferences/editor/right-margin-position, val: 80, type: int}
+  - {key: /org/x/editor/preferences/editor/scheme, val: oblivion, type: string}

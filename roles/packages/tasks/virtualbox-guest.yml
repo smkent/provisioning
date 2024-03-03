@@ -2,9 +2,9 @@
   shell: |
     lspci | grep -qie 'Virtualbox'
   register: virtualbox_guest_check
-  check_mode: False
-  changed_when: False
-  failed_when: False
+  check_mode: false
+  changed_when: false
+  failed_when: false
 
 - name: Install Virtualbox guest additions
   apt:
@@ -12,5 +12,5 @@
     - virtualbox-guest-dkms
     - virtualbox-guest-x11
     state: present
-  become: True
+  become: true
   when: virtualbox_guest_check.rc == 0

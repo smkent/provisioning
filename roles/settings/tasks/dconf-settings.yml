@@ -1,34 +1,34 @@
 - name: Retrieve UUID for current budgie-panel instance(s)
   command:
     argv:
-      - dconf
-      - read
-      - /com/solus-project/budgie-panel/panels
+    - dconf
+    - read
+    - /com/solus-project/budgie-panel/panels
   register: budgie_panels_dconf_output
-  check_mode: False
-  changed_when: False
-  failed_when: False
+  check_mode: false
+  changed_when: false
+  failed_when: false
 
 - name: Remove existing budgie-panel(s) configuration
   command:
     argv:
-      - dconf
-      - reset
-      - -f
-      - /com/solus-project/budgie-panel/
+    - dconf
+    - reset
+    - -f
+    - /com/solus-project/budgie-panel/
   when: 'budgie_panels_dconf_output.stdout != "[''7e105842-d533-11ea-93fb-e3fe5ccb8507'']"'
   notify:
-    - restart-budgie-panel
+  - restart-budgie-panel
 
 - name: Set dconf values from configuration file
   command:
     argv:
-      - dconf
-      - load
-      - /
+    - dconf
+    - load
+    - /
     stdin: "{{ lookup('file', 'dconf-settings.ini') }}"
   notify:
-    - restart-budgie-panel
+  - restart-budgie-panel
 
 - name: Set budgie-panel menu label
   dconf:
