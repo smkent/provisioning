@@ -5,6 +5,12 @@
     state: present
   become: true
 
+- name: Set lightdm as the default display manager
+  copy:
+    content: '/usr/sbin/lightdm'
+    dest: /etc/X11/default-display-manager
+  become: true
+
 - name: Check if the Ubuntu Budgie Backports PPA is installed
   command:
     argv:
