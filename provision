@@ -17,7 +17,7 @@ fi
 
 if [ ${check_ansible_installed} -eq 1 ]; then
     if ! which ansible >/dev/null 2>&1; then
-        sudo apt install -y ansible python-apt
+        sudo apt install -y ansible python3-apt
     fi
 fi
 
