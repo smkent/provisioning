@@ -6,6 +6,7 @@
     - curl
     - dconf-cli
     - dconf-editor
+    - dkms
     - easytag
     - exiv2
     - exuberant-ctags
