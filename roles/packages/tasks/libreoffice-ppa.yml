@@ -24,9 +24,10 @@
       upgrade: dist
     become: true
 
-- name: Install LibreOffice theme packages
+- name: Install LibreOffice
   apt:
     pkg:
+    - libreoffice
     - libreoffice-style-breeze
     - libreoffice-style-elementary
     - libreoffice-style-galaxy
