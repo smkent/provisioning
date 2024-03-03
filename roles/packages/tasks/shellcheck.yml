@@ -2,7 +2,7 @@
   apt:
     pkg: cabal-install
     state: present
-  become: True
+  become: true
 
 - name: Check if shellcheck is installed
   stat:
@@ -11,7 +11,7 @@
 
 - name: Update list of known cabal packages
   command: cabal new-update
-  changed_when: False
+  changed_when: false
   when: not shellcheck_stat_result.stat.exists
 
 - name: Retrieve ghc version
@@ -25,7 +25,8 @@
   file:
     path: ~/.cabal/store/ghc-{{ cabal_version_number.stdout }}/package.db
     state: directory
-  when: not shellcheck_stat_result.stat.exists and cabal_version_number.stdout != ""
+  when: not shellcheck_stat_result.stat.exists and cabal_version_number.stdout !=
+    ""
 
 - name: Install shellcheck
   command: cabal new-install ShellCheck

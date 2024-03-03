@@ -1,23 +1,23 @@
 - name: Check if Ghostscript types are enabled in ImageMagick
   command:
     argv:
-      - grep
-      - -qrHnie
-      - disable ghostscript format types
-      - /etc/ImageMagick-6/policy.xml
+    - grep
+    - -qrHnie
+    - disable ghostscript format types
+    - /etc/ImageMagick-6/policy.xml
   register: imagemagick_policy_grep
-  check_mode: False
-  changed_when: False
-  failed_when: False
+  check_mode: false
+  changed_when: false
+  failed_when: false
 
 - name: Enable Ghostscript types in ImageMagick
   command:
     argv:
-      - sed
-      - --in-place=.backup
-      - -e
-      - /disable ghostscript format types/,+6d
-      - /etc/ImageMagick-6/policy.xml
-    warn: False
-  become: True
+    - sed
+    - --in-place=.backup
+    - -e
+    - /disable ghostscript format types/,+6d
+    - /etc/ImageMagick-6/policy.xml
+    warn: false
+  become: true
   when: imagemagick_policy_grep.rc == 0

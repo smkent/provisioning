@@ -39,4 +39,4 @@
     - yubioath-desktop
     - zsnes
     state: present
-  become: True
+  become: true

@@ -4,4 +4,4 @@
     state: present
     key: '{{ item }}'
   with_file:
-    - yubikey.pub
+  - yubikey.pub
