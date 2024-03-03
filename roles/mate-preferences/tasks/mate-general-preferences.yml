@@ -12,8 +12,8 @@
   - {key: /org/mate/caja/desktop/computer-icon-visible, val: false, type: bool}
   - {key: /org/mate/caja/preferences/use-iec-units, val: true, type: bool}
   - {key: /org/mate/media-handling/automount-open, val: false, type: bool}
-  - {key: /org/mate/desktop/accessibility/keyboard/bouncekeys-enable, val: "{{ ansible_form_factor\
-      \ == 'Desktop' }}", type: bool}
+  - {key: /org/mate/desktop/accessibility/keyboard/bouncekeys-enable, val: "{{ ansible_form_factor
+      == 'Desktop' }}", type: bool}
   - {key: /org/mate/panel/objects/clock/prefs/show-date, val: false, type: bool}
   - {key: /org/mate/panel/objects/clock/prefs/show-temperature, val: false, type: bool}
   - {key: /org/mate/panel/objects/clock/prefs/show-weather, val: false, type: bool}

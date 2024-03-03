@@ -3,5 +3,5 @@
   with_items:
   - {key: /org/mate/power-manager/button-lid-ac, val: nothing, type: string}
   - {key: /org/mate/power-manager/button-lid-battery, val: nothing, type: string}
-  - {key: /org/mate/power-manager/button-power, val: "{{ 'shutdown' if ansible_form_factor\
-      \ == 'Desktop' else 'suspend' }}", type: string}
+  - {key: /org/mate/power-manager/button-power, val: "{{ 'shutdown' if ansible_form_factor
+      == 'Desktop' else 'suspend' }}", type: string}
