@@ -11,30 +11,29 @@
     update: false
   register: dotfiles_exists
 
-- name: Clone dotfiles repository
-  git:
-    repo: https://github.com/smkent/dotfiles
-    dest: '{{ ansible_user_dir }}/dotfiles_temp'
+- name: Install dotfiles
   when: not dotfiles_exists.before
+  block:
+  - name: Clone dotfiles repository
+    git:
+      repo: https://github.com/smkent/dotfiles
+      dest: '{{ ansible_user_dir }}/dotfiles_temp'
 
-- name: Move repository metadata directory into place
-  command: mv dotfiles_temp/.git .
-  args:
-    chdir: '{{ ansible_user_dir }}'
-    removes: '{{ ansible_user_dir }}/dotfiles_temp/.git'
-    creates: '{{ ansible_user_dir }}/.git'
-  when: not dotfiles_exists.before
+  - name: Move repository metadata directory into place
+    command: mv dotfiles_temp/.git .
+    args:
+      chdir: '{{ ansible_user_dir }}'
+      removes: '{{ ansible_user_dir }}/dotfiles_temp/.git'
+      creates: '{{ ansible_user_dir }}/.git'
 
-- name: Check out dotfiles repository contents
-  git:
-    repo: https://github.com/smkent/dotfiles
-    dest: '{{ ansible_user_dir }}'
-    clone: false
-    force: true
-  when: not dotfiles_exists.before
+  - name: Check out dotfiles repository contents
+    git:
+      repo: https://github.com/smkent/dotfiles
+      dest: '{{ ansible_user_dir }}'
+      clone: false
+      force: true
 
-- name: Clean up temporary dotfiles repository directory
-  file:
-    path: '{{ ansible_user_dir }}/dotfiles_temp'
-    state: absent
-  when: not dotfiles_exists.before
+  - name: Clean up temporary dotfiles repository directory
+    file:
+      path: '{{ ansible_user_dir }}/dotfiles_temp'
+      state: absent
