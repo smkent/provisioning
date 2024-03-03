@@ -18,6 +18,5 @@
     - -e
     - /disable ghostscript format types/,+6d
     - /etc/ImageMagick-6/policy.xml
-    warn: false
   become: true
   when: imagemagick_policy_grep.rc == 0
