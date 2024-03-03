@@ -2,6 +2,7 @@
   apt:
     pkg:
     - audacity
+    - blender
     - build-essential
     - curl
     - dconf-cli
@@ -11,15 +12,28 @@
     - exiv2
     - exuberant-ctags
     - flake8
+    - gifsicle
     - gimp
     - gnome-tweaks
     - gnucash
     - gparted
+    - gscan2pdf
+    - handbrake
+    - handbrake-cli
     - htop
     - iftop
     - imagemagick
+    - inkscape
+    - jq
+    - ldap-utils
+    - lsdvd
     - mesa-utils
+    - minicom
+    - mkvtoolnix
+    - nfs-common
     - nmap
+    - openscad
+    - pandoc
     - pdftk-java
     - proxytunnel
     - pv
@@ -28,9 +42,12 @@
     - scdaemon
     - screen
     - shellcheck
+    - smbclient
+    - sqlite3
     - tmux
     - tofrodos
     - traceroute
+    - unrar
     - vim-gtk3
     - vlc
     - whois

@@ -15,6 +15,7 @@
   - platformio
   - poetry
   - pre-commit
+  - s3cmd
   - scons
   - thonny
   - yt-dlp
