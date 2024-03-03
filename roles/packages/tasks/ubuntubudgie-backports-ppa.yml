@@ -1,4 +1,4 @@
-- name: check if the Ubuntu Budgie Backports PPA is installed
+- name: Check if the Ubuntu Budgie Backports PPA is installed
   command:
     argv:
     - grep
@@ -10,22 +10,22 @@
   changed_when: false
   failed_when: false
 
-- name: Add the Ubuntu Budgie Backports PPA
-  add_ppa:
-    name: ppa:ubuntubudgie/backports
-  become: true
+- name: Install Ubuntu Budgie Backports PPA
   when: ubuntubudgie_backports_ppa_grep.rc != 0
+  block:
+  - name: Add the Ubuntu Budgie Backports PPA
+    add_ppa:
+      name: ppa:ubuntubudgie/backports
+    become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: ubuntubudgie_backports_ppa_grep.rc != 0
+  - name: Update packages cache
+    apt:
+      update_cache: true
+    become: true
 
 - name: Install budgie apt packages
   apt:
     pkg:
     - budgie-calendar-applet
-    - budgie-previews
     state: present
   become: true
