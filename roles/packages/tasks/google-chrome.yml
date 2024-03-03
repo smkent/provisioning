@@ -1,13 +1,18 @@
-- name: Check if Google Chrome is installed
-  command: dpkg-query -l google-chrome-stable
-  register: google_chrome_installed
-  failed_when: google_chrome_installed.rc > 1
-  check_mode: false
-  changed_when: false
+- name: Add Google apt repository
+  ansible.builtin.deb822_repository:
+    name: google
+    uris:
+    - "http://dl.google.com/linux/chrome/deb"
+    signed_by: "https://dl.google.com/linux/linux_signing_key.pub"
+    suites: [stable]
+    components: [main]
+    state: present
+    enabled: true
+  become: true
 
 - name: Install Google Chrome
   apt:
-    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    pkg:
+    - google-chrome-stable
     state: present
   become: true
-  when: google_chrome_installed.rc != 0
