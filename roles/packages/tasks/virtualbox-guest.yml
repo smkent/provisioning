@@ -7,10 +7,12 @@
   failed_when: false
 
 - name: Install Virtualbox guest additions
-  apt:
-    pkg:
-    - virtualbox-guest-dkms
-    - virtualbox-guest-x11
-    state: present
-  become: true
   when: virtualbox_guest_check.rc == 0
+  block:
+  - name: Install Virtualbox guest additions prerequisites
+    apt:
+      pkg:
+      - dkms
+      - virtualbox-guest-x11
+      state: present
+    become: true
