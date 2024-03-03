@@ -1,6 +1,6 @@
 - include_tasks: google-chrome.yml
 - include_tasks: packages.yml
-- include_tasks: pip.yml
+- include_tasks: pipx.yml
 - include_tasks: shellcheck.yml
 - include_tasks: ubuntubudgie-backports-ppa.yml
 - include_tasks: virtualbox-guest.yml
