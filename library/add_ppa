@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-import os
+import re
 import subprocess
+from pathlib import Path
 
 from ansible.module_utils.basic import *  # NOQA
 
@@ -17,6 +18,11 @@ options:
     - PPA name (e.g. ppa:ansible/ansible)
     type: string
     required: true
+  update_cache:
+    description:
+    - Whether to update the packages cache on changes
+    type: bool
+    required: false
 """
 
 EXAMPLES = """
@@ -35,6 +41,7 @@ def main():
     module = AnsibleModule(
         argument_spec={
             "repo": {"required": True},
+            "update_cache": {"required": False, "default": True},
         },
         supports_check_mode=True,
     )
@@ -49,7 +56,7 @@ def main():
     # Determine Ubuntu codename to use
     ubuntu_codename = ""
     for fn in ["/etc/lsb-release", "/etc/upstream-release/lsb-release"]:
-        if not os.path.isfile(fn):
+        if not Path(fn).is_file():
             continue
         with open(fn, "r") as f:
             lsb_data = {}
@@ -64,20 +71,27 @@ def main():
         raise Exception("Unable to determine Ubuntu release codename")
 
     # Determine ppa target file name for /etc/apt/sources.list.d/
-    sources_file_name = "{}-{}.list".format(
-        name.replace("/", "-"), ubuntu_codename
-    )
-
-    if not os.path.isfile(
-        os.path.join("/etc/apt/sources.list.d", sources_file_name)
-    ):
-        changed = True
+    changed = True
+    for source in Path("/etc/apt/sources.list.d").iterdir():
+        if not source.is_file():
+            continue
+        if re.search(
+            r"(https?://ppa\.launchpad(content)?\.net/" + name + r")",
+            source.read_text(),
+        ):
+            changed = False
+            break
 
     if changed and not module.check_mode:
         stdout = subprocess.check_output(
             ["apt-add-repository", "-y", "ppa:{}".format(name)],
             stderr=subprocess.STDOUT,
         )
+
+        if module.params["update_cache"]:
+            stdout += subprocess.check_output(
+                ["apt", "update"], stderr=subprocess.STDOUT
+            )
 
     module.exit_json(
         changed=changed,

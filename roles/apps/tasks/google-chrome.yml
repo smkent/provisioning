@@ -10,14 +10,7 @@
     signed_by: "https://dl.google.com/linux/linux_signing_key.pub"
     state: present
     enabled: true
-  register: google_apt_repo
   become: true
-
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: google_apt_repo.changed
 
 - name: Install Google Chrome
   apt:
