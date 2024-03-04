@@ -8,6 +8,7 @@
     components:
     - stable
     signed_by: "https://download.docker.com/linux/ubuntu/gpg"
+    architectures: amd64
     state: present
     enabled: true
   register: docker_apt_repo
