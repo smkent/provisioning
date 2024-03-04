@@ -2,7 +2,7 @@
   ansible.builtin.deb822_repository:
     name: spotify
     uris:
-    - "https://repository.spotify.com"
+    - "http://repository.spotify.com"
     suites:
     - stable
     components:
