@@ -1,0 +1,27 @@
+- name: Add Spotify apt repository
+  ansible.builtin.deb822_repository:
+    name: spotify
+    uris:
+    - "http://repository.spotify.com"
+    suites:
+    - stable
+    components:
+    - non-free
+    signed_by: "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
+    state: present
+    enabled: true
+  register: spotify_apt_repo
+  become: true
+
+- name: Update packages cache
+  apt:
+    update_cache: true
+  become: true
+  when: spotify_apt_repo.changed
+
+- name: Install Spotify
+  apt:
+    pkg:
+    - spotify-client
+    state: present
+  become: true

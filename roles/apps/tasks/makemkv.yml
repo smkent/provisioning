@@ -1,0 +1,12 @@
+- name: Install MakeMKV Beta PPA
+  add_ppa:
+    repo: ppa:heyarje/makemkv-beta
+  become: true
+
+- name: Install MakeMKV
+  apt:
+    pkg:
+    - makemkv-bin
+    - makemkv-oss
+    state: present
+  become: true
