@@ -3,10 +3,10 @@
 - include_tasks: google-chrome.yml
 - include_tasks: libreoffice-ppa.yml
   when: ansible_distribution_release not in ppa_exclude_releases
-- include_tasks: makemkv.yml
 - include_tasks: signal.yml
 
 # Optional apps -- uncomment to install
 # - include_tasks: kicad.yml
+# - include_tasks: makemkv.yml
 # - include_tasks: spotify.yml
 # - include_tasks: zoom.yml
