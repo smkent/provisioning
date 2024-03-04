@@ -6,4 +6,5 @@
 - include_tasks: signal.yml
 
 # Optional apps -- uncomment to install
+# - include_tasks: kicad.yml
 # - include_tasks: zoom.yml

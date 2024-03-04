@@ -1,0 +1,11 @@
+- name: Install KiCAD PPA
+  add_ppa:
+    repo: ppa:kicad/kicad-8.0-releases
+  become: true
+
+- name: Install KiCAD
+  apt:
+    pkg:
+    - kicad
+    state: present
+  become: true
