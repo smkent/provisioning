@@ -1,6 +1,86 @@
-- include_tasks: google-chrome.yml
-- include_tasks: packages.yml
-- include_tasks: pipx.yml
+- name: Install apt packages
+  apt:
+    pkg:
+    - audacity
+    - blender
+    - build-essential
+    - curl
+    - dconf-cli
+    - dconf-editor
+    - dkms
+    - easytag
+    - exiv2
+    - exuberant-ctags
+    - flake8
+    - gifsicle
+    - gimp
+    - gnome-tweaks
+    - gnucash
+    - gparted
+    - gscan2pdf
+    - handbrake
+    - handbrake-cli
+    - htop
+    - iftop
+    - imagemagick
+    - inkscape
+    - jq
+    - ldap-utils
+    - lsdvd
+    - mesa-utils
+    - minicom
+    - mkvtoolnix
+    - nfs-common
+    - nmap
+    - openscad
+    - pandoc
+    - pdftk-java
+    - proxytunnel
+    - pv
+    - python-is-python3
+    - python3-pip
+    - scdaemon
+    - screen
+    - shellcheck
+    - smbclient
+    - sqlite3
+    - tmux
+    - tofrodos
+    - traceroute
+    - unrar
+    - vim-gtk3
+    - vlc
+    - whois
+    - xclip
+    - yubikey-manager
+    - yubioath-desktop
+    state: present
+  become: true
 
-- include_tasks: libreoffice-ppa.yml
-  when: ansible_distribution_release not in ppa_exclude_releases
+- name: Install pip packages via pipx
+  community.general.pipx:
+    name: "{{ item }}"
+    state: present
+  with_items:
+  - ansible-lint
+  - black
+  - cookiecutter
+  - cruft
+  - flake8
+  - isort
+  - linode-cli
+  - mdv
+  - mpremote
+  - platformio
+  - poetry
+  - pre-commit
+  - s3cmd
+  - scons
+  - thonny
+  - yt-dlp
+
+- name: Install poetry-dynamic-versioning into poetry virtualenv
+  community.general.pipx:
+    name: poetry
+    inject_packages: poetry-dynamic-versioning
+    state: inject
