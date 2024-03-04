@@ -1,5 +1,5 @@
 - name: Install Libreoffice Fresh PPA
-  ansible.builtin.apt_repository:
+  add_ppa:
     repo: ppa:libreoffice/ppa
   register: libreoffice_ppa
   become: true

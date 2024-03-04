@@ -35,7 +35,7 @@
       when: reconfigure_lightdm.changed
 
 - name: Install Ubuntu Budgie Backports PPA
-  ansible.builtin.apt_repository:
+  add_ppa:
     repo: ppa:ubuntubudgie/backports
   become: true
 
