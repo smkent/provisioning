@@ -1,0 +1,39 @@
+- name: Add Docker apt repository
+  ansible.builtin.deb822_repository:
+    name: docker
+    uris:
+    - "https://download.docker.com/linux/ubuntu"
+    suites:
+    - "{{ ansible_distribution_release }}"
+    components:
+    - stable
+    signed_by: "https://download.docker.com/linux/ubuntu/gpg"
+    state: present
+    enabled: true
+  register: docker_apt_repo
+  become: true
+
+- name: Update packages cache
+  apt:
+    update_cache: true
+  become: true
+  when: docker_apt_repo.changed
+
+- name: Install Docker
+  apt:
+    pkg:
+    - docker-ce
+    state: present
+  become: true
+
+- name: Create link to docker executables
+  ansible.builtin.file:
+    src: "/usr/libexec/docker/cli-plugins/{{ item }}"
+    dest: "/usr/bin/{{ item }}"
+    owner: root
+    group: root
+    state: link
+  become: true
+  with_items:
+  - docker-buildx
+  - docker-compose
