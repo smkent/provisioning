@@ -7,4 +7,5 @@
 
 # Optional apps -- uncomment to install
 # - include_tasks: kicad.yml
+# - include_tasks: spotify.yml
 # - include_tasks: zoom.yml
