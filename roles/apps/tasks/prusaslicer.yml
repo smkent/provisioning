@@ -1,0 +1,64 @@
+- name: Get PrusaSlicer latest release
+  shell: |
+    curl -s https://api.github.com/repos/prusa3d/prusaslicer/releases/latest \
+    | jq -r '.assets[] .browser_download_url | select(test("x64-GTK3-[0-9]+\\.AppImage"))'
+  register: prusaslicer_latest_url
+  changed_when: false
+
+- name: Install PrusaSlicer
+  when: prusaslicer_latest_url.rc == 0
+  block:
+  - name: Find file name from URL
+    set_fact:
+      prusaslicer_url: "{{ prusaslicer_latest_url.stdout }}"
+      prusaslicer_exe: "{{ prusaslicer_latest_url.stdout.split('/')[-1] | urldecode
+        }}"
+
+  - name: Create application directories
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - "~/.local/apps/prusaslicer"
+    - "~/.local/share/applications"
+
+  - name: Download PrusaSlicer
+    get_url:
+      url: "{{ prusaslicer_url }}"
+      dest: "~/.local/apps/prusaslicer/{{ prusaslicer_exe }}"
+      mode: "0755"
+
+  - name: Create PrusaSlicer executable symlink
+    file:
+      src: "~/.local/apps/prusaslicer//{{ prusaslicer_exe }}"
+      dest: "~/.local/bin/prusaslicer"
+      state: link
+
+  - name: Download PrusaSlicer application icon
+    get_url:
+      url: "https://github.com/prusa3d/PrusaSlicer/raw/master/resources/icons/PrusaSlicer_128px.png"
+      dest: "~/.local/apps/prusaslicer/icon.png"
+      mode: "0644"
+
+  - name: Create PrusaSlicer desktop entry
+    copy:
+      dest: "~/.local/share/applications/prusaslicer.desktop"
+      content: |-
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=PrusaSlicer
+        Exec=prusaslicer %F
+        Icon=/home/smkent/.local/apps/prusaslicer/icon.png
+        MimeType=model/stl;application/vnd.ms-3mfdocument;application/prs.wavefront-obj;application/x-amf;
+        Categories=Graphics;3DGraphics;Engineering;
+        Keywords=3D;Printing;Slicer;slice;3D;printer;convert;gcode;stl;obj;amf;SLA
+        StartupNotify=false
+        StartupWMClass=prusa-slicer
+
+- name: Install PrusaSlicer config git repository
+  git:
+    repo: https://github.com/smkent/prusa-slicer-config
+    dest: "~/.config/PrusaSlicer"
+    clone: true
+    update: false
