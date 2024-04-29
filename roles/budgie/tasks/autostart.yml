@@ -17,6 +17,7 @@
     mode: 0664
   with_items:
   - setxkbmap.desktop
+  - udiskie.desktop
 
 - name: Symlink autostart applications
   file:
