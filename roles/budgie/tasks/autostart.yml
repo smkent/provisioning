@@ -17,3 +17,13 @@
     mode: 0664
   with_items:
   - setxkbmap.desktop
+  - udiskie.desktop
+
+- name: Symlink autostart applications
+  file:
+    src: "/usr/share/applications/{{item}}"
+    dest: "~/.config/autostart/{{ item }}"
+    state: link
+    force: true
+  with_items:
+  - com.yubico.yubioath.desktop

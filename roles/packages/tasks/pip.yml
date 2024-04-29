@@ -1,8 +1,0 @@
-- name: Install pip packages
-  pip:
-    executable: 'pip3'
-    name:
-    - flake8
-    - mdv
-    state: latest
-    extra_args: --user

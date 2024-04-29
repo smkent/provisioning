@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=udiskie
+Comment=udiskie removable media automounter
+Exec=udiskie --no-tray --no-notify

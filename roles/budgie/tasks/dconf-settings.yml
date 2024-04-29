@@ -1,3 +1,12 @@
+- name: Install custom appmenu logo
+  copy:
+    src: "{{ item }}"
+    dest: "/usr/share/icons/{{ item }}"
+    mode: 0644
+  become: true
+  with_items:
+  - appmenu-ubuntu-custom.svg
+
 - name: Retrieve UUID for current budgie-panel instance(s)
   command:
     argv:

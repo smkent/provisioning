@@ -1,0 +1,13 @@
+- name: Create systemd overrides directory
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+  - "~/.config/systemd/user"
+
+- name: Disable xdg-desktop-portal-gnome in systemd
+  file:
+    src: /dev/null
+    dest: ~/.config/systemd/user/xdg-desktop-portal-gnome.service
+    state: link
+    force: true
