@@ -1,0 +1,21 @@
+- name: Override gnome-terminal applications entry
+  block:
+  - name: Create applications directory
+    file:
+      path: "{{ item }}"
+      state: directory
+    with_items:
+    - "~/.local/share/applications"
+
+  - name: Duplicate gnome-terminal launcher
+    copy:
+      src: /usr/share/applications/org.gnome.Terminal.desktop
+      dest: ~/.local/share/applications/
+      remote_src: true
+
+  - name: Adjust gnome-terminal launcher arguments
+    community.general.ini_file:
+      path: ~/.local/share/applications/org.gnome.Terminal.desktop
+      section: Desktop Entry
+      option: X-ExecArg
+      value: "--working-directory=$HOME --"
