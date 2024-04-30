@@ -2,7 +2,6 @@
   apt:
     pkg:
     - yubikey-manager
-    - yubioath-desktop
     state: present
   become: true
 

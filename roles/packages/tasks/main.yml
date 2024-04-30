@@ -54,7 +54,6 @@
     - whois
     - xclip
     - yubikey-manager
-    - yubioath-desktop
     state: present
   become: true
 
