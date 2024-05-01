@@ -5,7 +5,6 @@
   when: ansible_distribution_release not in ppa_exclude_releases
 - include_tasks: prusaslicer.yml
 - include_tasks: signal.yml
-- include_tasks: yubikey.yml
 
 # Optional apps -- uncomment to install
 # - include_tasks: kicad.yml
