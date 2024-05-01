@@ -3,6 +3,19 @@
     path: "~/.config/autostart"
     state: directory
 
+- name: Ensure ~/.local/bin directory exists
+  file:
+    path: "~/.local/bin"
+    state: directory
+
+- name: Install autostart application scripts
+  copy:
+    src: "{{ item }}"
+    dest: "~/.local/bin/{{ item }}"
+    mode: 0775
+  with_items:
+  - budgie-gnome-screensaver
+
 - name: Remove unwanted autostart applications
   file:
     path: "~/.config/autostart/{{ item }}"
@@ -16,5 +29,6 @@
     dest: "~/.config/autostart/{{ item }}"
     mode: 0664
   with_items:
+  - budgie-gnome-screensaver.desktop
   - setxkbmap.desktop
   - udiskie.desktop

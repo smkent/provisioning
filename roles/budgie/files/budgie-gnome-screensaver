@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "${XDG_CURRENT_DESKTOP}" != "Budgie:GNOME" ]; then
+    exit 0
+fi
+
+sleep 5
+if ! pgrep -f '^gnome-screensaver' >/dev/null 2>&1; then
+    pkill -9 -f "/usr/share/gnome-shell/org.gnome.ScreenSaver"
+    sleep 1
+    gnome-screensaver &
+fi
