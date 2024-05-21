@@ -1,0 +1,37 @@
+- name: Add Mozilla Firefox apt repository
+  ansible.builtin.deb822_repository:
+    name: mozilla
+    uris:
+    - "https://packages.mozilla.org/apt"
+    suites:
+    - mozilla
+    components:
+    - main
+    signed_by: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
+    architectures: amd64
+    state: present
+    enabled: true
+  register: mozilla_apt_repo
+  become: true
+
+- name: Update packages cache
+  apt:
+    update_cache: true
+  become: true
+  when: mozilla_apt_repo.changed
+
+- name: Prioritize Mozilla repository packages over default repositories
+  copy:
+    dest: /etc/apt/preferences.d/mozilla
+    content: |-
+      Package: *
+      Pin: origin packages.mozilla.org
+      Pin-Priority: 1000
+  become: true
+
+- name: Install Firefox
+  apt:
+    pkg:
+    - firefox
+    state: present
+  become: true
