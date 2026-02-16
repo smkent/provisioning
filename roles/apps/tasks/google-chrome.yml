@@ -14,15 +14,11 @@
   register: google_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: google_apt_repo.changed
-
 - name: Install Google Chrome
-  apt:
+  ansible.builtin.apt:
     pkg:
     - google-chrome-stable
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if google_apt_repo.changed else 600 }}"
   become: true

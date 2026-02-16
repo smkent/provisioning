@@ -2,11 +2,14 @@
   add_ppa:
     repo: ppa:heyarje/makemkv-beta
   become: true
+  register: makemkv_ppa
 
 - name: Install MakeMKV
-  apt:
+  ansible.builtin.apt:
     pkg:
     - makemkv-bin
     - makemkv-oss
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if makemkv_ppa.changed else 600 }}"
   become: true

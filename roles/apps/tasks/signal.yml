@@ -14,15 +14,11 @@
   register: signal_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: signal_apt_repo.changed
-
 - name: Install Signal
-  apt:
+  ansible.builtin.apt:
     pkg:
     - signal-desktop
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if signal_apt_repo.changed else 600 }}"
   become: true

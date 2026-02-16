@@ -14,17 +14,13 @@
   register: docker_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: docker_apt_repo.changed
-
 - name: Install Docker
-  apt:
+  ansible.builtin.apt:
     pkg:
     - docker-ce
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if docker_apt_repo.changed else 600 }}"
   become: true
 
 - name: Create link to docker executables

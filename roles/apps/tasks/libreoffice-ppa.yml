@@ -5,15 +5,17 @@
   become: true
 
 - name: Upgrade to install newer LibreOffice packages
-  apt:
-    update_cache: true
+  ansible.builtin.apt:
     upgrade: dist
+    update_cache: true
+    cache_valid_time: "{{ 0 if libreoffice_ppa.changed else 600 }}"
   become: true
-  when: libreoffice_ppa.changed
 
 - name: Install LibreOffice
-  apt:
+  ansible.builtin.apt:
     pkg:
     - libreoffice
     state: present
+    update_cache: true
+    cache_valid_time: 600
   become: true
