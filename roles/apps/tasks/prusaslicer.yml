@@ -11,8 +11,7 @@
   - name: Find file name from URL
     set_fact:
       prusaslicer_url: "{{ prusaslicer_latest_url.stdout }}"
-      prusaslicer_exe: "{{ prusaslicer_latest_url.stdout.split('/')[-1] | urldecode
-        }}"
+      prusaslicer_exe: "{{ prusaslicer_latest_url.stdout.split('/')[-1] | urldecode }}"
 
   - name: Create application directories
     file:
