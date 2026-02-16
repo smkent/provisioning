@@ -11,6 +11,12 @@
     - easytag
     - exiv2
     - flake8
+    - fonts-alegreya-sans
+    - fonts-lato
+    - fonts-powerline
+    - fonts-roboto
+    - fonts-roboto-hinted
+    - fonts-roboto-slab
     - gifsicle
     - gimp
     - gnome-tweaks
