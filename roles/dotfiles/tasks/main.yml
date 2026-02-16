@@ -1,2 +1,1 @@
 - include_tasks: repository.yml
-- include_tasks: fonts.yml
