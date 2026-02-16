@@ -10,8 +10,13 @@
     - dkms
     - easytag
     - exiv2
-    - exuberant-ctags
     - flake8
+    - fonts-alegreya-sans
+    - fonts-lato
+    - fonts-powerline
+    - fonts-roboto
+    - fonts-roboto-hinted
+    - fonts-roboto-slab
     - gifsicle
     - gimp
     - gnome-tweaks
@@ -48,11 +53,13 @@
     - tofrodos
     - traceroute
     - udiskie
+    - universal-ctags
     - unrar
     - vim-gtk3
     - vlc
     - whois
     - xclip
+    - yq
     - yubikey-manager
     state: present
     update_cache: true
@@ -65,21 +72,16 @@
     state: present
   with_items:
   - ansible-lint
-  - black
-  - cookiecutter
-  - cruft
   - easyeda2kicad
-  - flake8
-  - isort
   - linode-cli
   - mdv
   - mpremote
   - platformio
   - poetry
+  - ruff
   - pre-commit
   - s3cmd
   - scons
-  - thonny
   - yt-dlp
 
 - name: Install poetry-dynamic-versioning into poetry virtualenv
