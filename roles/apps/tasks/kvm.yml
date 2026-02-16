@@ -11,7 +11,7 @@
     cache_valid_time: 600
   become: true
 
-- name: "Ensure {{ ansible_facts['user_id'] }} user is in the libvirtd group"
+- name: "Ensure {{ ansible_facts['user_id'] }} user is in the libvirt group"
   ansible.builtin.user:
     user: "{{ ansible_facts['user_id'] }}"
     groups: libvirt
