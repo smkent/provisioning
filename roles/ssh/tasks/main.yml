@@ -7,8 +7,10 @@
   - yubikey.pub
 
 - name: Install ssh packages
-  apt:
+  ansible.builtin.apt:
     pkg:
     - ssh
     state: present
+    update_cache: true
+    cache_valid_time: 600
   become: true

@@ -7,21 +7,17 @@
     - stable
     components:
     - non-free
-    signed_by: "https://download.spotify.com/debian/pubkey_6224F9941A8AA6D1.gpg"
+    signed_by: "https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.asc"
     state: present
     enabled: true
   register: spotify_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: spotify_apt_repo.changed
-
 - name: Install Spotify
-  apt:
+  ansible.builtin.apt:
     pkg:
     - spotify-client
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if spotify_apt_repo.changed else 600 }}"
   become: true

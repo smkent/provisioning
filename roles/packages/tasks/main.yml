@@ -1,5 +1,5 @@
 - name: Install apt packages
-  apt:
+  ansible.builtin.apt:
     pkg:
     - audacity
     - blender
@@ -55,6 +55,8 @@
     - xclip
     - yubikey-manager
     state: present
+    update_cache: true
+    cache_valid_time: 600
   become: true
 
 - name: Install pip packages via pipx

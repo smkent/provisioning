@@ -1,8 +1,10 @@
 - name: Install Budgie desktop environment
-  apt:
+  ansible.builtin.apt:
     pkg:
     - ubuntu-budgie-desktop
     state: present
+    update_cache: true
+    cache_valid_time: 600
   become: true
 
 - name: Set lightdm as the default display manager
@@ -40,8 +42,10 @@
   become: true
 
 - name: Install budgie apt packages
-  apt:
+  ansible.builtin.apt:
     pkg:
     - budgie-calendar-applet
     state: present
+    update_cache: true
+    cache_valid_time: 600
   become: true

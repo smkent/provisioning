@@ -14,15 +14,11 @@
   register: github_cli_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: github_cli_apt_repo.changed
-
 - name: Install GitHub CLI
-  apt:
+  ansible.builtin.apt:
     pkg:
     - gh
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if github_cli_apt_repo.changed else 600 }}"
   become: true

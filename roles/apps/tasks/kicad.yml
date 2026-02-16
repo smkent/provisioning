@@ -2,10 +2,13 @@
   add_ppa:
     repo: ppa:kicad/kicad-8.0-releases
   become: true
+  register: kicad_repo
 
 - name: Install KiCAD
-  apt:
+  ansible.builtin.apt:
     pkg:
     - kicad
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if kicad_repo.changed else 600 }}"
   become: true

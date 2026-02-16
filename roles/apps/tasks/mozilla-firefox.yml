@@ -14,12 +14,6 @@
   register: mozilla_apt_repo
   become: true
 
-- name: Update packages cache
-  apt:
-    update_cache: true
-  become: true
-  when: mozilla_apt_repo.changed
-
 - name: Prioritize Mozilla repository packages over default repositories
   copy:
     dest: /etc/apt/preferences.d/mozilla
@@ -30,8 +24,10 @@
   become: true
 
 - name: Install Firefox
-  apt:
+  ansible.builtin.apt:
     pkg:
     - firefox
     state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
   become: true
