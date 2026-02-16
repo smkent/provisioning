@@ -10,7 +10,6 @@
     - dkms
     - easytag
     - exiv2
-    - exuberant-ctags
     - flake8
     - gifsicle
     - gimp
@@ -48,11 +47,13 @@
     - tofrodos
     - traceroute
     - udiskie
+    - universal-ctags
     - unrar
     - vim-gtk3
     - vlc
     - whois
     - xclip
+    - yq
     - yubikey-manager
     state: present
     update_cache: true
@@ -69,13 +70,12 @@
   - cookiecutter
   - cruft
   - easyeda2kicad
-  - flake8
-  - isort
   - linode-cli
   - mdv
   - mpremote
   - platformio
   - poetry
+  - ruff
   - pre-commit
   - s3cmd
   - scons
