@@ -72,9 +72,6 @@
     state: present
   with_items:
   - ansible-lint
-  - black
-  - cookiecutter
-  - cruft
   - easyeda2kicad
   - linode-cli
   - mdv
@@ -85,7 +82,6 @@
   - pre-commit
   - s3cmd
   - scons
-  - thonny
   - yt-dlp
 
 - name: Install poetry-dynamic-versioning into poetry virtualenv
