@@ -1,0 +1,20 @@
+- name: Install KVM-related apt packages
+  ansible.builtin.apt:
+    pkg:
+    - bridge-utils
+    - libvirt-clients
+    - libvirt-daemon-system
+    - qemu-kvm
+    - virt-manager
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: "Ensure {{ ansible_facts['user_id'] }} user is in the libvirtd group"
+  ansible.builtin.user:
+    user: "{{ ansible_facts['user_id'] }}"
+    groups: libvirtd
+    append: true
+  when:
+  - not ansible_check_mode
