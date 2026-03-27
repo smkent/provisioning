@@ -1,0 +1,30 @@
+- name: Install plymouth-x11 apt package
+  apt:
+    pkg:
+    - plymouth-x11
+    state: present
+  become: true
+
+- name: Clone vortex-ubuntu-plymouth-theme repository
+  git:
+    repo: https://github.com/emanuele-scarsella/vortex-ubuntu-plymouth-theme
+    dest: /opt/vortex-ubuntu-plymouth-theme
+  become: true
+
+- name: Create vortex-ubuntu theme symlink
+  file:
+    src: /opt/vortex-ubuntu-plymouth-theme/vortex-ubuntu
+    dest: /usr/share/plymouth/themes/vortex-ubuntu
+    state: link
+  become: true
+
+- name: Install default.plymouth alternative for vortex-ubuntu
+  community.general.alternatives:
+    name: default.plymouth
+    link: /usr/share/plymouth/themes/default.plymouth
+    path: /usr/share/plymouth/themes/vortex-ubuntu/vortex-ubuntu.plymouth
+    priority: 200
+    state: auto
+  become: true
+  notify:
+  - update-initramfs
