@@ -63,3 +63,6 @@
     update_cache: true
     cache_valid_time: 600
   become: true
+
+- name: 'Include Mozilla package tasks'
+  ansible.builtin.include_tasks: mozilla.yml

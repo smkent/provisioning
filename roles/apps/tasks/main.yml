@@ -1,7 +1,6 @@
 - ansible.builtin.include_tasks: docker.yml
 - ansible.builtin.include_tasks: google-chrome.yml
 - ansible.builtin.include_tasks: libreoffice-ppa.yml
-- ansible.builtin.include_tasks: mozilla-firefox.yml
 - ansible.builtin.include_tasks: signal.yml
 
 # Optional apps -- uncomment to install
