@@ -2,7 +2,6 @@
 - ansible.builtin.include_tasks: github-cli.yml
 - ansible.builtin.include_tasks: google-chrome.yml
 - ansible.builtin.include_tasks: libreoffice-ppa.yml
-  when: ansible_facts["distribution_release"] not in ppa_exclude_releases
 - ansible.builtin.include_tasks: mozilla-firefox.yml
 - ansible.builtin.include_tasks: signal.yml
 
