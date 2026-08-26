@@ -1,5 +1,3 @@
-- ansible.builtin.include_tasks: libreoffice-ppa.yml
-
 # Optional apps -- uncomment to install
 # - ansible.builtin.include_tasks: kicad.yml
 # - ansible.builtin.include_tasks: makemkv.yml
