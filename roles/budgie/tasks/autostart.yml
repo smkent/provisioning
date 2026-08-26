@@ -1,34 +1,34 @@
 - name: Ensure autostart directory exists
-  file:
+  ansible.builtin.file:
     path: "~/.config/autostart"
     state: directory
 
 - name: Ensure ~/.local/bin directory exists
-  file:
+  ansible.builtin.file:
     path: "~/.local/bin"
     state: directory
 
 - name: Install autostart application scripts
-  copy:
+  ansible.builtin.copy:
     src: "{{ item }}"
     dest: "~/.local/bin/{{ item }}"
-    mode: 0775
-  with_items:
+    mode: "0775"
+  loop:
   - budgie-gnome-screensaver
 
 - name: Remove unwanted autostart applications
-  file:
+  ansible.builtin.file:
     path: "~/.config/autostart/{{ item }}"
     state: absent
-  with_items:
+  loop:
   - plank.desktop
 
 - name: Install autostart applications
-  copy:
-    src: "{{item}}"
+  ansible.builtin.copy:
+    src: "{{ item }}"
     dest: "~/.config/autostart/{{ item }}"
-    mode: 0664
-  with_items:
+    mode: "0664"
+  loop:
   - budgie-gnome-screensaver.desktop
   - setxkbmap.desktop
   - udiskie.desktop

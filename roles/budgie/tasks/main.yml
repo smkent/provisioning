@@ -1,7 +1,7 @@
-- include_tasks: packages.yml
+- ansible.builtin.include_tasks: packages.yml
 
-- include_tasks: autostart.yml
-- include_tasks: dconf-settings.yml
-- include_tasks: fixes.yml
-- include_tasks: gnome-terminal.yml
-- include_tasks: imagemagick.yml
+- ansible.builtin.include_tasks: autostart.yml
+- ansible.builtin.include_tasks: dconf-settings.yml
+- ansible.builtin.include_tasks: fixes.yml
+- ansible.builtin.include_tasks: gnome-terminal.yml
+- ansible.builtin.include_tasks: imagemagick.yml

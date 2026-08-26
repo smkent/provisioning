@@ -1,5 +1,5 @@
 - name: Check if Ghostscript types are enabled in ImageMagick
-  command:
+  ansible.builtin.command:
     argv:
     - grep
     - -qrHnie
@@ -11,7 +11,7 @@
   failed_when: false
 
 - name: Enable Ghostscript types in ImageMagick
-  command:
+  ansible.builtin.command:
     argv:
     - sed
     - --in-place=.backup

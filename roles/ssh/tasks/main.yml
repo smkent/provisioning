@@ -2,7 +2,7 @@
   ansible.posix.authorized_key:
     user: smkent
     state: present
-    key: '{{ item }}'
+    key: "{{ item }}"
   with_file:
   - yubikey.pub
 

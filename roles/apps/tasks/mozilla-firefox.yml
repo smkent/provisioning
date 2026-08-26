@@ -15,7 +15,7 @@
   become: true
 
 - name: Prioritize Mozilla repository packages over default repositories
-  copy:
+  ansible.builtin.copy:
     dest: /etc/apt/preferences.d/mozilla
     content: |-
       Package: *

@@ -4,7 +4,7 @@
 # .git directory to $HOME, and check out the repository contents.
 
 - name: Check if dotfiles repository is installed
-  git:
+  ansible.builtin.git:
     repo: https://github.com/smkent/dotfiles
     dest: "{{ ansible_facts['user_dir'] }}"
     clone: false
@@ -15,25 +15,25 @@
   when: not dotfiles_exists.before
   block:
   - name: Clone dotfiles repository
-    git:
+    ansible.builtin.git:
       repo: https://github.com/smkent/dotfiles
       dest: "{{ ansible_facts['user_dir'] }}/dotfiles_temp"
 
   - name: Move repository metadata directory into place
-    command: mv dotfiles_temp/.git .
+    ansible.builtin.command: mv dotfiles_temp/.git .
     args:
       chdir: "{{ ansible_facts['user_dir'] }}"
       removes: "{{ ansible_facts['user_dir'] }}/dotfiles_temp/.git"
       creates: "{{ ansible_facts['user_dir'] }}/.git"
 
   - name: Check out dotfiles repository contents
-    git:
+    ansible.builtin.git:
       repo: https://github.com/smkent/dotfiles
       dest: "{{ ansible_facts['user_dir'] }}"
       clone: false
       force: true
 
   - name: Clean up temporary dotfiles repository directory
-    file:
+    ansible.builtin.file:
       path: "{{ ansible_facts['user_dir'] }}/dotfiles_temp"
       state: absent

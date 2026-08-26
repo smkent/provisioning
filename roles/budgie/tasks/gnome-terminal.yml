@@ -1,14 +1,14 @@
 - name: Override gnome-terminal applications entry
   block:
   - name: Create applications directory
-    file:
+    ansible.builtin.file:
       path: "{{ item }}"
       state: directory
-    with_items:
+    loop:
     - "~/.local/share/applications"
 
   - name: Duplicate gnome-terminal launcher
-    copy:
+    ansible.builtin.copy:
       src: /usr/share/applications/org.gnome.Terminal.desktop
       dest: ~/.local/share/applications/
       force: false
