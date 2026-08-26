@@ -1,0 +1,10 @@
+- name: Disable sudo pwfeedback
+  ansible.builtin.copy:
+    dest: /etc/sudoers.d/pwfeedback
+    content: |
+      Defaults !pwfeedback
+    owner: root
+    group: root
+    mode: "0440"
+    validate: "visudo -cf %s"
+  become: true
