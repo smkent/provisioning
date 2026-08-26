@@ -7,7 +7,6 @@
 
 # Optional apps -- uncomment to install
 # - ansible.builtin.include_tasks: kicad.yml
-# - ansible.builtin.include_tasks: kvm.yml
 # - ansible.builtin.include_tasks: makemkv.yml
 # - ansible.builtin.include_tasks: spotify.yml
 # - ansible.builtin.include_tasks: zoom.yml
