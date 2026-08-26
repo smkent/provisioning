@@ -1,5 +1,4 @@
 - ansible.builtin.include_tasks: docker.yml
-- ansible.builtin.include_tasks: google-chrome.yml
 - ansible.builtin.include_tasks: libreoffice-ppa.yml
 - ansible.builtin.include_tasks: signal.yml
 

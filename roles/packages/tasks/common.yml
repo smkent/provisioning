@@ -64,5 +64,8 @@
     cache_valid_time: 600
   become: true
 
+- name: 'Include Google Chrome package tasks'
+  ansible.builtin.include_tasks: google-chrome.yml
+
 - name: 'Include Mozilla package tasks'
   ansible.builtin.include_tasks: mozilla.yml

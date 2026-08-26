@@ -14,6 +14,14 @@
   register: google_apt_repo
   become: true
 
+- name: Disable Google's automatic repository management
+  ansible.builtin.copy:
+    content: |-
+      repo_add_once="false"
+      repo_reenable_on_distupgrade="false"
+    dest: /etc/default/google-chrome
+  become: true
+
 - name: Install Google Chrome
   ansible.builtin.apt:
     pkg:
