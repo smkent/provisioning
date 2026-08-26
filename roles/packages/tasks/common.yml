@@ -69,3 +69,6 @@
 
 - name: 'Include Mozilla package tasks'
   ansible.builtin.include_tasks: mozilla.yml
+
+- name: 'Include Signal package tasks'
+  ansible.builtin.include_tasks: signal.yml

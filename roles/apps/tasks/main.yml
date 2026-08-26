@@ -1,6 +1,5 @@
 - ansible.builtin.include_tasks: docker.yml
 - ansible.builtin.include_tasks: libreoffice-ppa.yml
-- ansible.builtin.include_tasks: signal.yml
 
 # Optional apps -- uncomment to install
 # - ansible.builtin.include_tasks: kicad.yml
