@@ -7,3 +7,6 @@
     update_cache: true
     cache_valid_time: 600
   become: true
+
+- name: 'Include mise package tasks'
+  ansible.builtin.include_tasks: mise_repo.yml

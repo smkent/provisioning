@@ -1,0 +1,51 @@
+- name: Add mise PPA
+  ansible.builtin.deb822_repository:
+    name: mise
+    uris:
+    - "https://ppa.launchpadcontent.net/jdxcode/mise/ubuntu/"
+    suites:
+    - "{{ ansible_facts['distribution_release'] }}"
+    components:
+    - main
+    signed_by: |-
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+      .
+      mQINBGh9jG4BEACnzIopwc0djTgW+MQ1DMlm8flkgFm1LE7bRyKkauyLZtHdpEvj
+      B6eFQB63VznMdEI0h8A7krdm4nPl+bcYRE66XI2EtqV4YvVSK82m7SyMDcIfyu7G
+      OYXph1z6SsesNJ1iIAx0jSqeE0L4NlQkfYYUnzn4sdCcpLYN7bfgV+kUMPUPvSiK
+      JK0ak7Bi+T1ERrWML6NwVZFXqBXoqoSWxC57iyjceD5oZDBUJgQ2Jpq4nbFFvfym
+      rMJzy3eqiA6/1FbPJ1HY97JB4MXd11xw/loPdbdrCc2Ik7mAO5ekCfM67AttHI59
+      uoNyRSWWdmUOy0eMS89kwrZI3/BtDNNzYyOL3tvSBMY4g6PEsYt9VGSCeKDqFE+5
+      6sT1bmKrGw1AqxMtJRA7+52uBpjDfyQF7UAb8q5pNXUacCUyWF+hvj/GZof4CvI7
+      m9NVDdBMY2ACGBC1kAf7R/11ucZkRPCPm91Cy1jfMw+lraaBN4/yGvc0bIXch2sR
+      uph7occRjhkedwhHwMdCVlQTV6Y1lKIRrvYj0LRwCOYAP13tO3PJD8S0hQDzEc39
+      IY7YsoqeGATW2eYeZY7ikNm5c3aN2Phx69+kMBkeRINUKEIaa60wZu3xY2Q36TVT
+      OemDcYhUXY2gPupMu7bU+4NGDpvzHAv/uz6chr57WdbkUIkNS7VpFwWXJwARAQAB
+      tB1MYXVuY2hwYWQgUFBBIGZvciBKZWZmIERpY2tleYkCTgQTAQoAOBYhBDigl8DM
+      5pF5XksVviOZfT7uHtxSBQJofYxuAhsDBQsJCAcCBhUKCQgLAgQWAgMBAh4BAheA
+      AAoJECOZfT7uHtxSig4QAIb5axPJCUbx7c3b76ubu1pSf26J8B8wzQfSA50hksZp
+      KYiwuhhlnr0qhpcK5mIoyU2ha8EFLkDiZwb3x26oVnkxbBCchDiTo8764e5zUv1c
+      rWDhgPVl6AEH10OyEtyMTy/Cxs7M5MLZ89TpJB6dN8+dCjBJ4SGueiZg4Syk63hN
+      YPmjH4CjKEF++s+tWV5YDDTj00RoxyxrMIJjWeNa3cJqy/ch6Od2bFS+mngyrmmD
+      tbJErfg3XRGRXrmJIVQls/UqpNY3CA/6qCDd83pI2x5P3KRsf+PyxH72Pi4m9o+5
+      IwQeAQkl7k7/JDEi8HdMb+EA+nfICvvxe44+Dz3/hqAIGu4k+myTA2Bh5O2rB9xC
+      kjlvr/5u9bGrL/tTAl8vGztxSkmnGaPkbUiA9NAxJOPwpH1ouBU4xsLWkicva3et
+      rrnrxLVi76DBAnPZdf8hUoQZI0pLhKCt0/jJQvtTZ6MtAyMtCAaGa4hTFyh72yEq
+      Nz+0PPnuWNKxGWEUFLCtZPb8bsCqXEOcmdzGkfcnRc5+WFRcXYtirqbtFaOM9xTC
+      fRtSekMMVRBqY5AhKZGLIheXVdNvv9OqPKeYUiyl55A5scKVipfOOCrLusLGc27l
+      sPqlC/Q95TtzfLZRXSoQbUAKjM5TXNl+EwREvBUMXavbrnUIjXe1mPkrsBvh+Unn
+      =N6TY
+      -----END PGP PUBLIC KEY BLOCK-----
+    state: present
+    enabled: true
+  register: mise_ppa
+  become: true
+
+- name: Install mise
+  ansible.builtin.apt:
+    pkg:
+    - mise
+    state: present
+    update_cache: true
+    cache_valid_time: "{{ 0 if mise_ppa.changed else 600 }}"
+  become: true
