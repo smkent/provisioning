@@ -1,0 +1,9 @@
+- name: Check for sudo.ws fallback for sudo-rs
+  ansible.builtin.stat:
+    path: /usr/bin/sudo.ws
+  register: sudo_ws_stat
+
+- name: Use sudo.ws for privilege escalation when present
+  ansible.builtin.set_fact:
+    ansible_become_exe: sudo.ws
+  when: sudo_ws_stat.stat.exists
