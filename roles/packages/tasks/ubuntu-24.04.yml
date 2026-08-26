@@ -1,0 +1,9 @@
+- name: Install apt packages
+  ansible.builtin.apt:
+    pkg:
+    - fonts-alegreya-sans
+    - fonts-roboto-hinted
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true

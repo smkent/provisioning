@@ -1,67 +1,9 @@
-- name: Install apt packages
-  ansible.builtin.apt:
-    pkg:
-    - audacity
-    - blender
-    - build-essential
-    - curl
-    - dconf-cli
-    - dconf-editor
-    - dkms
-    - easytag
-    - exiv2
-    - flake8
-    - fonts-alegreya-sans
-    - fonts-lato
-    - fonts-powerline
-    - fonts-roboto
-    - fonts-roboto-hinted
-    - fonts-roboto-slab
-    - gifsicle
-    - gimp
-    - gnome-tweaks
-    - gnucash
-    - gparted
-    - gscan2pdf
-    - handbrake
-    - handbrake-cli
-    - htop
-    - iftop
-    - imagemagick
-    - inkscape
-    - jq
-    - ldap-utils
-    - lsdvd
-    - mesa-utils
-    - minicom
-    - mkvtoolnix
-    - nfs-common
-    - nmap
-    - openscad
-    - pandoc
-    - pdftk-java
-    - proxytunnel
-    - pv
-    - python-is-python3
-    - python3-pip
-    - scdaemon
-    - screen
-    - shellcheck
-    - smbclient
-    - sqlite3
-    - tmux
-    - tofrodos
-    - traceroute
-    - udiskie
-    - universal-ctags
-    - unrar
-    - vim-gtk3
-    - vlc
-    - whois
-    - xclip
-    - yq
-    - yubikey-manager
-    state: present
-    update_cache: true
-    cache_valid_time: 600
-  become: true
+- name: 'Include common package tasks'
+  ansible.builtin.include_tasks: common.yml
+
+- name: 'Include package tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+  ansible.builtin.include_tasks: '{{ item }}'
+  with_first_found:
+  - files:
+    - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
+  - skip: true
