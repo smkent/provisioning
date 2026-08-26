@@ -6,7 +6,7 @@ repos:
   - id: end-of-file-fixer
   - id: trailing-whitespace
   - id: mixed-line-ending
-    args: ['--fix=lf']
+    args: ["--fix=lf"]
 - repo: https://github.com/Lucas-C/pre-commit-hooks
   rev: v1.5.5
   hooks:
@@ -15,7 +15,7 @@ repos:
   rev: v2.15.0
   hooks:
   - id: pretty-format-yaml
-    args: [--preserve-quotes, --autofix, --indent, '2']
+    args: [--preserve-quotes, --autofix, --indent, "2"]
 - repo: https://github.com/koalaman/shellcheck-precommit
   rev: v0.11.0
   hooks:

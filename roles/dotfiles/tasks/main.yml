@@ -1,1 +1,1 @@
-- include_tasks: repository.yml
+- ansible.builtin.include_tasks: repository.yml

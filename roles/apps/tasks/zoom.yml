@@ -1,5 +1,5 @@
 - name: Check if Zoom is installed
-  command: dpkg-query -l zoom
+  ansible.builtin.command: dpkg-query -l zoom
   register: zoom_installed
   failed_when: zoom_installed.rc > 1
   check_mode: false
