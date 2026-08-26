@@ -63,3 +63,18 @@
     update_cache: true
     cache_valid_time: 600
   become: true
+
+- name: 'Include Docker package tasks'
+  ansible.builtin.include_tasks: docker.yml
+
+- name: 'Include Google Chrome package tasks'
+  ansible.builtin.include_tasks: google-chrome.yml
+
+- name: 'Include LibreOffice package tasks'
+  ansible.builtin.include_tasks: libreoffice.yml
+
+- name: 'Include Mozilla package tasks'
+  ansible.builtin.include_tasks: mozilla.yml
+
+- name: 'Include Signal package tasks'
+  ansible.builtin.include_tasks: signal.yml

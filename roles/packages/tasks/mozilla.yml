@@ -27,11 +27,18 @@
       Pin-Priority: -1
   become: true
 
+- name: Remove Firefox snap package
+  community.general.snap:
+    name: firefox
+    state: absent
+  become: true
+
 - name: Install Firefox
   ansible.builtin.apt:
     pkg:
     - firefox
-    state: present
+    state: latest
     update_cache: true
     cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
+    allow_downgrade: true
   become: true
