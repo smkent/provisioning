@@ -1,5 +1,4 @@
 - ansible.builtin.include_tasks: docker.yml
-- ansible.builtin.include_tasks: github-cli.yml
 - ansible.builtin.include_tasks: google-chrome.yml
 - ansible.builtin.include_tasks: libreoffice-ppa.yml
 - ansible.builtin.include_tasks: mozilla-firefox.yml
