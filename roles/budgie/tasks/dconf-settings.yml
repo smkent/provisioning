@@ -4,7 +4,7 @@
     dest: "/usr/share/icons/{{ item }}"
     mode: "0644"
   become: true
-  with_items:
+  loop:
   - appmenu-ubuntu-custom.svg
 
 - name: Retrieve UUID for current budgie-panel instance(s)

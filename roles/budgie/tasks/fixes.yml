@@ -2,7 +2,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-  with_items:
+  loop:
   - "~/.config/systemd/user"
 
 - name: Disable xdg-desktop-portal-gnome in systemd

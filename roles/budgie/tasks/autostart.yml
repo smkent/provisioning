@@ -13,14 +13,14 @@
     src: "{{ item }}"
     dest: "~/.local/bin/{{ item }}"
     mode: "0775"
-  with_items:
+  loop:
   - budgie-gnome-screensaver
 
 - name: Remove unwanted autostart applications
   ansible.builtin.file:
     path: "~/.config/autostart/{{ item }}"
     state: absent
-  with_items:
+  loop:
   - plank.desktop
 
 - name: Install autostart applications
@@ -28,7 +28,7 @@
     src: "{{ item }}"
     dest: "~/.config/autostart/{{ item }}"
     mode: "0664"
-  with_items:
+  loop:
   - budgie-gnome-screensaver.desktop
   - setxkbmap.desktop
   - udiskie.desktop

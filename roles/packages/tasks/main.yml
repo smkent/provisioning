@@ -70,7 +70,7 @@
   community.general.pipx:
     name: "{{ item }}"
     state: present
-  with_items:
+  loop:
   - ansible-lint
   - easyeda2kicad
   - linode-cli
