@@ -2,31 +2,18 @@
 
 set -e
 
-# Don't check if ansible is installed if -h/--help is a command line argument
-check_ansible_installed=1
-for arg in "${@}"; do
-    if [ "${arg}" = "-h" ] || [ "${arg}" = "--help" ]; then
-        check_ansible_installed=0
-    fi
-done
-
 if [ "$(id -u)" -eq 0 ]; then
     echo "Error: Run this as a normal user" >&2
     exit 1
 fi
 
-export PATH="${HOME}/.local/bin:${PATH}"
-
-if [ ${check_ansible_installed} -eq 1 ]; then
-    if ! which pipx >/dev/null 2>&1; then
-        sudo apt install -y pipx
-    fi
-    if ! which ansible >/dev/null 2>&1; then
-        sudo apt install -y python3-apt
-        pipx install ansible-core
-        ansible-galaxy install -r requirements.yml
-    fi
+if [ ! -x "$(command -v ansible 2>&1)" ]; then
+    (
+        set -x
+        sudo apt install -y ansible-core
+    )
 fi
 
 set -x
+ansible-galaxy install -r requirements.yml
 ANSIBLE_NOCOWS=1 ansible-playbook -Ki hosts.localhost local.yml "${@}"
