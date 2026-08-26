@@ -1,8 +1,9 @@
 - name: Local desktop machine configuration
   hosts: localhost
   roles:
-  - dotfiles
+  - system
   - ssh
+  - dotfiles
   - budgie
   - packages
   - apps
