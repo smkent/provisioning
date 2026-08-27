@@ -1,7 +1,14 @@
 - name: 'Include Budgie packages tasks'
-  ansible.builtin.include_tasks: packages.yml
+  ansible.builtin.import_tasks: packages.yml
 
-- ansible.builtin.include_tasks: autostart.yml
-- ansible.builtin.include_tasks: dconf-settings.yml
-- ansible.builtin.include_tasks: fixes.yml
-- ansible.builtin.include_tasks: gnome-terminal.yml
+- name: 'Include Budgie autostart tasks'
+  ansible.builtin.import_tasks: autostart.yml
+
+- name: 'Include Budgie dconf settings tasks'
+  ansible.builtin.import_tasks: dconf-settings.yml
+
+- name: 'Include Budgie fixes tasks'
+  ansible.builtin.import_tasks: fixes.yml
+
+- name: 'Include Budgie gnome-terminal tasks'
+  ansible.builtin.import_tasks: gnome-terminal.yml
