@@ -5,4 +5,3 @@
 - ansible.builtin.include_tasks: dconf-settings.yml
 - ansible.builtin.include_tasks: fixes.yml
 - ansible.builtin.include_tasks: gnome-terminal.yml
-- ansible.builtin.include_tasks: imagemagick.yml
