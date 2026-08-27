@@ -1,0 +1,31 @@
+- name: Install dotfiles dependent apt packages
+  ansible.builtin.apt:
+    pkg:
+    - fzf
+    - gimp
+    - git
+    - gnupg
+    - mutt
+    - screen
+    - shellcheck
+    - tmux
+    - universal-ctags
+    - vim-gtk3
+    - xclip
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: 'Include mise tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+  ansible.builtin.include_tasks: '{{ item }}'
+  with_first_found:
+  - files:
+    - 'mise/{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
+  - skip: true
+
+- name: Ensure mise packages are installed
+  ansible.builtin.command: "mise install {% if ansible_check_mode %}--dry-run{% endif %}"
+  register: dotfiles_mise_install_check
+  check_mode: false
+  changed_when: "'all tools are installed' not in dotfiles_mise_install_check.stderr"
