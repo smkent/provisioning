@@ -60,6 +60,7 @@
       S1GIqgTqW7TRaQRg
       =yIM2
       -----END PGP PUBLIC KEY BLOCK-----
+    architectures: amd64
     state: present
     enabled: true
   register: mise_apt_repo
