@@ -1,4 +1,5 @@
-- ansible.builtin.include_tasks: packages.yml
+- name: 'Include Budgie packages tasks'
+  ansible.builtin.include_tasks: packages.yml
 
 - ansible.builtin.include_tasks: autostart.yml
 - ansible.builtin.include_tasks: dconf-settings.yml
