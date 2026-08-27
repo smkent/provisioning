@@ -1,3 +1,11 @@
-- name: Restart-budgie-panel
+- name: restart-budgie-panel
   ansible.builtin.shell: "( cd && DISPLAY=:0 nohup budgie-panel --replace </dev/null >/dev/null 2>&1 & )"
-  when: "lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') == 'Budgie:GNOME'"
+  when: "lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') in ['Budgie', 'Budgie:GNOME']"
+
+- name: reload-labwc-config
+  ansible.builtin.command: labwc -r
+  when: "lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') == 'Budgie'"
+
+- name: update-initramfs
+  ansible.builtin.command: update-initramfs -u
+  become: true

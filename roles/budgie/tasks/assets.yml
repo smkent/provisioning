@@ -1,0 +1,8 @@
+- name: Install custom appmenu logo
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/usr/share/icons/{{ item }}"
+    mode: "0644"
+  become: true
+  loop:
+  - appmenu-ubuntu-custom.svg

@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=crystal-dock
+Exec=/usr/bin/crystal-dock
+Hidden=true

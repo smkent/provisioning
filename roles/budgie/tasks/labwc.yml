@@ -1,0 +1,21 @@
+- name: Check if labwc config file exists
+  ansible.builtin.stat:
+    path: "~/.config/budgie-desktop/labwc/rc.xml"
+  register: labwc_rc_xml_stat
+
+- name: Configure labwc keyboard settings
+  when: labwc_rc_xml_stat.stat.exists
+  block:
+  - name: Set labwc keyboard repeat rate
+    community.general.xml:
+      path: "~/.config/budgie-desktop/labwc/rc.xml"
+      xpath: /labwc_config/keyboard/repeatRate
+      value: "33"
+    notify: reload-labwc-config
+
+  - name: Set labwc keyboard repeat delay
+    community.general.xml:
+      path: "~/.config/budgie-desktop/labwc/rc.xml"
+      xpath: /labwc_config/keyboard/repeatDelay
+      value: "500"
+    notify: reload-labwc-config

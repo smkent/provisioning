@@ -55,31 +55,9 @@
     cache_valid_time: "{{ 0 if budgie_ubuntu_backports_ppa.changed else 600 }}"
   become: true
 
-- name: Set lightdm as the default display manager
-  block:
-  - name: Configure default display manager executable
-    ansible.builtin.copy:
-      content: "/usr/sbin/lightdm"
-      dest: /etc/X11/default-display-manager
-    register: etc_default_dm
-    become: true
-
-  - name: Configure lightdm
-    when: etc_default_dm.changed
-    block:
-    - name: Configure lightdm as default in debconf
-      ansible.builtin.debconf:
-        name: lightdm
-        question: shared/default-x-display-manager
-        vtype: string
-        value: lightdm
-      register: reconfigure_lightdm
-      become: true
-
-    - name: Apply lightdm configuration using dpkg-reconfigure
-      ansible.builtin.command: dpkg-reconfigure lightdm
-      environment:
-        DEBIAN_FRONTEND: noninteractive
-        DEBCONF_NONINTERACTIVE_SEEN: true
-      become: true
-      when: reconfigure_lightdm.changed
+- name: Restore default Ubuntu boot splash theme
+  community.general.alternatives:
+    name: default.plymouth
+    path: /usr/share/plymouth/themes/bgrt/bgrt.plymouth
+  become: true
+  notify: update-initramfs
