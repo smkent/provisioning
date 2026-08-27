@@ -1,0 +1,39 @@
+# Install dotfiles repository
+# This repository can't be cloned directly to $HOME, as git requires the clone
+# destination to be absent. Instead, clone to a temporary directory, move the
+# .git directory to $HOME, and check out the repository contents.
+
+- name: Check if dotfiles repository is installed
+  ansible.builtin.git:
+    repo: https://github.com/smkent/dotfiles
+    dest: "{{ ansible_facts['user_dir'] }}"
+    clone: false
+    update: false
+  register: dotfiles_exists
+
+- name: Install dotfiles
+  when: not dotfiles_exists.before
+  block:
+  - name: Clone dotfiles repository
+    ansible.builtin.git:
+      repo: https://github.com/smkent/dotfiles
+      dest: "{{ ansible_facts['user_dir'] }}/dotfiles_temp"
+
+  - name: Move repository metadata directory into place
+    ansible.builtin.command: mv dotfiles_temp/.git .
+    args:
+      chdir: "{{ ansible_facts['user_dir'] }}"
+      removes: "{{ ansible_facts['user_dir'] }}/dotfiles_temp/.git"
+      creates: "{{ ansible_facts['user_dir'] }}/.git"
+
+  - name: Check out dotfiles repository contents
+    ansible.builtin.git:
+      repo: https://github.com/smkent/dotfiles
+      dest: "{{ ansible_facts['user_dir'] }}"
+      clone: false
+      force: true
+
+  - name: Clean up temporary dotfiles repository directory
+    ansible.builtin.file:
+      path: "{{ ansible_facts['user_dir'] }}/dotfiles_temp"
+      state: absent
