@@ -1,6 +1,6 @@
 - name: Install KiCAD PPA
   add_ppa:
-    repo: ppa:kicad/kicad-8.0-releases
+    repo: ppa:kicad/kicad-10.0-releases
   become: true
   register: kicad_repo
 
