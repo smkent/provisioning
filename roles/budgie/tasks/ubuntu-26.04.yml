@@ -1,0 +1,23 @@
+- name: 'Include labwc tasks'
+  ansible.builtin.import_tasks: labwc.yml
+
+- name: 'Include sddm tasks'
+  ansible.builtin.import_tasks: sddm.yml
+
+- name: Install apt packages
+  ansible.builtin.apt:
+    pkg:
+    - budgie-visualspace-applet
+    - budgie-clipboard-applet
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: Override Crystal Dock application to prevent it from starting
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.config/autostart/{{ item }}"
+    mode: "0664"
+  loop:
+  - crystal-dock-autostart.desktop

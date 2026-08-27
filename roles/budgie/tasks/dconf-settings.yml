@@ -1,12 +1,3 @@
-- name: Install custom appmenu logo
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "/usr/share/icons/{{ item }}"
-    mode: "0644"
-  become: true
-  loop:
-  - appmenu-ubuntu-custom.svg
-
 - name: Retrieve UUID for current budgie-panel instance(s)
   ansible.builtin.command:
     argv:
@@ -15,7 +6,7 @@
     - /com/solus-project/budgie-panel/panels
   register: budgie_panels_dconf_output
   check_mode: false
-  changed_when: false
+  changed_when: 'budgie_panels_dconf_output.stdout != "[''c01dale8-1977-1138-2187-deadbeef0000'']"'
   failed_when: false
 
 - name: Remove existing budgie-panel(s) configuration
@@ -25,7 +16,29 @@
     - reset
     - -f
     - /com/solus-project/budgie-panel/
-  when: 'budgie_panels_dconf_output.stdout != "[''c01dale8-1977-1138-2187-deadbeef0000'']"'
+  when: budgie_panels_dconf_output.changed
+  notify:
+  - restart-budgie-panel
+
+- name: Retrieve UUIDs for current Raven widgets
+  command:
+    argv:
+    - dconf
+    - read
+    - /org/buddiesofbudgie/budgie-desktop/raven/widgets/uuids
+  register: budgie_raven_widgets_dconf_output
+  check_mode: false
+  changed_when: '"c01dale8-1977-1138-2187-deadbeefd001" not in budgie_raven_widgets_dconf_output.stdout'
+  failed_when: false
+
+- name: Remove existing Raven widgets configuration
+  command:
+    argv:
+    - dconf
+    - reset
+    - -f
+    - /org/buddiesofbudgie/budgie-desktop/raven/widgets/
+  when: budgie_raven_widgets_dconf_output.changed
   notify:
   - restart-budgie-panel
 
@@ -35,7 +48,11 @@
     - dconf
     - load
     - /
-    stdin: "{{ lookup('file', 'dconf-settings.ini') }}"
+    stdin: "{{ lookup('file', item) }}"
+  with_first_found:
+  - files:
+    - 'dconf/dconf-settings-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
+  - skip: true
   notify:
   - restart-budgie-panel
 

@@ -1,0 +1,32 @@
+- name: 'Include lightdm tasks'
+  ansible.builtin.import_tasks: lightdm.yml
+
+- name: 'Include gnome-terminal tasks'
+  ansible.builtin.import_tasks: gnome-terminal.yml
+
+- name: 'Include xdg-desktop-portal-gnome tasks'
+  ansible.builtin.import_tasks: xdg-desktop-portal-gnome.yml
+
+- name: Install autostart application scripts
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.local/bin/{{ item }}"
+    mode: "0775"
+  loop:
+  - budgie-gnome-screensaver
+
+- name: Install autostart applications
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "~/.config/autostart/{{ item }}"
+    mode: "0664"
+  loop:
+  - budgie-gnome-screensaver.desktop
+  - setxkbmap.desktop
+
+- name: Remove Plank from autostart applications
+  ansible.builtin.file:
+    path: "~/.config/autostart/{{ item }}"
+    state: absent
+  loop:
+  - plank.desktop
