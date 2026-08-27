@@ -1,7 +1,11 @@
-- name: Install Budgie desktop environment
+- name: Install Budgie desktop environment and supporting packages
   ansible.builtin.apt:
     pkg:
+    - dconf-cli
+    - dconf-editor
+    - gnome-tweaks
     - ubuntu-budgie-desktop
+    - udiskie
     state: present
     update_cache: true
     cache_valid_time: 600

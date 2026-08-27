@@ -5,8 +5,6 @@
     - blender
     - build-essential
     - curl
-    - dconf-cli
-    - dconf-editor
     - dkms
     - easytag
     - exiv2
@@ -15,7 +13,6 @@
     - fonts-roboto
     - fonts-roboto-slab
     - gifsicle
-    - gnome-tweaks
     - gnucash
     - gparted
     - gscan2pdf
@@ -45,7 +42,6 @@
     - sqlite3
     - tofrodos
     - traceroute
-    - udiskie
     - unrar
     - vlc
     - whois
