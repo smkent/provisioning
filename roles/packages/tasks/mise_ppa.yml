@@ -36,6 +36,7 @@
       sPqlC/Q95TtzfLZRXSoQbUAKjM5TXNl+EwREvBUMXavbrnUIjXe1mPkrsBvh+Unn
       =N6TY
       -----END PGP PUBLIC KEY BLOCK-----
+    architectures: amd64
     state: present
     enabled: true
   register: mise_ppa
