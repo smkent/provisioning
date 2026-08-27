@@ -1,3 +1,25 @@
+- name: 'Include basic packages tasks'
+  ansible.builtin.import_tasks: packages.yml
+
+- name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+  ansible.builtin.include_tasks: '{{ item }}'
+  with_first_found:
+  - files:
+    - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
+  - skip: true
+
+- name: 'Include Docker tasks'
+  ansible.builtin.import_tasks: docker.yml
+
+- name: 'Include Google Chrome tasks'
+  ansible.builtin.import_tasks: google-chrome.yml
+
+- name: 'Include LibreOffice tasks'
+  ansible.builtin.import_tasks: libreoffice.yml
+
+- name: 'Include Signal tasks'
+  ansible.builtin.import_tasks: signal.yml
+
 # Optional apps -- uncomment to install
 # - ansible.builtin.include_tasks: kicad.yml
 # - ansible.builtin.include_tasks: makemkv.yml
