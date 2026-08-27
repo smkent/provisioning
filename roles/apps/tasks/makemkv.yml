@@ -1,8 +1,45 @@
-- name: Install MakeMKV Beta PPA
-  add_ppa:
-    repo: ppa:heyarje/makemkv-beta
+- name: Add MakeMKV Beta PPA
+  ansible.builtin.deb822_repository:
+    name: makemkv-beta
+    uris:
+    - "https://ppa.launchpadcontent.net/heyarje/makemkv-beta/ubuntu/"
+    suites:
+    - "{{ ansible_facts['distribution_release'] }}"
+    components:
+    - main
+    signed_by: |-
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+      xsFNBFNwf5EBEADHr3Q9HEZsS/B/7B+tRIlBATZcDS8WIiMkTuYX8UEEeKx92mvc
+      5NaRfXgPkP26kpsovWYEJ4+fYv7pTjkNYB+QXootq7BwzPcW8iOe3LldEDUvAI6B
+      zI9OuRTH+EzMZ3yz6cjCD+b/x5StMUOM2Z38PgSomW+uGzrmLtlzDWG4oSjSdEdl
+      yoeLozKx58YBLludX4u2rE7rrBnnOiBAe9W79FrNNygNvL2wxV1Sv3mgA2864lfM
+      HOK+J1mTSKiuNd3XmmSRWM/LkSpUWxOf3aWJCogo62jYoPjiSeRsS8OAPqv06WJX
+      j85Qo6TygBqB7wrP5OEsdxx9E3oPkb+Do0PtcIX/Pc/13nHfLPX8Oyw6qYJxpXP3
+      YcUlBITYaYe3kqwJ5657gl4S62aUG1WcQjWwfCUR3MfTr/tyQHcbms9nYD4rg2Fi
+      QwGFPMcSpP8PVupuSVkmd7NW97iBCg3ZroriCebe5O/12wfdbiE7opFPkHzfkX/9
+      FEIbyADN4N8M1HJWwuUhnZ4apdk5L9o0XUiV3FHpVrDgjAwM0PMlLfp2Brbf3dax
+      WsatDpWfJnayGqI97Qr07s1VVl7JKGa8+it2th/v1qlyPs1WXhGtiEUzEYnhyAaN
+      8RhTInda5ZgoiCw34FKwLrHtKc8KBb6TGAdU5LYFgEvWoKHqMTR6w8XR6QARAQAB
+      zRpMYXVuY2hwYWQgUFBBIGZvciBoam1vb3Nlc8LBeAQTAQIAIgUCU3B/kQIbAwYL
+      CQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQhUA1YBn35VuveBAAuUAwrhNnpNwP
+      EnSXuZS8pobzlwytVyLSZ3jpIOBpVkX9VZHgigjoVW4X4ms5EAE5b3/8X86wP97W
+      CxsDe96QFcP51j3hNr3MWwzmjqNPS5SJyKYuZmeZ94X6k5Jum6lbQ/4nNh5XTLkf
+      lbqJXR/DI4xX47TkGFMTweZcIoFxigbxkc2HphCnOXHLr6EaazTOqFIhrI7uY92V
+      /Fb8IuXO5bJqLXfMySyxWiBvcILJ2AklbyqGtXbiAeOEDNCsKOgfkSI4DeM8wqE5
+      VtUiIWeleCQCZqa1GzvtvQ2ymVjB31qjPwn0TRWZd411SJlj/3qEbIxLluRZpyfv
+      WX3tAJ02GyKdiPdqFUZjen49eM54Rn6S0MW/HdGWcKs9o2R7ctOCwKors0pOn/9x
+      pAMWtGPfQ8Ce3WlRgY423b3is8qlfF9eEknyKEzSxovOCrXMPBJEKZaONwPUfDG8
+      StY3DT4IX7QDMuLssaw5mOtsNt1qWj79sNWjs/U1LDiY2HGBUGMBcJIy1nqtobD4
+      t/sDoXBKfU2DBjYSPBlpKybaavNONu+vAK6CFLmKdkeFEVnNDa65aNtuLTw8s4L1
+      XK9UjQ4hcs187q6oIjvaKxgB2dmBUx93cNElkA1LPnb+ugg/FASDWcCakcTaHFEW
+      VjU8OSvTvQ1DY9RZmDvohbKeRDEtfnI=
+      =JaYK
+      -----END PGP PUBLIC KEY BLOCK-----
+    state: present
+    enabled: true
+  register: makemkv_beta_ppa
   become: true
-  register: makemkv_ppa
 
 - name: Install MakeMKV
   ansible.builtin.apt:
@@ -11,5 +48,5 @@
     - makemkv-oss
     state: present
     update_cache: true
-    cache_valid_time: "{{ 0 if makemkv_ppa.changed else 600 }}"
+    cache_valid_time: "{{ 0 if makemkv_beta_ppa.changed else 600 }}"
   become: true
