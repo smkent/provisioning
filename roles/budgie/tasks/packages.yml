@@ -1,6 +1,50 @@
+- name: Add Ubuntu Budgie Backports PPA
+  ansible.builtin.deb822_repository:
+    name: ubuntubudgie-backports
+    uris:
+    - "https://ppa.launchpadcontent.net/ubuntubudgie/backports/ubuntu/"
+    suites:
+    - "{{ ansible_facts['distribution_release'] }}"
+    components:
+    - main
+    signed_by: |-
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+      .
+      mQINBFiBQFQBEADerJrPpT9g8iggCaQQ/ZolRy/dpAt55R42vav+rQlEzfbs13S9
+      kVrXRvpGXUoW+Sz9TCVoHvXTKQCL8/MDmRmaM61flndAu1welQbsRIImlT9Z1lBJ
+      0dk1adkshmi/yvVRY6vxta84NEhs1mntkmqlvzRebHtOjiylm+70Iw3/Po64/dU/
+      NHa4aUYJSBxWHJQTbr6zE2ql9f0pEe4wv3/PPxGKJBbMzcqNWImh6/uSL9SLxt8a
+      XRLe2fllWByRPGQbZI+O1GukXfX0FLc+DeQVl2DlTiSIXku8BVlaAhrctAvj+c3f
+      IObm4DvHmCT8lGWDo2JMFBgGAjrsYLBnxTEtOv9TPqxTVquQNn9qasPaSykI+EcS
+      6E/K+UuK57gM2Zwldkj4FpYJdlos4ZX+TqjucQY7kXHipiE8cubcfBB/X6Kv1p9s
+      8tWOeumnATc246NlAFqN7aLjTXJhU8kU3Iwtw4u5bFI5Zm12uQlcexzgNnXos1+Q
+      ZEXCFCl6aSPiC+b4RPlDJSZKHvL/CupJm0LY8x3gqw5dcW3rYBaJqNIfpUfRvDwT
+      nC/KWKKxIJWnavoiQINyISx5dYFTZxDopjWuLqCiIAcSP+FRJhEsAuuk/jUxVC48
+      0kGVhsyVp/lsFzJzx5CzG2JvzdnKoG05XBuhpIFfwfpRMZUH7qK6okE7QwARAQAB
+      tB9MYXVuY2hwYWQgUFBBIGZvciBVYnVudHUgQnVkZ2lliQI4BBMBAgAiBQJYgUBU
+      AhsDBgsJCAcDAgYVCAIJCgsEFgIDAQIeAQIXgAAKCRC7UwUqJFl8IP73D/9pc9cl
+      LOjrhX+DEXo3yH9Od7ek/ysXVEl7SRP7SuGU7jAYBo5Z1DL1InL12Dd7V0rfq4Pk
+      imop4BNhw4qCkrFkHy9URGK713aet6Usut32wck4QQ0sgvmY3edgCs6FGwasy22c
+      HmfFDd69U12wsu9ULb6t6wrePFf7Vk2Hccc2+wU80bLPn5AvmPJkLr/bvC93A6Pa
+      /+55aYaKNVeVWCvtsIGoNkW0Nt8fHeHUtzu0HO6BVNcBlxLdxmzW7wGVB8RLukTR
+      EVg1c/5AIsRZAXzPpTtiVEi+FEsjLg7rBccdv/0ZE5Rrg+KBo38jKphMyBWpVLRw
+      ISYv02jU/R4ii9NuY46HD0MX4iCqZr3ce2FV9AWpQsGjHokLmi+IqBvUuW6KR0qt
+      YHac+YZroC5mxGYeMp6tySySjGcjdqAOYRGEW7E3l8D4q3X2n5/fs4o0YStYf2qn
+      qM3kPd9BlF2dgRD1OZ4kbjQKp+x7mpqwpZMGWx/TidzdZ7dvdHPWQy2+c/TjuXcJ
+      wf+xM+JRXl7o13TUXLwAMqcnfnH6J61oXyaidzoqsuXliOX+oMKdBVhUpfaaH872
+      TGxU3MRMBcXcPHag+A+c2DFTjts1JN9zknI4+0JNJmpLCprrt/FN+wscbqh74w7G
+      gNJT6U7xEofzJTc0JNYtgI7s3z/hiNt4ah7NPw==
+      =OYJe
+      -----END PGP PUBLIC KEY BLOCK-----
+    state: present
+    enabled: true
+  register: budgie_ubuntu_backports_ppa
+  become: true
+
 - name: Install Budgie desktop environment and supporting packages
   ansible.builtin.apt:
     pkg:
+    - budgie-calendar-applet
     - dconf-cli
     - dconf-editor
     - gnome-tweaks
@@ -8,7 +52,7 @@
     - udiskie
     state: present
     update_cache: true
-    cache_valid_time: 600
+    cache_valid_time: "{{ 0 if budgie_ubuntu_backports_ppa.changed else 600 }}"
   become: true
 
 - name: Set lightdm as the default display manager
@@ -39,17 +83,3 @@
         DEBCONF_NONINTERACTIVE_SEEN: true
       become: true
       when: reconfigure_lightdm.changed
-
-- name: Install Ubuntu Budgie Backports PPA
-  add_ppa:
-    repo: ppa:ubuntubudgie/backports
-  become: true
-
-- name: Install budgie apt packages
-  ansible.builtin.apt:
-    pkg:
-    - budgie-calendar-applet
-    state: present
-    update_cache: true
-    cache_valid_time: 600
-  become: true
