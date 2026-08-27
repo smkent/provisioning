@@ -1,8 +1,27 @@
 - name: Local desktop machine configuration
   hosts: localhost
+  gather_facts: false
+  pre_tasks:
+  - name: Gathering Facts
+    ansible.builtin.gather_facts:
+    tags:
+    - always
   roles:
-  - system
-  - ssh
-  - dotfiles
-  - budgie
-  - apps
+  - role: system
+    tags:
+    - minimal
+    - system
+  - role: ssh
+    tags:
+    - minimal
+    - ssh
+  - role: dotfiles
+    tags:
+    - minimal
+    - dotfiles
+  - role: budgie
+    tags:
+    - budgie
+  - role: apps
+  tags:
+  - full
