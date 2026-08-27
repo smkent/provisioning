@@ -10,7 +10,6 @@
     - dkms
     - easytag
     - exiv2
-    - flake8
     - fonts-lato
     - fonts-powerline
     - fonts-roboto
