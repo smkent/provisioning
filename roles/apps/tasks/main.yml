@@ -1,27 +1,70 @@
 - name: 'Include basic packages tasks'
   ansible.builtin.import_tasks: packages.yml
+  tags:
+  - apps
 
 - name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
-  ansible.builtin.include_tasks: '{{ item }}'
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+    apply:
+      tags:
+      - always
   with_first_found:
   - files:
     - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
   - skip: true
+  tags:
+  - apps
 
 - name: 'Include Docker tasks'
   ansible.builtin.import_tasks: docker.yml
+  tags:
+  - apps
+  - docker
 
 - name: 'Include Google Chrome tasks'
   ansible.builtin.import_tasks: google-chrome.yml
+  tags:
+  - apps
+  - chrome
+  - google-chrome
+
+- name: 'Include KiCAD tasks'
+  ansible.builtin.import_tasks: kicad.yml
+  tags:
+  - never
+  - full
+  - kicad
 
 - name: 'Include LibreOffice tasks'
   ansible.builtin.import_tasks: libreoffice.yml
+  tags:
+  - apps
+  - libreoffice
+
+- name: 'Include MakeMKV tasks'
+  ansible.builtin.import_tasks: makemkv.yml
+  tags:
+  - never
+  - full
+  - makemkv
 
 - name: 'Include Signal tasks'
   ansible.builtin.import_tasks: signal.yml
+  tags:
+  - apps
+  - signal
 
-# Optional apps -- uncomment to install
-# - ansible.builtin.include_tasks: kicad.yml
-# - ansible.builtin.include_tasks: makemkv.yml
-# - ansible.builtin.include_tasks: spotify.yml
-# - ansible.builtin.include_tasks: zoom.yml
+- name: 'Include Spotify tasks'
+  ansible.builtin.import_tasks: spotify.yml
+  tags:
+  - never
+  - full
+  - spotify
+
+- name: 'Include Zoom tasks'
+  ansible.builtin.import_tasks: zoom.yml
+  tags:
+  - never
+  - full
+  - zoom
