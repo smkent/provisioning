@@ -65,8 +65,5 @@
 - name: 'Include LibreOffice package tasks'
   ansible.builtin.include_tasks: libreoffice.yml
 
-- name: 'Include Mozilla package tasks'
-  ansible.builtin.include_tasks: mozilla.yml
-
 - name: 'Include Signal package tasks'
   ansible.builtin.include_tasks: signal.yml
