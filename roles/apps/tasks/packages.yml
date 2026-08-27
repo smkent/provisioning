@@ -32,6 +32,7 @@
     - nmap
     - openscad
     - pandoc
+    - pcsc-tools
     - pdftk-java
     - proxytunnel
     - pv
