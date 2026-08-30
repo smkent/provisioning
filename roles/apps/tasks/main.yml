@@ -3,19 +3,6 @@
   tags:
   - apps
 
-- name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
-  ansible.builtin.include_tasks:
-    file: "{{ item }}"
-    apply:
-      tags:
-      - always
-  with_first_found:
-  - files:
-    - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
-  - skip: true
-  tags:
-  - apps
-
 - name: 'Include Docker tasks'
   ansible.builtin.import_tasks: docker.yml
   tags:
@@ -28,6 +15,12 @@
   - apps
   - chrome
   - google-chrome
+
+- name: 'Include Gnucash tasks'
+  ansible.builtin.import_tasks: gnucash.yml
+  tags:
+  - apps
+  - gnucash
 
 - name: 'Include KiCAD tasks'
   ansible.builtin.import_tasks: kicad.yml
