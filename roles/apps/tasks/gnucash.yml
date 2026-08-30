@@ -1,0 +1,20 @@
+- name: Install Gnucash
+  ansible.builtin.apt:
+    pkg:
+    - gnucash
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: Set Gnucash dconf values from configuration file
+  ansible.builtin.command:
+    argv:
+    - dconf
+    - load
+    - /
+    stdin: "{{ lookup('file', item) }}"
+  with_first_found:
+  - files:
+    - 'dconf/gnucash-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
+  - skip: true

@@ -13,7 +13,6 @@
     - fonts-roboto
     - fonts-roboto-slab
     - gifsicle
-    - gnucash
     - gparted
     - gscan2pdf
     - handbrake
@@ -52,3 +51,14 @@
     update_cache: true
     cache_valid_time: 600
   become: true
+
+- name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+  ansible.builtin.include_tasks:
+    file: "{{ item }}"
+    apply:
+      tags:
+      - always
+  with_first_found:
+  - files:
+    - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
+  - skip: true
