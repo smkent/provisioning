@@ -2,4 +2,3 @@ dependencies:
 - role: facts_common
   tags:
   - always
-- role: gnome_apps

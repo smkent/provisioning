@@ -1,0 +1,11 @@
+- name: Set Gnome apps dconf values from configuration file
+  ansible.builtin.command:
+    argv:
+    - dconf
+    - load
+    - /
+    stdin: "{{ lookup('file', item) }}"
+  with_first_found:
+  - files:
+    - 'dconf/dconf-settings-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
+  - skip: true
