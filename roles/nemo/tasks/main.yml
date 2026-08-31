@@ -1,0 +1,16 @@
+- name: Install Nemo file manager
+  ansible.builtin.apt:
+    pkg:
+    - nemo
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: Set Nemo dconf values from configuration file
+  ansible.builtin.command:
+    argv:
+    - dconf
+    - load
+    - /
+    stdin: "{{ lookup('file', 'dconf-settings.ini') }}"
