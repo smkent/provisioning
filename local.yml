@@ -19,6 +19,10 @@
     tags:
     - minimal
     - dotfiles
+  - role: gnome_shell
+    tags:
+    - gnome
+    - gnome_shell
   - role: budgie
     tags:
     - budgie

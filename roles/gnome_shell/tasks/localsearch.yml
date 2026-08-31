@@ -1,0 +1,18 @@
+- name: Disable localsearch services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    scope: user
+    masked: true
+    state: stopped
+  loop:
+  - localsearch-3.service
+  - localsearch-control-3.service
+  - localsearch-writeback-3.service
+
+- name: Remove localsearch cache
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+  - "~/.cache/tracker3"
+  - "~/.cache/localsearch"

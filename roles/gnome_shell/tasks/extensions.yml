@@ -1,0 +1,78 @@
+- name: Install packages
+  ansible.builtin.apt:
+    pkg:
+    - gnome-shell-extension-gpaste
+    - gnome-shell-extension-manager
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: Locate uv tools directory
+  ansible.builtin.command:
+    argv:
+    - uv
+    - tool
+    - dir
+  register: uv_tool_dir
+  check_mode: false
+  changed_when: false
+
+- name: Ensure gnome-extensions-cli is installed
+  ansible.builtin.command:
+    argv:
+    - uv
+    - tool
+    - install
+    - gnome-extensions-cli
+    creates: "{{  uv_tool_dir.stdout }}/gnome-extensions-cli"
+
+- name: Retrieve enabled Gnome extensions
+  ansible.builtin.command:
+    argv:
+    - gnome-extensions
+    - list
+    - --enabled
+  register: gnome_extensions_enabled
+  check_mode: false
+  changed_when: false
+
+- name: Retrieve disabled Gnome extensions
+  ansible.builtin.command:
+    argv:
+    - gnome-extensions
+    - list
+    - --disabled
+  register: gnome_extensions_disabled
+  check_mode: false
+  changed_when: false
+
+- name: Disable Ubuntu Dock extension
+  ansible.builtin.command:
+    argv:
+    - gnome-extensions
+    - disable
+    - ubuntu-dock@ubuntu.com
+  when: "'ubuntu-dock@ubuntu.com' not in gnome_extensions_disabled.stdout_lines"
+
+- name: Install extensions
+  ansible.builtin.command:
+    argv:
+    - gext
+    - --filesystem
+    - install
+    - "{{ item }}"
+    creates: "{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json"
+  with_items: "{{ gnome_extensions.user }}"
+
+- name: Set dconf values from configuration file
+  ansible.builtin.command:
+    argv:
+    - dconf
+    - load
+    - /
+    stdin: "{{ lookup('file', item) }}"
+  with_first_found:
+  - files:
+    - 'dconf/dconf-settings-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
+  - skip: true

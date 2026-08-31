@@ -1,0 +1,7 @@
+dependencies:
+- role: facts_common
+  tags:
+  - always
+- role: dotfiles
+- role: gnome_apps
+- role: nemo

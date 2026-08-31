@@ -1,0 +1,18 @@
+- name: Use Nemo as the default file manager
+  community.general.xdg_mime:
+    handler: nemo.desktop
+    mime_types:
+    - application/x-gnome-saved-search
+    - inode/directory
+
+- name: Ensure ~/.local/share/dbus-1/services exists
+  ansible.builtin.file:
+    path: "~/.local/share/dbus-1/services"
+    state: directory
+
+- name: Symlink org.freedesktop.FileManager1 service to Nemo
+  ansible.builtin.file:
+    src: /usr/share/dbus-1/services/nemo.FileManager1.service
+    dest: "~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service"
+    state: link
+    force: true

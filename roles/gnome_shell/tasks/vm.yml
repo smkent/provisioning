@@ -1,0 +1,16 @@
+- name: Run virtual machine specific tasks
+  when: "ansible_facts['virtualization_role'] == 'guest'"
+  block:
+  - name: If a virtual machine, disable screen lock and blank timeout
+    community.general.dconf:
+      key: "{{ item.key }}"
+      value: "{{ item.value }}"
+    loop:
+    - key: "/org/gnome/desktop/screensaver/lock-enabled"
+      value: "false"
+    - key: "/org/gnome/desktop/session/idle-delay"
+      value: "uint32 0"
+    - key: "/org/gnome/settings-daemon/plugins/power/sleep-inactive-ac-type"
+      value: "'nothing'"
+    loop_control:
+      label: "{{ item.key }} -> {{ item.value }}"
