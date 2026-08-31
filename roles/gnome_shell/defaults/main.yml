@@ -1,0 +1,7 @@
+gnome_extensions:
+  user:
+  - dash-to-panel@jderose9.github.com
+  - just-perfection-desktop@just-perfection
+  - simple-weather@romanlefler.com
+  system:
+  - GPaste@gnome-shell-extensions.gnome.org

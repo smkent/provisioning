@@ -1,0 +1,11 @@
+- name: 'Include extensions tasks'
+  ansible.builtin.import_tasks: extensions.yml
+
+- name: 'Include localsearch tasks'
+  ansible.builtin.import_tasks: localsearch.yml
+
+- name: 'Include Nemo tasks'
+  ansible.builtin.import_tasks: nemo.yml
+
+- name: 'Include virtual machine specific tasks'
+  ansible.builtin.import_tasks: vm.yml
