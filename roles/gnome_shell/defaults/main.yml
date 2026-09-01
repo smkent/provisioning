@@ -6,3 +6,29 @@ gnome_extensions:
   - simple-weather@romanlefler.com
   system:
   - drive-menu@gnome-shell-extensions.gcampax.github.com
+
+gnome_theme:
+  dconf_path: /org/gnome/desktop/interface/
+  dconf:
+  - key: accent-color
+    value: "'purple'"
+    defaults:
+    - "'orange'"
+  - key: color-scheme
+    value: "'prefer-dark'"
+    defaults:
+    - "'default'"
+  - key: cursor-theme
+    value: "'Bibata-Modern-Ice'"
+    defaults:
+    - "'Yaru'"
+  - key: gtk-theme
+    value: "'Yaru-purple-dark'"
+    defaults:
+    - "'Yaru'"
+    - "'Yaru-dark'"
+  - key: icon-theme
+    value: "'Yaru-purple-dark'"
+    defaults:
+    - "'Yaru'"
+    - "'Yaru-dark'"
