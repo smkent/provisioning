@@ -70,6 +70,17 @@
     creates: "{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json"
   with_items: "{{ gnome_extensions.user }}"
 
+- name: Enable extensions
+  ansible.builtin.command:
+    argv:
+    - gnome-extensions
+    - enable
+    - "{{ item }}"
+  register: gnome_extensions_enable
+  changed_when: gnome_extensions_enable.rc == 0
+  when: "item in gnome_extensions_disabled.stdout_lines"
+  with_items: "{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}"
+
 - name: Set dconf values from configuration file
   ansible.builtin.command:
     argv:
