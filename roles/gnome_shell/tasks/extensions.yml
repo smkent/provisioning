@@ -95,15 +95,3 @@
   changed_when: gnome_extensions_enable.rc == 0
   when: "item in gnome_extensions_disabled.stdout_lines"
   with_items: "{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}"
-
-- name: Set dconf values from configuration file
-  ansible.builtin.command:
-    argv:
-    - dconf
-    - load
-    - /
-    stdin: "{{ lookup('file', item) }}"
-  with_first_found:
-  - files:
-    - 'dconf/dconf-settings-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
-  - skip: true
