@@ -1,7 +1,8 @@
 gnome_extensions:
   user:
+  - copyous@boerdereinar.dev
   - dash-to-panel@jderose9.github.com
   - just-perfection-desktop@just-perfection
   - simple-weather@romanlefler.com
   system:
-  - GPaste@gnome-shell-extensions.gnome.org
+  - drive-menu@gnome-shell-extensions.gcampax.github.com
