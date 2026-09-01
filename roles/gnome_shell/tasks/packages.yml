@@ -1,0 +1,10 @@
+- name: Install packages
+  ansible.builtin.apt:
+    pkg:
+    - dconf-cli
+    - dconf-editor
+    - gnome-tweaks
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
