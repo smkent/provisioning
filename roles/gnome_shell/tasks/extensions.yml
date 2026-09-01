@@ -58,6 +58,11 @@
 - name: Install extensions
   ansible.builtin.command:
     argv:
+    - uv
+    - tool
+    - run
+    - --from
+    - gnome-extensions-cli
     - gext
     - --filesystem
     - install
