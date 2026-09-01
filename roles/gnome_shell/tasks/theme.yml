@@ -1,0 +1,29 @@
+- name: Install theme packages
+  ansible.builtin.apt:
+    pkg:
+    - bibata-cursor-theme
+    state: present
+    update_cache: true
+    cache_valid_time: 600
+  become: true
+
+- name: Retrieve theme settings
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/{{ dconf_item.key }}"
+    state: read
+  register: gnome_theme_state
+  loop: "{{ gnome_theme.dconf }}"
+  loop_control:
+    label: "{{ dconf_item.key }}"
+    loop_var: dconf_item
+
+- name: Set theme settings if not already set
+  community.general.dconf:
+    key: "/org/gnome/desktop/interface/{{ result_item.dconf_item.key }}"
+    value: "{{ result_item.dconf_item.value }}"
+    state: present
+  when: "result_item.value is ansible.builtin.none or result_item.value in result_item.dconf_item.defaults | default([])"
+  loop: "{{ gnome_theme_state.results }}"
+  loop_control:
+    label: "{{ result_item.dconf_item.key }}: {{ result_item.value | default('(unset)', true) }} -> {{ result_item.dconf_item.value }}"
+    loop_var: result_item
