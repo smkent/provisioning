@@ -1,3 +1,6 @@
+- name: 'Include Gnome Shell packages tasks'
+  ansible.builtin.import_tasks: packages.yml
+
 - name: 'Include Gnome Shell dconf settings tasks'
   ansible.builtin.import_tasks: dconf-settings.yml
 
