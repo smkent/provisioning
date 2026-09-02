@@ -16,3 +16,37 @@
     dest: "~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service"
     state: link
     force: true
+
+- name: Override nemo launcher
+  block:
+  - name: Ensure applications directory exists
+    ansible.builtin.file:
+      path: "~/.local/share/applications"
+      state: directory
+
+  - name: Duplicate nemo launcher
+    ansible.builtin.copy:
+      src: /usr/share/applications/nemo.desktop
+      dest: ~/.local/share/applications/
+      force: false
+      remote_src: true
+    register: nemo_launcher_created
+
+  - name: Add a new-window action to the nemo launcher
+    community.general.ini_file:
+      path: ~/.local/share/applications/nemo.desktop
+      section: "{{ item.section }}"
+      option: "{{ item.option }}"
+      value: "{{ item.value }}"
+      no_extra_spaces: true
+    loop:
+    - section: Desktop Entry
+      option: Actions
+      value: "new-window;open-home;open-computer;open-trash;"
+    - section: Desktop Action new-window
+      option: Name
+      value: New Window
+    - section: Desktop Action new-window
+      option: Exec
+      value: nemo %U
+    when: nemo_launcher_created.changed
