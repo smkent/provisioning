@@ -4,5 +4,7 @@ dependencies:
   - always
 - role: backgrounds
 - role: dotfiles
+  tags:
+  - never
 - role: gnome_apps
 - role: nemo
