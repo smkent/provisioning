@@ -21,11 +21,19 @@
     - dotfiles
   - role: gnome_shell
     tags:
+    - never
     - gnome
     - gnome_shell
   - role: budgie
     tags:
+    - never
     - budgie
   - role: apps
+    tags:
+    - apps
+  - role: apps_optional
+    tags:
+    - never
+    - full
   tags:
   - full
