@@ -1,0 +1,4 @@
+dependencies:
+- role: facts_common
+  tags:
+  - always

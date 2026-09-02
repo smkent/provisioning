@@ -1,0 +1,19 @@
+- name: 'Include KiCAD tasks'
+  ansible.builtin.import_tasks: kicad.yml
+  tags:
+  - kicad
+
+- name: 'Include MakeMKV tasks'
+  ansible.builtin.import_tasks: makemkv.yml
+  tags:
+  - makemkv
+
+- name: 'Include Spotify tasks'
+  ansible.builtin.import_tasks: spotify.yml
+  tags:
+  - spotify
+
+- name: 'Include Zoom tasks'
+  ansible.builtin.import_tasks: zoom.yml
+  tags:
+  - zoom

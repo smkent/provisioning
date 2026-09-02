@@ -1,63 +1,28 @@
 - name: 'Include basic packages tasks'
   ansible.builtin.import_tasks: packages.yml
-  tags:
-  - apps
 
 - name: 'Include Docker tasks'
   ansible.builtin.import_tasks: docker.yml
   tags:
-  - apps
   - docker
 
 - name: 'Include Google Chrome tasks'
   ansible.builtin.import_tasks: google-chrome.yml
   tags:
-  - apps
   - chrome
   - google-chrome
 
 - name: 'Include Gnucash tasks'
   ansible.builtin.import_tasks: gnucash.yml
   tags:
-  - apps
   - gnucash
-
-- name: 'Include KiCAD tasks'
-  ansible.builtin.import_tasks: kicad.yml
-  tags:
-  - never
-  - full
-  - kicad
 
 - name: 'Include LibreOffice tasks'
   ansible.builtin.import_tasks: libreoffice.yml
   tags:
-  - apps
   - libreoffice
-
-- name: 'Include MakeMKV tasks'
-  ansible.builtin.import_tasks: makemkv.yml
-  tags:
-  - never
-  - full
-  - makemkv
 
 - name: 'Include Signal tasks'
   ansible.builtin.import_tasks: signal.yml
   tags:
-  - apps
   - signal
-
-- name: 'Include Spotify tasks'
-  ansible.builtin.import_tasks: spotify.yml
-  tags:
-  - never
-  - full
-  - spotify
-
-- name: 'Include Zoom tasks'
-  ansible.builtin.import_tasks: zoom.yml
-  tags:
-  - never
-  - full
-  - zoom
