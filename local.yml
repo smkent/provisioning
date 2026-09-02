@@ -19,15 +19,10 @@
     tags:
     - minimal
     - dotfiles
-  - role: gnome_shell
+  - role: desktop_environment
     tags:
-    - never
-    - gnome
-    - gnome_shell
-  - role: budgie
-    tags:
-    - never
-    - budgie
+    - de
+    - desktop
   - role: apps
     tags:
     - apps
