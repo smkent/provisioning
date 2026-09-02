@@ -1,0 +1,14 @@
+- name: Ensure desktop backgrounds directory exists
+  file:
+    path: "{{ ansible_facts.env.HOME }}/.local/share/backgrounds"
+    state: directory
+    mode: "0755"
+
+- name: Copy desktop backgrounds
+  copy:
+    src: "{{ file_path }}"
+    dest: "{{ ansible_facts.env.HOME }}/.local/share/backgrounds/"
+    mode: "0644"
+  loop: "{{ query('ansible.builtin.fileglob', 'files/*') }}"
+  loop_control:
+    loop_var: file_path
