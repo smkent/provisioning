@@ -1,0 +1,18 @@
+- name: "Include Budgie desktop environment role"
+  ansible.builtin.import_role:
+    name: budgie
+  when: >
+    ansible_run_tags | intersect(['budgie']) | length > 0
+    or lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') in ['Budgie', 'Budgie:GNOME']
+  tags:
+  - budgie
+
+- name: "Include Gnome Shell desktop environment role"
+  ansible.builtin.import_role:
+    name: gnome_shell
+  when: >
+    ansible_run_tags | intersect(['gnome', 'gnome_shell']) | length > 0
+    or lookup('ansible.builtin.env', 'XDG_CURRENT_DESKTOP') in ['ubuntu:GNOME']
+  tags:
+  - gnome
+  - gnome_shell
