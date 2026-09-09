@@ -1,0 +1,21 @@
+[hooks]
+postinstall = [
+    "prek install",
+    "ansible-galaxy install -r requirements.yml",
+]
+
+[tools]
+"pipx:ansible-core" = "latest"
+prek = "latest"
+shellcheck = "latest"
+
+[tasks.lint]
+description = "Run all formatters and static checks"
+raw_args = true
+run = "prek run --all-files"
+
+[tasks.provision]
+description = "Run Ansible playbook to provision local machine"
+interactive = true
+raw_args = true
+run = "ansible-playbook -K -i hosts.localhost local.yml"
