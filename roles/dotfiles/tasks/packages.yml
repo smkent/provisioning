@@ -17,9 +17,6 @@
     cache_valid_time: 600
   become: true
 
-- name: 'Include mise tasks'
-  ansible.builtin.import_tasks: mise.yml
-
 - name: Ensure mise packages are installed
   ansible.builtin.command: "mise install {% if ansible_check_mode %}--dry-run{% endif %}"
   register: dotfiles_mise_install_check

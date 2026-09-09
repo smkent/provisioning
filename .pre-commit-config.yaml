@@ -16,7 +16,10 @@ repos:
   hooks:
   - id: pretty-format-yaml
     args: [--preserve-quotes, --autofix, --indent, "2"]
-- repo: https://github.com/shellcheck-py/shellcheck-py
-  rev: v0.11.0.1-1
+- repo: local
   hooks:
   - id: shellcheck
+    name: shellcheck
+    language: system
+    entry: mise exec -- shellcheck
+    types: [shell]

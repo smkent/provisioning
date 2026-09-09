@@ -6,16 +6,20 @@ These scripts are meant for desktop/laptop systems running Ubuntu Linux.
 
 ## Usage
 
-Simply clone the repository and run the convenience script to configure a
-system:
+Clone the repository, then run the setup script to install tools and
+dependencies:
 
-```shell
-./provision
+```sh
+./setup
 ```
 
-If not already installed, the convenience script installs Ansible and
-dependencies before running the playbook. `provision` passes any arguments to
-`ansible-playbook`.
+To configure the local system, run `mise provision`:
+
+```sh
+mise provision
+```
+
+Any arguments to `mise provision` are passed through to `ansible-playbook`.
 
 ## Features
 

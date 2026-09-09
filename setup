@@ -1,0 +1,31 @@
+#!/bin/sh
+
+set -e
+
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Error: Run this as a normal user, not root" >&2
+    exit 1
+fi
+
+cd "$(dirname "${0}")"
+
+if ! command -v mise >/dev/null 2>&1; then
+    source="assets/mise.sources"
+    dest="/etc/apt/sources.list.d/mise.sources"
+    if [ -d "$(dirname "${dest}")" ]; then
+        if [ ! -f "${dest}" ] || ! ( set -x ; diff "${dest}" "${source}" ); then
+            sudo cp -v "${source}" "${dest}"
+        fi
+        (
+            set -x
+            sudo apt-get update
+            sudo apt-get install -y mise
+        )
+    else
+        echo "\`mise\` is not installed. Docs: https://mise.jdx.dev" >&2
+        exit 1
+    fi
+fi
+
+set -x
+mise install
