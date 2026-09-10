@@ -9,6 +9,12 @@ postinstall = [
 prek = "latest"
 shellcheck = "latest"
 
+[tasks.laptop]
+description = "Apply laptop specific settings"
+run = [
+    "dconf write /org/gnome/desktop/interface/text-scaling-factor 1.25"
+]
+
 [tasks.lint]
 description = "Run all formatters and static checks"
 raw_args = true
