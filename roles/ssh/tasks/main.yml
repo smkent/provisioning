@@ -1,16 +1,16 @@
-- name: Set up smkent's authorized_keys
-  ansible.posix.authorized_key:
-    user: smkent
-    state: present
-    key: "{{ item }}"
-  with_file:
-  - yubikey.pub
+  - name: Set up smkent's authorized_keys
+    ansible.posix.authorized_key:
+      user: smkent
+      state: present
+      key: "{{ item }}"
+    with_file:
+      - yubikey.pub
 
-- name: Install ssh packages
-  ansible.builtin.apt:
-    pkg:
-    - ssh
-    state: present
-    update_cache: true
-    cache_valid_time: 600
-  become: true
+  - name: Install ssh packages
+    ansible.builtin.apt:
+      pkg:
+        - ssh
+      state: present
+      update_cache: true
+      cache_valid_time: 600
+    become: true

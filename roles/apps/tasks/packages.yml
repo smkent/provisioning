@@ -1,64 +1,64 @@
-- name: Install apt packages
-  ansible.builtin.apt:
-    pkg:
-    - audacity
-    - blender
-    - build-essential
-    - curl
-    - dkms
-    - easytag
-    - exiv2
-    - fonts-lato
-    - fonts-powerline
-    - fonts-roboto
-    - fonts-roboto-slab
-    - gifsicle
-    - gparted
-    - gscan2pdf
-    - handbrake
-    - handbrake-cli
-    - htop
-    - iftop
-    - imagemagick
-    - inkscape
-    - jq
-    - ldap-utils
-    - lsdvd
-    - mesa-utils
-    - minicom
-    - mkvtoolnix
-    - nfs-common
-    - nmap
-    - openscad
-    - pandoc
-    - pcsc-tools
-    - pdftk-java
-    - proxytunnel
-    - pv
-    - python-is-python3
-    - python3-pip
-    - scdaemon
-    - smbclient
-    - sqlite3
-    - tofrodos
-    - traceroute
-    - unrar
-    - vlc
-    - whois
-    - yq
-    - yubikey-manager
-    state: present
-    update_cache: true
-    cache_valid_time: 600
-  become: true
+  - name: Install apt packages
+    ansible.builtin.apt:
+      pkg:
+        - audacity
+        - blender
+        - build-essential
+        - curl
+        - dkms
+        - easytag
+        - exiv2
+        - fonts-lato
+        - fonts-powerline
+        - fonts-roboto
+        - fonts-roboto-slab
+        - gifsicle
+        - gparted
+        - gscan2pdf
+        - handbrake
+        - handbrake-cli
+        - htop
+        - iftop
+        - imagemagick
+        - inkscape
+        - jq
+        - ldap-utils
+        - lsdvd
+        - mesa-utils
+        - minicom
+        - mkvtoolnix
+        - nfs-common
+        - nmap
+        - openscad
+        - pandoc
+        - pcsc-tools
+        - pdftk-java
+        - proxytunnel
+        - pv
+        - python-is-python3
+        - python3-pip
+        - scdaemon
+        - smbclient
+        - sqlite3
+        - tofrodos
+        - traceroute
+        - unrar
+        - vlc
+        - whois
+        - yq
+        - yubikey-manager
+      state: present
+      update_cache: true
+      cache_valid_time: 600
+    become: true
 
-- name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
-  ansible.builtin.include_tasks:
-    file: "{{ item }}"
-    apply:
-      tags:
-      - always
-  with_first_found:
-  - files:
-    - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
-  - skip: true
+  - name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+    ansible.builtin.include_tasks:
+      file: "{{ item }}"
+      apply:
+        tags:
+          - always
+    with_first_found:
+      - files:
+          - '{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.yml'
+      - skip: true

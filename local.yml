@@ -1,34 +1,34 @@
-- name: Local desktop machine configuration
-  hosts: localhost
-  gather_facts: false
-  pre_tasks:
-  - name: Gathering Facts
-    ansible.builtin.gather_facts:
+  - name: Local desktop machine configuration
+    hosts: localhost
+    gather_facts: false
+    pre_tasks:
+      - name: Gathering Facts
+        ansible.builtin.gather_facts:
+        tags:
+          - always
+    roles:
+      - role: system
+        tags:
+          - minimal
+          - system
+      - role: ssh
+        tags:
+          - minimal
+          - ssh
+      - role: dotfiles
+        tags:
+          - minimal
+          - dotfiles
+      - role: desktop_environment
+        tags:
+          - de
+          - desktop
+      - role: apps
+        tags:
+          - apps
+      - role: apps_optional
+        tags:
+          - never
+          - full
     tags:
-    - always
-  roles:
-  - role: system
-    tags:
-    - minimal
-    - system
-  - role: ssh
-    tags:
-    - minimal
-    - ssh
-  - role: dotfiles
-    tags:
-    - minimal
-    - dotfiles
-  - role: desktop_environment
-    tags:
-    - de
-    - desktop
-  - role: apps
-    tags:
-    - apps
-  - role: apps_optional
-    tags:
-    - never
-    - full
-  tags:
-  - full
+      - full

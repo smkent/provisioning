@@ -1,5 +1,5 @@
-- name: 'Include sudo tasks'
-  ansible.builtin.import_tasks: sudo.yml
+  - name: 'Include sudo tasks'
+    ansible.builtin.import_tasks: sudo.yml
 
-- name: 'Include Mozilla package tasks'
-  ansible.builtin.import_tasks: mozilla.yml
+  - name: 'Include Mozilla package tasks'
+    ansible.builtin.import_tasks: mozilla.yml
