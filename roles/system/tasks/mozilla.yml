@@ -1,44 +1,44 @@
-- name: Add Mozilla Firefox apt repository
-  ansible.builtin.deb822_repository:
-    name: mozilla
-    uris:
-    - "https://packages.mozilla.org/apt"
-    suites:
-    - mozilla
-    components:
-    - main
-    signed_by: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
-    architectures: amd64
-    state: present
-    enabled: true
-  register: mozilla_apt_repo
-  become: true
+  - name: Add Mozilla Firefox apt repository
+    ansible.builtin.deb822_repository:
+      name: mozilla
+      uris:
+        - "https://packages.mozilla.org/apt"
+      suites:
+        - mozilla
+      components:
+        - main
+      signed_by: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
+      architectures: amd64
+      state: present
+      enabled: true
+    register: mozilla_apt_repo
+    become: true
 
-- name: Prioritize Mozilla repository packages over default repositories
-  ansible.builtin.copy:
-    dest: /etc/apt/preferences.d/mozilla
-    content: |-
-      Package: *
-      Pin: origin packages.mozilla.org
-      Pin-Priority: 1000
+  - name: Prioritize Mozilla repository packages over default repositories
+    ansible.builtin.copy:
+      dest: /etc/apt/preferences.d/mozilla
+      content: |-
+        Package: *
+        Pin: origin packages.mozilla.org
+        Pin-Priority: 1000
 
-      Package: firefox*
-      Pin: release o=Ubuntu*
-      Pin-Priority: -1
-  become: true
+        Package: firefox*
+        Pin: release o=Ubuntu*
+        Pin-Priority: -1
+    become: true
 
-- name: Remove Firefox snap package
-  community.general.snap:
-    name: firefox
-    state: absent
-  become: true
+  - name: Remove Firefox snap package
+    community.general.snap:
+      name: firefox
+      state: absent
+    become: true
 
-- name: Install Firefox
-  ansible.builtin.apt:
-    pkg:
-    - firefox
-    state: latest
-    update_cache: true
-    cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
-    allow_downgrade: true
-  become: true
+  - name: Install Firefox
+    ansible.builtin.apt:
+      pkg:
+        - firefox
+      state: latest
+      update_cache: true
+      cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
+      allow_downgrade: true
+    become: true

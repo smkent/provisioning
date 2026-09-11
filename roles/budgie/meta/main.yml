@@ -1,7 +1,7 @@
 dependencies:
-- role: facts_common
-  tags:
-  - always
-- role: backgrounds
-- role: gnome_apps
-- role: nemo
+  - role: facts_common
+    tags:
+      - always
+  - role: backgrounds
+  - role: gnome_apps
+  - role: nemo

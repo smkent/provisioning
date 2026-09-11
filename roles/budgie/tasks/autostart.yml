@@ -1,17 +1,17 @@
-- name: Ensure autostart directory exists
-  ansible.builtin.file:
-    path: "~/.config/autostart"
-    state: directory
+  - name: Ensure autostart directory exists
+    ansible.builtin.file:
+      path: "~/.config/autostart"
+      state: directory
 
-- name: Ensure ~/.local/bin directory exists
-  ansible.builtin.file:
-    path: "~/.local/bin"
-    state: directory
+  - name: Ensure ~/.local/bin directory exists
+    ansible.builtin.file:
+      path: "~/.local/bin"
+      state: directory
 
-- name: Install autostart common applications
-  ansible.builtin.copy:
-    src: "{{ item }}"
-    dest: "~/.config/autostart/{{ item }}"
-    mode: "0664"
-  loop:
-  - udiskie.desktop
+  - name: Install autostart common applications
+    ansible.builtin.copy:
+      src: "{{ item }}"
+      dest: "~/.config/autostart/{{ item }}"
+      mode: "0664"
+    loop:
+      - udiskie.desktop

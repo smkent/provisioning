@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-    - main
+      - main
   workflow_dispatch:
 
 jobs:
@@ -12,29 +12,29 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-    - name: 💾 Check out repository
-      uses: actions/checkout@v6
+      - name: 💾 Check out repository
+        uses: actions/checkout@v6
 
-    - name: 🪝 Cache prek hooks
-      uses: actions/cache@v6
-      with:
-        path: ~/.cache/prek
-        key: "prek-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}"
+      - name: 🪝 Cache prek hooks
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/prek
+          key: "prek-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}"
 
-    - name: 🌌 Cache ansible-galaxy collections
-      uses: actions/cache@v6
-      with:
-        path: ~/.ansible/collections
-        key: "ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}"
+      - name: 🌌 Cache ansible-galaxy collections
+        uses: actions/cache@v6
+        with:
+          path: ~/.ansible/collections
+          key: "ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}"
 
-    - name: 🍳 Set up mise
-      uses: jdx/mise-action@v4
-      with:
-        cache: true
-        install: true
+      - name: 🍳 Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          cache: true
+          install: true
 
-    - name: 📐 Lint
-      run: mise run lint
+      - name: 📐 Lint
+        run: mise run lint
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

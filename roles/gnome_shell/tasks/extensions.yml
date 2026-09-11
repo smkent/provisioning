@@ -1,112 +1,112 @@
-- name: Install packages
-  ansible.builtin.apt:
-    pkg:
-    - gir1.2-gda-5.0
-    - gir1.2-gsound-1.0
-    - gnome-shell-extension-manager
-    - gnome-shell-extensions
-    state: present
-    update_cache: true
-    cache_valid_time: 600
-  become: true
+  - name: Install packages
+    ansible.builtin.apt:
+      pkg:
+        - gir1.2-gda-5.0
+        - gir1.2-gsound-1.0
+        - gnome-shell-extension-manager
+        - gnome-shell-extensions
+      state: present
+      update_cache: true
+      cache_valid_time: 600
+    become: true
 
-- name: Ensure Copyous extension directory exists
-  ansible.builtin.file:
-    path: "{{ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev"
-    state: directory
-    mode: "0750"
-    force: false
+  - name: Ensure Copyous extension directory exists
+    ansible.builtin.file:
+      path: "{{ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev"
+      state: directory
+      mode: "0750"
+      force: false
 
-- name: Ensure highlight.js is installed for copyous extension
-  ansible.builtin.get_url:
-    url: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"
-    dest: "{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev/highlight.min.js"
-    force: false
-    mode: '0640'
-  register: copyous_install_highlight_js
-  ignore_errors: true
-  changed_when: >
-    copyous_install_highlight_js.changed
-    and not (
-      ansible_check_mode
-      and copyous_install_highlight_js.checksum_dest is not ansible.builtin.none
-    )
-  failed_when: >
-    copyous_install_highlight_js.failed
-    and not (
-      ansible_check_mode
-      and copyous_install_highlight_js.msg is ansible.builtin.match("Destination .* does not exist")
-    )
+  - name: Ensure highlight.js is installed for copyous extension
+    ansible.builtin.get_url:
+      url: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"
+      dest: "{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev/highlight.min.js"
+      force: false
+      mode: '0640'
+    register: copyous_install_highlight_js
+    ignore_errors: true
+    changed_when: >
+      copyous_install_highlight_js.changed
+      and not (
+        ansible_check_mode
+        and copyous_install_highlight_js.checksum_dest is not ansible.builtin.none
+      )
+    failed_when: >
+      copyous_install_highlight_js.failed
+      and not (
+        ansible_check_mode
+        and copyous_install_highlight_js.msg is ansible.builtin.match("Destination .* does not exist")
+      )
 
-- name: Locate uv tools directory
-  ansible.builtin.command:
-    argv:
-    - uv
-    - tool
-    - dir
-  register: uv_tool_dir
-  check_mode: false
-  changed_when: false
+  - name: Locate uv tools directory
+    ansible.builtin.command:
+      argv:
+        - uv
+        - tool
+        - dir
+    register: uv_tool_dir
+    check_mode: false
+    changed_when: false
 
-- name: Ensure gnome-extensions-cli is installed
-  ansible.builtin.command:
-    argv:
-    - uv
-    - tool
-    - install
-    - gnome-extensions-cli
-    creates: "{{  uv_tool_dir.stdout }}/gnome-extensions-cli"
+  - name: Ensure gnome-extensions-cli is installed
+    ansible.builtin.command:
+      argv:
+        - uv
+        - tool
+        - install
+        - gnome-extensions-cli
+      creates: "{{  uv_tool_dir.stdout }}/gnome-extensions-cli"
 
-- name: Retrieve enabled Gnome extensions
-  ansible.builtin.command:
-    argv:
-    - gnome-extensions
-    - list
-    - --enabled
-  register: gnome_extensions_enabled
-  check_mode: false
-  changed_when: false
+  - name: Retrieve enabled Gnome extensions
+    ansible.builtin.command:
+      argv:
+        - gnome-extensions
+        - list
+        - --enabled
+    register: gnome_extensions_enabled
+    check_mode: false
+    changed_when: false
 
-- name: Retrieve disabled Gnome extensions
-  ansible.builtin.command:
-    argv:
-    - gnome-extensions
-    - list
-    - --disabled
-  register: gnome_extensions_disabled
-  check_mode: false
-  changed_when: false
+  - name: Retrieve disabled Gnome extensions
+    ansible.builtin.command:
+      argv:
+        - gnome-extensions
+        - list
+        - --disabled
+    register: gnome_extensions_disabled
+    check_mode: false
+    changed_when: false
 
-- name: Disable Ubuntu Dock extension
-  ansible.builtin.command:
-    argv:
-    - gnome-extensions
-    - disable
-    - ubuntu-dock@ubuntu.com
-  when: "'ubuntu-dock@ubuntu.com' not in gnome_extensions_disabled.stdout_lines"
+  - name: Disable Ubuntu Dock extension
+    ansible.builtin.command:
+      argv:
+        - gnome-extensions
+        - disable
+        - ubuntu-dock@ubuntu.com
+    when: "'ubuntu-dock@ubuntu.com' not in gnome_extensions_disabled.stdout_lines"
 
-- name: Install extensions
-  ansible.builtin.command:
-    argv:
-    - uv
-    - tool
-    - run
-    - --from
-    - gnome-extensions-cli
-    - gext
-    - --filesystem
-    - install
-    - "{{ item }}"
-    creates: "{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json"
-  with_items: "{{ gnome_extensions.user }}"
+  - name: Install extensions
+    ansible.builtin.command:
+      argv:
+        - uv
+        - tool
+        - run
+        - --from
+        - gnome-extensions-cli
+        - gext
+        - --filesystem
+        - install
+        - "{{ item }}"
+      creates: "{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json"
+    with_items: "{{ gnome_extensions.user }}"
 
-- name: Enable extensions
-  ansible.builtin.command:
-    argv:
-    - gnome-extensions
-    - enable
-    - "{{ item }}"
-  register: gnome_extensions_enable
-  changed_when: gnome_extensions_enable.rc == 0
-  when: "item in gnome_extensions_disabled.stdout_lines"
-  with_items: "{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}"
+  - name: Enable extensions
+    ansible.builtin.command:
+      argv:
+        - gnome-extensions
+        - enable
+        - "{{ item }}"
+    register: gnome_extensions_enable
+    changed_when: gnome_extensions_enable.rc == 0
+    when: "item in gnome_extensions_disabled.stdout_lines"
+    with_items: "{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}"

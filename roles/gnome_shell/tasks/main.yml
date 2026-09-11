@@ -1,20 +1,20 @@
-- name: 'Include Gnome Shell packages tasks'
-  ansible.builtin.import_tasks: packages.yml
+  - name: 'Include Gnome Shell packages tasks'
+    ansible.builtin.import_tasks: packages.yml
 
-- name: 'Include Gnome Shell dconf settings tasks'
-  ansible.builtin.import_tasks: dconf-settings.yml
+  - name: 'Include Gnome Shell dconf settings tasks'
+    ansible.builtin.import_tasks: dconf-settings.yml
 
-- name: 'Include extensions tasks'
-  ansible.builtin.import_tasks: extensions.yml
+  - name: 'Include extensions tasks'
+    ansible.builtin.import_tasks: extensions.yml
 
-- name: 'Include localsearch tasks'
-  ansible.builtin.import_tasks: localsearch.yml
+  - name: 'Include localsearch tasks'
+    ansible.builtin.import_tasks: localsearch.yml
 
-- name: 'Include Nemo tasks'
-  ansible.builtin.import_tasks: nemo.yml
+  - name: 'Include Nemo tasks'
+    ansible.builtin.import_tasks: nemo.yml
 
-- name: 'Include theme tasks'
-  ansible.builtin.import_tasks: theme.yml
+  - name: 'Include theme tasks'
+    ansible.builtin.import_tasks: theme.yml
 
-- name: 'Include virtual machine specific tasks'
-  ansible.builtin.import_tasks: vm.yml
+  - name: 'Include virtual machine specific tasks'
+    ansible.builtin.import_tasks: vm.yml

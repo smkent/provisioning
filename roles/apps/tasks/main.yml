@@ -1,28 +1,28 @@
-- name: 'Include basic packages tasks'
-  ansible.builtin.import_tasks: packages.yml
+  - name: 'Include basic packages tasks'
+    ansible.builtin.import_tasks: packages.yml
 
-- name: 'Include Docker tasks'
-  ansible.builtin.import_tasks: docker.yml
-  tags:
-  - docker
+  - name: 'Include Docker tasks'
+    ansible.builtin.import_tasks: docker.yml
+    tags:
+      - docker
 
-- name: 'Include Google Chrome tasks'
-  ansible.builtin.import_tasks: google-chrome.yml
-  tags:
-  - chrome
-  - google-chrome
+  - name: 'Include Google Chrome tasks'
+    ansible.builtin.import_tasks: google-chrome.yml
+    tags:
+      - chrome
+      - google-chrome
 
-- name: 'Include Gnucash tasks'
-  ansible.builtin.import_tasks: gnucash.yml
-  tags:
-  - gnucash
+  - name: 'Include Gnucash tasks'
+    ansible.builtin.import_tasks: gnucash.yml
+    tags:
+      - gnucash
 
-- name: 'Include LibreOffice tasks'
-  ansible.builtin.import_tasks: libreoffice.yml
-  tags:
-  - libreoffice
+  - name: 'Include LibreOffice tasks'
+    ansible.builtin.import_tasks: libreoffice.yml
+    tags:
+      - libreoffice
 
-- name: 'Include Signal tasks'
-  ansible.builtin.import_tasks: signal.yml
-  tags:
-  - signal
+  - name: 'Include Signal tasks'
+    ansible.builtin.import_tasks: signal.yml
+    tags:
+      - signal
