@@ -7,6 +7,7 @@ postinstall = [
 [tools]
 "pipx:ansible-core" = "latest"
 prek = "latest"
+uv = "latest"
 shellcheck = "latest"
 
 [tasks.laptop]
