@@ -42,3 +42,19 @@
       cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
       allow_downgrade: true
     become: true
+
+  - name: Configure Firefox default settings
+    block:
+      - name: Create Firefox policies directory
+        ansible.builtin.file:
+          path: /etc/firefox/policies
+          state: directory
+          mode: "0755"
+        become: true
+
+      - name: Configure Firefox policies
+        ansible.builtin.copy:
+          src: mozilla-firefox-policies.json
+          dest: /etc/firefox/policies/policies.json
+          mode: "0644"
+        become: true
