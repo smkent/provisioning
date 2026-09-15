@@ -1,0 +1,78 @@
+{
+  "policies": {
+    "3rdparty": {
+      "Extensions": {
+        "jid1-MnnxcxisBPnSXQ@jetpack": {
+          "showIntroPage": false
+        }
+      }
+    },
+    "AIControls": {
+      "LinkPreviewKeyPoints": {
+        "Value": "blocked"
+      },
+      "PDFAltText": {
+        "Value": "blocked"
+      },
+      "SmartTabGroups": {
+        "Value": "blocked"
+      }
+    },
+    "AutofillCreditCardEnabled": false,
+    "DefaultDownloadDirectory": "${home}/Downloads",
+    "DisableTelemetry": true,
+    "DontCheckDefaultBrowser": true,
+    "ExtensionSettings": {
+      "@testpilot-containers": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi",
+        "installation_mode": "normal_installed"
+      },
+      "jid1-MnnxcxisBPnSXQ@jetpack": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi",
+        "installation_mode": "normal_installed"
+      },
+      "uBlock0@raymondhill.net": {
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi",
+        "installation_mode": "normal_installed"
+      }
+    },
+    "FirefoxHome": {
+      "SponsoredPocket": false,
+      "SponsoredStories": false,
+      "SponsoredTopSites": false,
+      "Stories": false,
+      "Weather": false
+    },
+    "FirefoxSuggest": {
+      "OnlineEnabled": false,
+      "SponsoredSuggestions": false
+    },
+    "GenerativeAI": {
+      "LinkPreviews": false,
+      "TabGroups": false
+    },
+    "Homepage": {
+      "StartPage": "previous-session"
+    },
+    "NoDefaultBookmarks": true,
+    "OfferToSaveLoginsDefault": false,
+    "OverrideFirstRunPage": "",
+    "Preferences": {
+      "extensions.activeThemeID": {
+        "Value": "firefox-alpenglow@mozilla.org",
+        "Status": "default"
+      }
+    },
+    "SearchEngines": {
+      "Default": "DuckDuckGo"
+    },
+    "SkipTermsOfUse": true,
+    "UserMessaging": {
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false
+    }
+  }
+}
