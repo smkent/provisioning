@@ -13,6 +13,11 @@
     tags:
       - spotify
 
+  - name: 'Include Steam tasks'
+    ansible.builtin.import_tasks: steam.yml
+    tags:
+      - steam
+
   - name: 'Include Zoom tasks'
     ansible.builtin.import_tasks: zoom.yml
     tags:
