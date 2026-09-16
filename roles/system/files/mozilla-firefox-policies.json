@@ -58,9 +58,29 @@
     "OfferToSaveLoginsDefault": false,
     "OverrideFirstRunPage": "",
     "Preferences": {
+      "browser.aboutConfig.showWarning": {
+        "Value": false,
+        "Status": "user"
+      },
       "extensions.activeThemeID": {
         "Value": "firefox-alpenglow@mozilla.org",
         "Status": "default"
+      },
+      "sidebar.animation.expand-on-hover.delay-duration-ms": {
+        "Value": 0,
+        "Status": "default"
+      },
+      "sidebar.animation.expand-on-hover.duration-ms": {
+        "Value": 50,
+        "Status": "default"
+      },
+      "sidebar.main.tools": {
+        "Value": "syncedtabs,history,bookmarks,opentabs",
+        "Status": "default"
+      },
+      "sidebar.verticalTabs.dragToPinPromo.dismissed": {
+        "Value": true,
+        "Status": "user"
       }
     },
     "SearchEngines": {
