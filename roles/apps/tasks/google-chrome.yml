@@ -30,3 +30,33 @@
       update_cache: true
       cache_valid_time: "{{ 0 if google_apt_repo.changed else 600 }}"
     become: true
+
+  - name: Configure Google Chrome default settings
+    block:
+      - name: Create Google Chrome managed policies directory
+        ansible.builtin.file:
+          path: /etc/opt/chrome/policies/managed
+          state: directory
+          mode: "0755"
+        become: true
+
+      - name: Create Google Chrome recommended policies directory
+        ansible.builtin.file:
+          path: /etc/opt/chrome/policies/recommended
+          state: directory
+          mode: "0755"
+        become: true
+
+      - name: Configure Google Chrome mandatory policies
+        ansible.builtin.copy:
+          src: google-chrome-policies-managed.json
+          dest: /etc/opt/chrome/policies/managed/policies.json
+          mode: "0644"
+        become: true
+
+      - name: Configure Google Chrome recommended policies
+        ansible.builtin.copy:
+          src: google-chrome-policies-recommended.json
+          dest: /etc/opt/chrome/policies/recommended/policies.json
+          mode: "0644"
+        become: true
