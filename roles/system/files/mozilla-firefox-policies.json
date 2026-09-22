@@ -62,6 +62,10 @@
         "Value": false,
         "Status": "user"
       },
+      "browser.taskbarTabs.enabled": {
+        "Value": true,
+        "Status": "default"
+      },
       "extensions.activeThemeID": {
         "Value": "firefox-alpenglow@mozilla.org",
         "Status": "default"
