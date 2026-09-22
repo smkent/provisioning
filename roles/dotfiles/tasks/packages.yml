@@ -1,6 +1,7 @@
   - name: Install dotfiles dependent apt packages
     ansible.builtin.apt:
       pkg:
+        - curl
         - fzf
         - gimp
         - git
