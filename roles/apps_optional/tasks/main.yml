@@ -18,6 +18,11 @@
     tags:
       - steam
 
+  - name: 'Include VirtualBox tasks'
+    ansible.builtin.import_tasks: virtualbox.yml
+    tags:
+      - virtualbox
+
   - name: 'Include Zoom tasks'
     ansible.builtin.import_tasks: zoom.yml
     tags:
