@@ -18,21 +18,12 @@
     become: true
 
   - name: Add Steam apt repository
-    ansible.builtin.deb822_repository:
-      name: steam
-      types: deb
-      uris:
-        - "http://repo.steampowered.com/steam/"
-      suites:
-        - stable
-      components:
-        - steam
-      architectures:
-        - amd64
-        - i386
-      signed_by: /usr/share/keyrings/steam.gpg
-      state: present
-      enabled: true
+    ansible.builtin.copy:
+      dest: /etc/apt/sources.list.d/steam-stable.list
+      content: |
+        deb [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
+        deb-src [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
+      mode: "0644"
     register: steam_apt_repo
     become: true
 
