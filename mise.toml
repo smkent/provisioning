@@ -1,8 +1,5 @@
 [hooks]
-postinstall = [
-  "prek install",
-  "ansible-galaxy collection install -r requirements.yml --upgrade",
-]
+postinstall = ["prek install", { task = "ansible-collections" }]
 
 [tools]
 "pipx:ansible-core" = "latest"
@@ -21,3 +18,13 @@ description = "Run Ansible playbook to provision local machine"
 interactive = true
 raw_args = true
 run = "ansible-playbook -K -i hosts.localhost local.yml"
+
+[tasks.ansible-collections]
+description = "Ensure required Ansible collections are installed"
+outputs = [".ansible/collections/"]
+raw_args = true
+run = [
+  "ansible-galaxy collection install --collections-path .ansible/collections -r requirements.yml --upgrade",
+  "touch .ansible/collections/",
+]
+sources = ["requirements.yml"]
