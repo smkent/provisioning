@@ -2,6 +2,7 @@
 postinstall = ["prek install", { task = "ansible-collections" }]
 
 [tools]
+betterleaks = "latest"
 "pipx:ansible-core" = "latest"
 prek = "latest"
 uv = "latest"
@@ -28,3 +29,8 @@ run = [
   "touch .ansible/collections/",
 ]
 sources = ["requirements.yml"]
+
+[tasks.secretscan]
+description = "Scan git history for secrets"
+raw_args = true
+run = "betterleaks git . --redact"
