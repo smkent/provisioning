@@ -18,6 +18,11 @@ repos:
         args: [--preserve-quotes, --autofix, --offset, "2"]
   - repo: local
     hooks:
+      - id: betterleaks
+        name: betterleaks
+        entry: betterleaks git . --pre-commit --staged --redact
+        language: system
+        pass_filenames: false
       - id: shellcheck
         name: shellcheck
         language: system
