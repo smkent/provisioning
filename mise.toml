@@ -1,7 +1,7 @@
 [hooks]
 postinstall = [
-    "prek install",
-    "ansible-galaxy collection install -r requirements.yml --upgrade",
+  "prek install",
+  "ansible-galaxy collection install -r requirements.yml --upgrade",
 ]
 
 [tools]
@@ -9,6 +9,7 @@ postinstall = [
 prek = "latest"
 uv = "latest"
 shellcheck = "latest"
+taplo = "latest"
 
 [tasks.lint]
 description = "Run all formatters and static checks"

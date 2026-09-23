@@ -23,3 +23,8 @@ repos:
         language: system
         entry: shellcheck
         types: [shell]
+      - id: taplo
+        name: taplo
+        entry: taplo format
+        language: system
+        types: [toml]
