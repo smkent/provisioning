@@ -32,6 +32,10 @@
       name: firefox
       state: absent
     become: true
+    register: mozilla_firefox_snap_remove
+    failed_when:
+      - mozilla_firefox_snap_remove.failed
+      - "'Failed to find required executable \"snap\"' not in mozilla_firefox_snap_remove.msg"
 
   - name: Install Firefox
     ansible.builtin.apt:
