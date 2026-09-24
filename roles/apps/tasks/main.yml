@@ -26,3 +26,8 @@
     ansible.builtin.import_tasks: signal.yml
     tags:
       - signal
+
+  - name: 'Include snap removal tasks'
+    ansible.builtin.import_tasks: snap.yml
+    tags:
+      - snap
