@@ -1,5 +1,5 @@
 [hooks]
-postinstall = ["prek install --quiet", { task = "ansible-collections" }]
+postinstall = ["prek --quiet install", { task = "ansible-collections" }]
 
 [tools]
 betterleaks = "latest"
