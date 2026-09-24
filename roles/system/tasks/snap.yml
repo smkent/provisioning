@@ -1,0 +1,21 @@
+  - name: Ensure snapd is purged
+    ansible.builtin.apt:
+      name: snapd
+      state: absent
+      purge: true
+      autoremove: true
+    become: true
+
+  - name: Prevent snapd from being reinstalled via apt
+    ansible.builtin.copy:
+      dest: /etc/apt/preferences.d/nosnap.pref
+      content: |-
+        Package: snapd
+        Pin: release a=*
+        Pin-Priority: -1
+    become: true
+
+  - name: "Ensure {{ ansible_facts['user_dir'] }}/snap is removed"
+    ansible.builtin.file:
+      path: "{{ ansible_facts['user_dir'] }}/snap"
+      state: absent
