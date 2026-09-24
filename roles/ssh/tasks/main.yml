@@ -16,16 +16,14 @@
     become: true
 
   - name: Configure ssh login settings
-    ansible.builtin.lineinfile:
-      dest: /etc/ssh/sshd_config
-      regexp: ^#?{{ item.name }}
-      line: '{{ item.name }} {{ item.value }}'
-      state: present
+    ansible.builtin.copy:
+      dest: /etc/ssh/sshd_config.d/settings-login
+      content: |
+        PasswordAuthentication: no
+        StreamLocalBindUnlink: yes
+      owner: root
+      group: root
+      mode: "0644"
     become: true
-    loop:
-      - {name: PasswordAuthentication, value: "no"}
-      - {name: StreamLocalBindUnlink, value: "yes"}
-    loop_control:
-      label: "{{ item.name }}"
     notify:
       - restart-ssh
