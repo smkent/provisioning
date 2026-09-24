@@ -3,9 +3,3 @@
 
   - name: 'Include Mozilla package tasks'
     ansible.builtin.import_tasks: mozilla.yml
-
-  - name: 'Include snap removal tasks'
-    ansible.builtin.import_tasks: snap.yml
-    tags:
-      - never
-      - snap
