@@ -30,6 +30,21 @@ interactive = true
 raw_args = true
 run = "ansible-playbook -K -i hosts.localhost local.yml"
 
+[tasks.user]
+description = "Ensure desired login user exists and/or temporary installation user is removed"
+run = [
+  'grep -qe ":${usage_gid}:[^:]*\$" /etc/group || sudo groupadd -g "${usage_gid}" "${usage_user}"',
+  'grep -qe ":x:${usage_uid}:" /etc/passwd || { sudo useradd -m -u "${usage_uid}" -g "${usage_gid}" -G sudo -s /bin/bash -c "${usage_name}" "${usage_user}" && sudo passwd "${usage_user}" && for g in $(id -nG | cut -d" " -f2-); do sudo gpasswd -a "${usage_user}" "${g}"; done; }',
+  '[ "$(id -u)" = "${usage_uid}" ] && grep -qe ":x:1000:" /etc/passwd && sudo deluser --remove-all-files "$(id -nu ${usage_install_uid})" || true;',
+]
+usage = '''
+flag "-n --user <user>" help="User name" default="smkent"
+flag "-c --name <name>" help="Display name (user's full name)" default="Stephen Kent"
+flag "-u --uid <uid>" help="UID" default="2000"
+flag "-g --gid <gid>" help="GID" default="2000"
+flag "-i --install-uid <uid>" help="Temporary installation user UID" default="1000"
+'''
+
 [tasks.secretscan]
 description = "Scan git history for secrets"
 raw_args = true
