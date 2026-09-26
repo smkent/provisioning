@@ -8,5 +8,5 @@
       cache_valid_time: 600
     become: true
 
-  - name: 'Include ImageMagick configuration tasks'
+  - name: "Include ImageMagick configuration tasks"
     ansible.builtin.import_tasks: imagemagick-config.yml

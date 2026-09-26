@@ -1,10 +1,10 @@
-  - name: 'Include lightdm tasks'
+  - name: "Include lightdm tasks"
     ansible.builtin.import_tasks: lightdm.yml
 
-  - name: 'Include gnome-terminal tasks'
+  - name: "Include gnome-terminal tasks"
     ansible.builtin.import_tasks: gnome-terminal.yml
 
-  - name: 'Include xdg-desktop-portal-gnome tasks'
+  - name: "Include xdg-desktop-portal-gnome tasks"
     ansible.builtin.import_tasks: xdg-desktop-portal-gnome.yml
 
   - name: Install autostart application scripts

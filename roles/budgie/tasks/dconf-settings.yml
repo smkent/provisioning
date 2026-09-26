@@ -21,7 +21,7 @@
       - restart-budgie-panel
 
   - name: Retrieve UUIDs for current Raven widgets
-    command:
+    ansible.builtin.command:
       argv:
         - dconf
         - read
@@ -32,7 +32,7 @@
     failed_when: false
 
   - name: Remove existing Raven widgets configuration
-    command:
+    ansible.builtin.command:
       argv:
         - dconf
         - reset
@@ -58,5 +58,5 @@
 
   - name: Set budgie-panel menu label
     community.general.dconf:
-      key: '/org/solus-project/budgie-panel/instance/budgie-menu/{c01dale8-1977-1138-2187-deadbeefa000}/menu-label'
+      key: "/org/solus-project/budgie-panel/instance/budgie-menu/{c01dale8-1977-1138-2187-deadbeefa000}/menu-label"
       value: "'{{ ansible_facts['hostname'] }}'"

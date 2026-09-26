@@ -1,7 +1,7 @@
-  - name: 'Include labwc tasks'
+  - name: "Include labwc tasks"
     ansible.builtin.import_tasks: labwc.yml
 
-  - name: 'Include sddm tasks'
+  - name: "Include sddm tasks"
     ansible.builtin.import_tasks: sddm.yml
 
   - name: Install apt packages
