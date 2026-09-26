@@ -136,3 +136,10 @@
             - vboxusers
           append: true
         become: true
+
+      - name: Add workaround for VirtualBox XWayland crash on screen resume
+        ansible.builtin.copy:
+          dest: /etc/environment.d/90-virtualbox.conf
+          content: |
+            VBOX_DESKTOPWATCHDOGPOLICY_SYNTHTEST=Disabled
+        become: true
