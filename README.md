@@ -46,7 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See [`LICENSE`](/LICENSE) for the full license text.
 
+[dotfiles]: https://github.com/smkent/dotfiles
 [gnome]: https://gnome.org
 [mise]: https://mise.jdx.dev
-[dotfiles]: https://github.com/smkent/dotfiles
 [ubuntu-budgie]: https://ubuntubudgie.org
