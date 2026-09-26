@@ -6,24 +6,28 @@ These scripts are meant for desktop/laptop systems running Ubuntu Linux.
 
 ## Usage
 
-Simply clone the repository and run the convenience script to configure a
-system:
+Clone the repository, then run the setup script to install tools and
+dependencies:
 
-```shell
-./provision
+```sh
+./setup
 ```
 
-If not already installed, the convenience script installs Ansible and
-dependencies before running the playbook. `provision` passes any arguments to
-`ansible-playbook`.
+To configure the local system, run `mise provision`:
+
+```sh
+mise provision
+```
+
+Any arguments to `mise provision` are passed through to `ansible-playbook`.
 
 ## Features
 
 The included playbook performs the following actions:
 
-* Install packages using `apt` and `pipx`
-* Install [smkent/dotfiles](https://github.com/smkent/dotfiles) in `$HOME`
-* Set [Budgie desktop environment](https://ubuntubudgie.org/) preferences
+* Install packages using `apt` and [`mise`][mise]
+* Install [smkent/dotfiles][dotfiles] in `$HOME`
+* Set [Budgie desktop environment][ubuntu-budgie] preferences
 
 ## License
 
@@ -41,3 +45,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See [`LICENSE`](/LICENSE) for the full license text.
+
+[mise]: https://mise.jdx.dev
+[dotfiles]: https://github.com/smkent/dotfiles
+[ubuntu-budgie]: https://ubuntubudgie.org

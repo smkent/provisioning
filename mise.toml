@@ -1,0 +1,36 @@
+[hooks]
+postinstall = ["prek --quiet install", { task = "ansible-collections" }]
+
+[tools]
+betterleaks = "latest"
+"pipx:ansible-core" = "latest"
+prek = "latest"
+uv = "latest"
+shellcheck = "latest"
+taplo = "latest"
+
+[tasks.ansible-collections]
+description = "Ensure required Ansible collections are installed"
+outputs = [".ansible/collections/"]
+raw_args = true
+run = [
+  "ansible-galaxy collection install --collections-path .ansible/collections -r requirements.yml --upgrade",
+  "touch .ansible/collections/",
+]
+sources = ["requirements.yml"]
+
+[tasks.lint]
+description = "Run all formatters and static checks"
+raw_args = true
+run = "prek run --all-files"
+
+[tasks.provision]
+description = "Run Ansible playbook to provision local machine"
+interactive = true
+raw_args = true
+run = "ansible-playbook -K -i hosts.localhost local.yml"
+
+[tasks.secretscan]
+description = "Scan git history for secrets"
+raw_args = true
+run = "betterleaks git . --redact"

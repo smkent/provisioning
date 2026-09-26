@@ -1,14 +1,33 @@
-- include_tasks: docker.yml
-- include_tasks: github-cli.yml
-- include_tasks: google-chrome.yml
-- include_tasks: libreoffice-ppa.yml
-  when: ansible_distribution_release not in ppa_exclude_releases
-- include_tasks: prusaslicer.yml
-- include_tasks: signal.yml
-- include_tasks: yubikey.yml
+  - name: "Include basic packages tasks"
+    ansible.builtin.import_tasks: packages.yml
 
-# Optional apps -- uncomment to install
-# - include_tasks: kicad.yml
-# - include_tasks: makemkv.yml
-# - include_tasks: spotify.yml
-# - include_tasks: zoom.yml
+  - name: "Include Docker tasks"
+    ansible.builtin.import_tasks: docker.yml
+    tags:
+      - docker
+
+  - name: "Include Google Chrome tasks"
+    ansible.builtin.import_tasks: google-chrome.yml
+    tags:
+      - chrome
+      - google-chrome
+
+  - name: "Include Gnucash tasks"
+    ansible.builtin.import_tasks: gnucash.yml
+    tags:
+      - gnucash
+
+  - name: "Include LibreOffice tasks"
+    ansible.builtin.import_tasks: libreoffice.yml
+    tags:
+      - libreoffice
+
+  - name: "Include Signal tasks"
+    ansible.builtin.import_tasks: signal.yml
+    tags:
+      - signal
+
+  - name: "Include snap removal tasks"
+    ansible.builtin.import_tasks: snap.yml
+    tags:
+      - snap

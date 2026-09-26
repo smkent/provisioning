@@ -1,29 +1,17 @@
-- name: Ensure autostart directory exists
-  file:
-    path: "~/.config/autostart"
-    state: directory
+  - name: Ensure autostart directory exists
+    ansible.builtin.file:
+      path: "~/.config/autostart"
+      state: directory
 
-- name: Remove unwanted autostart applications
-  file:
-    path: "~/.config/autostart/{{ item }}"
-    state: absent
-  with_items:
-  - plank.desktop
+  - name: Ensure ~/.local/bin directory exists
+    ansible.builtin.file:
+      path: "~/.local/bin"
+      state: directory
 
-- name: Install autostart applications
-  copy:
-    src: "{{item}}"
-    dest: "~/.config/autostart/{{ item }}"
-    mode: 0664
-  with_items:
-  - setxkbmap.desktop
-  - udiskie.desktop
-
-- name: Symlink autostart applications
-  file:
-    src: "/usr/share/applications/{{item}}"
-    dest: "~/.config/autostart/{{ item }}"
-    state: link
-    force: true
-  with_items:
-  - com.yubico.yubioath.desktop
+  - name: Install autostart common applications
+    ansible.builtin.copy:
+      src: "{{ item }}"
+      dest: "~/.config/autostart/{{ item }}"
+      mode: "0664"
+    loop:
+      - udiskie.desktop

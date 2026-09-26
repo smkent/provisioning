@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=budgie-gnome-screensaver
+Comment=Replace gnome-shell screensaver with Budgie's gnome-screensaver
+Exec=budgie-gnome-screensaver

@@ -1,0 +1,37 @@
+  - name: Check foreign architectures
+    ansible.builtin.command: dpkg --print-foreign-architectures
+    register: dpkg_foreign_architectures
+    changed_when: false
+    check_mode: false
+
+  - name: Enable i386 architecture for Steam
+    ansible.builtin.command: dpkg --add-architecture i386
+    when: "'i386' not in dpkg_foreign_architectures.stdout_lines"
+    become: true
+    register: steam_i386_arch
+
+  - name: Add Steam repository signing key
+    ansible.builtin.get_url:
+      url: https://repo.steampowered.com/steam/archive/stable/steam.gpg
+      dest: /usr/share/keyrings/steam.gpg
+      mode: "0664"
+    become: true
+
+  - name: Add Steam apt repository
+    ansible.builtin.copy:
+      dest: /etc/apt/sources.list.d/steam-stable.list
+      content: |
+        deb [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
+        deb-src [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
+      mode: "0644"
+    register: steam_apt_repo
+    become: true
+
+  - name: Install Steam
+    ansible.builtin.apt:
+      pkg:
+        - steam-launcher
+      state: present
+      update_cache: true
+      cache_valid_time: "{{ 0 if (steam_apt_repo.changed or steam_i386_arch.changed) else 600 }}"
+    become: true

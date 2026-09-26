@@ -1,2 +1,5 @@
-- include_tasks: repository.yml
-- include_tasks: fonts.yml
+  - name: "Include dotfiles repository tasks"
+    ansible.builtin.import_tasks: repository.yml
+
+  - name: "Include dotfiles packages tasks"
+    ansible.builtin.import_tasks: packages.yml
