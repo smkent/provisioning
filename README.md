@@ -27,7 +27,7 @@ The included playbook performs the following actions:
 
 * Install packages using `apt` and [`mise`][mise]
 * Install [smkent/dotfiles][dotfiles] in `$HOME`
-* Set [Budgie desktop environment][ubuntu-budgie] preferences
+* Set [GNOME][gnome] or [Budgie desktop environment][ubuntu-budgie] preferences
 
 ## License
 
@@ -46,6 +46,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 See [`LICENSE`](/LICENSE) for the full license text.
 
-[mise]: https://mise.jdx.dev
 [dotfiles]: https://github.com/smkent/dotfiles
+[gnome]: https://gnome.org
+[mise]: https://mise.jdx.dev
 [ubuntu-budgie]: https://ubuntubudgie.org
