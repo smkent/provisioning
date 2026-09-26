@@ -1,13 +1,13 @@
-  - name: 'Include Budgie packages tasks'
+  - name: "Include Budgie packages tasks"
     ansible.builtin.import_tasks: packages.yml
 
-  - name: 'Include Budgie static assets tasks'
+  - name: "Include Budgie static assets tasks"
     ansible.builtin.import_tasks: assets.yml
 
-  - name: 'Include Budgie autostart applications common tasks'
+  - name: "Include Budgie autostart applications common tasks"
     ansible.builtin.import_tasks: autostart.yml
 
-  - name: 'Include Budgie dconf settings tasks'
+  - name: "Include Budgie dconf settings tasks"
     ansible.builtin.import_tasks: dconf-settings.yml
 
   - name: 'Include Budgie tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'

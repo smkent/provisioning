@@ -1,5 +1,5 @@
-  - name: 'Include dotfiles repository tasks'
+  - name: "Include dotfiles repository tasks"
     ansible.builtin.import_tasks: repository.yml
 
-  - name: 'Include dotfiles packages tasks'
+  - name: "Include dotfiles packages tasks"
     ansible.builtin.import_tasks: packages.yml
