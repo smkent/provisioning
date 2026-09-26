@@ -1,0 +1,8 @@
+  - name: Install apt packages
+    ansible.builtin.apt:
+      pkg:
+        - libusb-0.1-4
+      state: present
+      update_cache: true
+      cache_valid_time: 600
+    become: true
