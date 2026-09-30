@@ -66,8 +66,16 @@
         "Value": true,
         "Status": "default"
       },
+      "browser.uidensity": {
+        "Value": 1,
+        "Status": "user"
+      },
+      "browser.theme.native-theme": {
+        "Value": false,
+        "Status": "user"
+      },
       "extensions.activeThemeID": {
-        "Value": "firefox-alpenglow@mozilla.org",
+        "Value": "default-theme@mozilla.org",
         "Status": "default"
       },
       "sidebar.animation.expand-on-hover.delay-duration-ms": {
