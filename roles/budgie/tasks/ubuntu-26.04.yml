@@ -1,7 +1,7 @@
-  - name: "Include labwc tasks"
+  - name: Include labwc tasks
     ansible.builtin.import_tasks: labwc.yml
 
-  - name: "Include sddm tasks"
+  - name: Include sddm tasks
     ansible.builtin.import_tasks: sddm.yml
 
   - name: Install apt packages
@@ -16,8 +16,8 @@
 
   - name: Override Crystal Dock application to prevent it from starting
     ansible.builtin.copy:
-      src: "{{ item }}"
-      dest: "~/.config/autostart/{{ item }}"
-      mode: "0664"
+      src: '{{ item }}'
+      dest: ~/.config/autostart/{{ item }}
+      mode: '0664'
     loop:
       - crystal-dock-autostart.desktop

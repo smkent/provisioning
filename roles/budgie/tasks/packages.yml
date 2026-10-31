@@ -2,7 +2,7 @@
     ansible.builtin.deb822_repository:
       name: ubuntubudgie-backports
       uris:
-        - "https://ppa.launchpadcontent.net/ubuntubudgie/backports/ubuntu/"
+        - https://ppa.launchpadcontent.net/ubuntubudgie/backports/ubuntu/
       suites:
         - "{{ ansible_facts['distribution_release'] }}"
       components:
@@ -52,7 +52,7 @@
         - udiskie
       state: present
       update_cache: true
-      cache_valid_time: "{{ 0 if budgie_ubuntu_backports_ppa.changed else 600 }}"
+      cache_valid_time: '{{ 0 if budgie_ubuntu_backports_ppa.changed else 600 }}'
     become: true
 
   - name: Restore default Ubuntu boot splash theme

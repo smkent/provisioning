@@ -7,13 +7,13 @@
 
   - name: Ensure ~/.local/share/dbus-1/services exists
     ansible.builtin.file:
-      path: "~/.local/share/dbus-1/services"
+      path: ~/.local/share/dbus-1/services
       state: directory
 
   - name: Symlink org.freedesktop.FileManager1 service to Nemo
     ansible.builtin.file:
       src: /usr/share/dbus-1/services/nemo.FileManager1.service
-      dest: "~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service"
+      dest: ~/.local/share/dbus-1/services/org.freedesktop.FileManager1.service
       state: link
       force: true
 
@@ -21,7 +21,7 @@
     block:
       - name: Ensure applications directory exists
         ansible.builtin.file:
-          path: "~/.local/share/applications"
+          path: ~/.local/share/applications
           state: directory
 
       - name: Duplicate nemo launcher
@@ -35,14 +35,14 @@
       - name: Add a new-window action to the nemo launcher
         community.general.ini_file:
           path: ~/.local/share/applications/nemo.desktop
-          section: "{{ item.section }}"
-          option: "{{ item.option }}"
-          value: "{{ item.value }}"
+          section: '{{ item.section }}'
+          option: '{{ item.option }}'
+          value: '{{ item.value }}'
           no_extra_spaces: true
         loop:
           - section: Desktop Entry
             option: Actions
-            value: "new-window;open-home;open-computer;open-trash;"
+            value: new-window;open-home;open-computer;open-trash;
           - section: Desktop Action new-window
             option: Name
             value: New Window

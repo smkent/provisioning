@@ -12,17 +12,17 @@
 
   - name: Ensure Copyous extension directory exists
     ansible.builtin.file:
-      path: "{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev"
+      path: '{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev'
       state: directory
-      mode: "0750"
+      mode: '0750'
       force: false
 
   - name: Ensure highlight.js is installed for copyous extension
     ansible.builtin.get_url:
-      url: "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"
-      dest: "{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev/highlight.min.js"
+      url: https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js
+      dest: '{{ ansible_facts.env.HOME }}/.local/share/copyous@boerdereinar.dev/highlight.min.js'
       force: false
-      mode: "0640"
+      mode: '0640'
     register: copyous_install_highlight_js
     ignore_errors: true
     changed_when: >
@@ -55,7 +55,7 @@
         - tool
         - install
         - gnome-extensions-cli
-      creates: "{{  uv_tool_dir.stdout }}/gnome-extensions-cli"
+      creates: '{{  uv_tool_dir.stdout }}/gnome-extensions-cli'
 
   - name: Retrieve enabled Gnome extensions
     ansible.builtin.command:
@@ -96,17 +96,17 @@
         - gext
         - --filesystem
         - install
-        - "{{ item }}"
-      creates: "{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json"
-    with_items: "{{ gnome_extensions.user }}"
+        - '{{ item }}'
+      creates: '{{ ansible_facts.env.HOME }}/.local/share/gnome-shell/extensions/{{ item }}/metadata.json'
+    with_items: '{{ gnome_extensions.user }}'
 
   - name: Enable extensions
     ansible.builtin.command:
       argv:
         - gnome-extensions
         - enable
-        - "{{ item }}"
+        - '{{ item }}'
     register: gnome_extensions_enable
     changed_when: gnome_extensions_enable.rc == 0
-    when: "item in gnome_extensions_disabled.stdout_lines"
-    with_items: "{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}"
+    when: item in gnome_extensions_disabled.stdout_lines
+    with_items: '{{ gnome_extensions.user | ansible.builtin.union(gnome_extensions.system) }}'

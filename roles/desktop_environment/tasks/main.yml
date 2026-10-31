@@ -1,4 +1,4 @@
-  - name: "Include Budgie desktop environment role"
+  - name: Include Budgie desktop environment role
     ansible.builtin.import_role:
       name: budgie
     when: >
@@ -7,7 +7,7 @@
     tags:
       - budgie
 
-  - name: "Include Gnome Shell desktop environment role"
+  - name: Include Gnome Shell desktop environment role
     ansible.builtin.import_role:
       name: gnome_shell
     when: >

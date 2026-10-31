@@ -5,6 +5,6 @@
         Defaults !pwfeedback
       owner: root
       group: root
-      mode: "0440"
-      validate: "visudo -cf %s"
+      mode: '0440'
+      validate: visudo -cf %s
     become: true

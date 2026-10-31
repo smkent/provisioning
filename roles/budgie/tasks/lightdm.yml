@@ -2,7 +2,7 @@
     block:
       - name: Configure default display manager executable
         ansible.builtin.copy:
-          content: "/usr/sbin/lightdm"
+          content: /usr/sbin/lightdm
           dest: /etc/X11/default-display-manager
         register: etc_default_dm
         become: true

@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: .ansible/collections
-          key: "ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}"
+          key: ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
 
       - name: 🍳 Set up mise
         uses: jdx/mise-action@v4
@@ -45,7 +45,7 @@ jobs:
         uses: actions/cache@v6
         with:
           path: .ansible/collections
-          key: "ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}"
+          key: ansible-collections-${{ runner.os }}-${{ hashFiles('requirements.yml') }}
 
       - name: 🍳 Set up mise
         uses: jdx/mise-action@v4
