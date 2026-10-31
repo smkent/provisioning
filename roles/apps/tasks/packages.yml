@@ -52,9 +52,9 @@
       cache_valid_time: 600
     become: true
 
-  - name: 'Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}'
+  - name: Include packages tasks for {{ ansible_facts["distribution"] }} {{ ansible_facts["distribution_version"] }}
     ansible.builtin.include_tasks:
-      file: "{{ item }}"
+      file: '{{ item }}'
       apply:
         tags:
           - always

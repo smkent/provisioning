@@ -2,10 +2,10 @@
     block:
       - name: Create applications directory
         ansible.builtin.file:
-          path: "{{ item }}"
+          path: '{{ item }}'
           state: directory
         loop:
-          - "~/.local/share/applications"
+          - ~/.local/share/applications
 
       - name: Duplicate gnome-terminal launcher
         ansible.builtin.copy:
@@ -20,5 +20,5 @@
           path: ~/.local/share/applications/org.gnome.Terminal.desktop
           section: Desktop Entry
           option: X-ExecArg
-          value: "--working-directory=$HOME --"
+          value: --working-directory=$HOME --
         when: gnome_terminal_launcher_created.changed

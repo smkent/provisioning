@@ -1,9 +1,9 @@
   - name: Create systemd overrides directory
     ansible.builtin.file:
-      path: "{{ item }}"
+      path: '{{ item }}'
       state: directory
     loop:
-      - "~/.config/systemd/user"
+      - ~/.config/systemd/user
 
   - name: Disable xdg-desktop-portal-gnome in systemd
     ansible.builtin.file:

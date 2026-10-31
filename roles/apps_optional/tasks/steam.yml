@@ -14,7 +14,7 @@
     ansible.builtin.get_url:
       url: https://repo.steampowered.com/steam/archive/stable/steam.gpg
       dest: /usr/share/keyrings/steam.gpg
-      mode: "0664"
+      mode: '0664'
     become: true
 
   - name: Add Steam apt repository
@@ -23,7 +23,7 @@
       content: |
         deb [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
         deb-src [arch=amd64,i386 signed-by=/usr/share/keyrings/steam.gpg] https://repo.steampowered.com/steam/ stable steam
-      mode: "0644"
+      mode: '0644'
     register: steam_apt_repo
     become: true
 
@@ -33,5 +33,5 @@
         - steam-launcher
       state: present
       update_cache: true
-      cache_valid_time: "{{ 0 if (steam_apt_repo.changed or steam_i386_arch.changed) else 600 }}"
+      cache_valid_time: '{{ 0 if (steam_apt_repo.changed or steam_i386_arch.changed) else 600 }}'
     become: true

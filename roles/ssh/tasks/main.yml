@@ -2,7 +2,7 @@
     ansible.posix.authorized_key:
       user: smkent
       state: present
-      key: "{{ item }}"
+      key: '{{ item }}'
     with_file:
       - yubikey.pub
 
@@ -23,7 +23,7 @@
         StreamLocalBindUnlink yes
       owner: root
       group: root
-      mode: "0644"
+      mode: '0644'
     become: true
     notify:
       - restart-ssh
@@ -39,7 +39,7 @@
         RekeyLimit 128M 15m
       owner: root
       group: root
-      mode: "0644"
+      mode: '0644'
     become: true
     notify:
       - restart-ssh

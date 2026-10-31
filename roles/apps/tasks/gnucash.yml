@@ -16,5 +16,5 @@
       stdin: "{{ lookup('file', item) }}"
     with_first_found:
       - files:
-          - 'dconf/gnucash-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini'
+          - dconf/gnucash-{{ ansible_facts["distribution"] | lower }}-{{ ansible_facts["distribution_version"] }}.ini
       - skip: true

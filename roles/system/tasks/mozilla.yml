@@ -2,12 +2,12 @@
     ansible.builtin.deb822_repository:
       name: mozilla
       uris:
-        - "https://packages.mozilla.org/apt"
+        - https://packages.mozilla.org/apt
       suites:
         - mozilla
       components:
         - main
-      signed_by: "https://packages.mozilla.org/apt/repo-signing-key.gpg"
+      signed_by: https://packages.mozilla.org/apt/repo-signing-key.gpg
       architectures: amd64
       state: present
       enabled: true
@@ -43,7 +43,7 @@
         - firefox
       state: latest
       update_cache: true
-      cache_valid_time: "{{ 0 if mozilla_apt_repo.changed else 600 }}"
+      cache_valid_time: '{{ 0 if mozilla_apt_repo.changed else 600 }}'
       allow_downgrade: true
     become: true
 
@@ -53,12 +53,12 @@
         ansible.builtin.file:
           path: /etc/firefox/policies
           state: directory
-          mode: "0755"
+          mode: '0755'
         become: true
 
       - name: Configure Firefox policies
         ansible.builtin.copy:
           src: mozilla-firefox-policies.json
           dest: /etc/firefox/policies/policies.json
-          mode: "0644"
+          mode: '0644'
         become: true

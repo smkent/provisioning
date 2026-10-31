@@ -2,7 +2,7 @@
     ansible.builtin.deb822_repository:
       name: libreoffice
       uris:
-        - "https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu/"
+        - https://ppa.launchpadcontent.net/libreoffice/ppa/ubuntu/
       suites:
         - "{{ ansible_facts['distribution_release'] }}"
       components:
@@ -46,7 +46,7 @@
     ansible.builtin.apt:
       upgrade: dist
       update_cache: true
-      cache_valid_time: "{{ 0 if libreoffice_ppa.changed else 600 }}"
+      cache_valid_time: '{{ 0 if libreoffice_ppa.changed else 600 }}'
     become: true
 
   - name: Install LibreOffice

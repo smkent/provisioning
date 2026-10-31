@@ -19,7 +19,7 @@
     become: true
 
   - name: Ensure mise packages are installed
-    ansible.builtin.command: "mise install {% if ansible_check_mode %}--dry-run{% endif %}"
+    ansible.builtin.command: mise install {% if ansible_check_mode %}--dry-run{% endif %}
     register: dotfiles_mise_install_check
     check_mode: false
     changed_when: "'all tools are installed' not in dotfiles_mise_install_check.stderr"

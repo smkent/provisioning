@@ -1,12 +1,12 @@
   - name: Install VirtualBox if not already on a virtual machine
-    when: "ansible_facts['virtualization_role'] != 'guest'"
+    when: ansible_facts['virtualization_role'] != 'guest'
     block:
       - name: Add VirtualBox apt repository
         ansible.builtin.deb822_repository:
           name: virtualbox
           types: deb
           uris:
-            - "https://download.virtualbox.org/virtualbox/debian"
+            - https://download.virtualbox.org/virtualbox/debian
           suites:
             - "{{ ansible_facts['distribution_release'] }}"
           components:
@@ -126,10 +126,10 @@
             - virtualbox-7.2
           state: present
           update_cache: true
-          cache_valid_time: "{{ 0 if virtualbox_apt_repo.changed else 600 }}"
+          cache_valid_time: '{{ 0 if virtualbox_apt_repo.changed else 600 }}'
         become: true
 
-      - name: "Ensure {{ ansible_facts['user_id'] }} is in the vboxusers group"
+      - name: Ensure {{ ansible_facts['user_id'] }} is in the vboxusers group
         ansible.builtin.user:
           name: "{{ ansible_facts['user_id'] }}"
           groups:
