@@ -2,6 +2,11 @@
 
 Ansible provisioning scripts for my machines
 
+[![License](https://img.shields.io/github/license/smkent/provisioning)](https://github.com/smkent/provisioning/blob/main/COPYING)
+[![CI](https://github.com/smkent/provisioning/actions/workflows/ci.yaml/badge.svg)](https://github.com/smkent/provisioning/actions/workflows/ci.yaml)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-brightgreen?logo=renovatebot)](https://renovatebot.com)
+[![GitHub stars](https://img.shields.io/github/stars/smkent/provisioning?style=social)](https://github.com/smkent/provisioning)
+
 These scripts are meant for desktop/laptop systems running Ubuntu Linux.
 
 ## Usage
@@ -31,21 +36,16 @@ The included playbook performs the following actions:
 
 ## License
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright (C) 2016 Stephen Kent and contributors
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Licensed under the GNU General Public License v3.0 or later
+([`GPL-3.0-or-later`](https://github.com/smkent/provisioning/blob/main/COPYING)).
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+## Project template
 
-See [`LICENSE`](/LICENSE) for the full license text.
+This project is based on and maintained with [copier-project][copier-project].
 
+[copier-project]: https://smkent.github.io/copier-project
 [dotfiles]: https://github.com/smkent/dotfiles
 [gnome]: https://gnome.org
 [mise]: https://mise.jdx.dev
