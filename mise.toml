@@ -1,13 +1,21 @@
+min_version = "2026.2.5"
+
 [hooks]
-postinstall = ["prek --quiet install", { task = "ansible-collections" }]
+postinstall = [
+  "[ -e .git ] && prek --quiet install || { echo \"No git repository found.\"; }",
+  { task = "ansible-collections" },
+]
 
 [tools]
 betterleaks = "latest"
+jactionlint = "latest"
 "pipx:ansible-core" = "latest"
+"pipx:commit-check" = "latest"
+"pipx:copier" = "latest"
 prek = "latest"
-uv = "latest"
 shellcheck = "latest"
 taplo = "latest"
+uv = "latest"
 
 [tasks.ansible-collections]
 description = "Ensure required Ansible collections are installed"
@@ -24,11 +32,25 @@ description = "Run all formatters and static checks"
 raw_args = true
 run = "prek run --all-files"
 
+[tasks.lt]
+description = "Run all formatters, static checks, and tests"
+run = [{ task = "lint" }, { task = "test" }]
+
 [tasks.provision]
 description = "Run Ansible playbook to provision local machine"
 interactive = true
 raw_args = true
 run = "ansible-playbook -K -i hosts.localhost local.yml"
+
+[tasks.secretscan]
+description = "Scan git history for secrets"
+raw_args = true
+run = "betterleaks git . --redact"
+
+[tasks.test]
+description = "Run tests"
+raw_args = true
+run = "echo \"No test command defined. Set the \\`test\\` command in mise.toml -> [tasks.test] -> \\`run\\`.\""
 
 [tasks.user]
 description = "Ensure desired login user exists and/or temporary installation user is removed"
@@ -44,8 +66,3 @@ flag "-u --uid <uid>" help="UID" default="2000"
 flag "-g --gid <gid>" help="GID" default="2000"
 flag "-i --install-uid <uid>" help="Temporary installation user UID" default="1000"
 '''
-
-[tasks.secretscan]
-description = "Scan git history for secrets"
-raw_args = true
-run = "betterleaks git . --redact"
